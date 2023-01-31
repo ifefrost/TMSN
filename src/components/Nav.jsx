@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, Router } from "react-router-dom";
+import {MdPersonOutline} from 'react-icons/md';
 
 const Nav = () => {
     return (
@@ -16,6 +17,20 @@ const Nav = () => {
                     <Link className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" to={"/movies"}>Movies</Link>
                     <Link className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" to={"/tv"}>TV Shows</Link>
                     <Link className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" to={"/search"}>Search</Link>
+                  </div>
+                </div>
+              </div>
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <div className="ml-3 relative">
+                  <div>
+                    <button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu" aria-expanded="false" aria-haspopup="true">
+                      <Link className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" to={"/"}>
+                        <div className="flex items-center">
+                        <span className="mr-3">Login</span>
+                        <MdPersonOutline className="h-8 w-8 text-white" />
+                        </div>
+                      </Link>
+                    </button>
                   </div>
                 </div>
               </div>

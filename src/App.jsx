@@ -7,7 +7,7 @@ import Search from "./pages/Search";
 
 function App() {
   return (
-    <div>
+    <div className="bg-gray-800 h-screen">
       <BrowserRouter>
         <Nav />
         <Routes>
