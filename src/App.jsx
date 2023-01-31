@@ -2,12 +2,13 @@ import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import reactLogo from "./assets/react.svg";
 import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 
 function App() {
   return (
-    <div className="bg-gray-800 h-screen">
+    <div className="bg-gray-800 h-full">
       <BrowserRouter>
         <Nav />
         <Routes>
@@ -17,6 +18,7 @@ function App() {
           <Route path='/search' element={<Search />} />
         </Routes>
       </BrowserRouter>
+      <Footer />
     </div>
   );
 }
