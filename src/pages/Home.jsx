@@ -1,7 +1,52 @@
 import { MdOutlineSearch, MdArrowForward } from "react-icons/md";
 import poster from "../assets/poster.jpg";
+import PortraitSlider from "../components/PortraitSlider";
 
 const Home = () => {
+
+const movieArray = [
+  {
+    id: 1,
+    title: "The Shawshank Redemption",
+    poster: poster,
+    rating: 9.2,
+    date: 1994,
+    genre: "Drama",
+  },
+  {
+    id: 2,
+    title: "The Godfather",
+    poster: poster,
+    rating: 9.2,
+    date: 1972,
+    genre: "Crime, Drama",
+  },
+  {
+    id: 3,
+    title: "The Godfather: Part II",
+    poster: poster,
+    rating: 9.0,
+    date: 1974,
+    genre: "Crime, Drama",
+  },
+  {
+    id: 4,
+    title: "The Dark Knight",
+    poster: poster,
+    rating: 9.0,
+    date: 2008,
+    genre: "Action, Crime, Drama",
+  },
+  {
+    id: 5,
+    title: "The Menu",
+    poster: poster,
+    rating: 8.9,
+    date: 2022,
+    genre: "Crime, Drama, Thriller",
+  },
+];
+
   return (
     <div className='mx-auto 2xl:max-w-screen-xl px-8'>
       <div className='bg-blue-500 rounded-b-[3rem] h-[32rem] flex items-center'>
@@ -48,6 +93,10 @@ const Home = () => {
           />
         </div>
       </div>
+
+      <PortraitSlider heading={"Trending this Week"} movieArray={movieArray} />
+
+
       <div className='bg-blue-500 rounded-xl h-80 flex items-center mb-20'>
         <div className='ml-16'>
           <h3 className='text-5xl font-bold text-white'>Join TMSN today.</h3>
