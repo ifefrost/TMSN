@@ -1,11 +1,11 @@
 import React from "react";
-import { Link, Router } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {MdPersonOutline} from 'react-icons/md';
 
 const Nav = () => {
     return (
         <nav className="bg-gray-800">
-          <div className="mx-auto 2xl:max-w-screen-2xl px-2 sm:px-6 lg:px-8">
+          <div className="mx-auto 2xl:max-w-screen-xl px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex-shrink-0 flex items-center">
