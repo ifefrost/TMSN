@@ -2,7 +2,7 @@ import {MdPlayCircleOutline} from 'react-icons/md';
 
 const Movie = () => {
     return (
-        <div className="mx-auto 2xl:max-w-screen-2xl px-2 sm:px-6 lg:px-8">
+        <div className="mx-auto 2xl:max-w-screen-xl px-8">
             <div className="flex lg:mt-8 lg:mb-8">
                 <div>
                     <img src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg" alt="movie poster" className="rounded-xl object-cover h-[450px] w-[300px]"/>
