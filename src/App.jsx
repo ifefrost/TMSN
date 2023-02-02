@@ -9,7 +9,7 @@ import Movie from "./pages/Movie";
 
 function App() {
   return (
-    <div className="bg-gray-800 h-full">
+    <div className="bg-[#11131B] h-full">
       <BrowserRouter>
         <Nav />
         <Routes>

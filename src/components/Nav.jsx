@@ -4,7 +4,7 @@ import {MdPersonOutline} from 'react-icons/md';
 
 const Nav = () => {
     return (
-        <nav className="bg-gray-800">
+        <nav className="bg-[#11131B]">
           <div className="mx-auto 2xl:max-w-screen-xl px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
@@ -23,7 +23,7 @@ const Nav = () => {
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <div className="ml-3 relative">
                   <div>
-                    <button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu" aria-expanded="false" aria-haspopup="true">
+                    <button className="flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu" aria-expanded="false" aria-haspopup="true">
                       <Link className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" to={"/"}>
                         <div className="flex items-center">
                         <span className="mr-3">Login</span>
