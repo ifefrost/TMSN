@@ -1,5 +1,7 @@
 import { MdOutlineSearch, MdArrowForward } from "react-icons/md";
 import poster from "../assets/poster.jpg";
+import trailer from "../assets/trailer.png";
+import LandscapeSlider from "../components/LandscapeSlider";
 import PortraitSlider from "../components/PortraitSlider";
 
 const Home = () => {
@@ -12,6 +14,7 @@ const movieArray = [
     rating: 9.2,
     date: 1994,
     genre: "Drama",
+    trailer: trailer,
   },
   {
     id: 2,
@@ -20,6 +23,7 @@ const movieArray = [
     rating: 9.2,
     date: 1972,
     genre: "Crime, Drama",
+    trailer: trailer,
   },
   {
     id: 3,
@@ -28,6 +32,7 @@ const movieArray = [
     rating: 9.0,
     date: 1974,
     genre: "Crime, Drama",
+    trailer: trailer,
   },
   {
     id: 4,
@@ -36,6 +41,7 @@ const movieArray = [
     rating: 9.0,
     date: 2008,
     genre: "Action, Crime, Drama",
+    trailer: trailer,
   },
   {
     id: 5,
@@ -44,6 +50,7 @@ const movieArray = [
     rating: 8.9,
     date: 2022,
     genre: "Crime, Drama, Thriller",
+    trailer: trailer,
   },
 ];
 
@@ -95,6 +102,10 @@ const movieArray = [
       </div>
 
       <PortraitSlider heading={"Trending this Week"} movieArray={movieArray} />
+
+      <LandscapeSlider heading={"Latest Trailers"} movieArray={movieArray} />
+
+      <PortraitSlider heading={"Free Ad Supported"} movieArray={movieArray} />
 
 
       <div className='bg-blue-500 rounded-xl h-80 flex items-center mb-20'>
