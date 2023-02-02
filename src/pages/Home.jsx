@@ -8,7 +8,7 @@ const Home = () => {
             <div className="bg-blue-500 rounded-b-[3rem]">
                 <div className="px-6 lg:px-8">
                     <div className="ml-24 max-w-4xl py-32 sm:py-48">
-                        <h3 className="text-7xl font-bold text-white">Come for the movies & stay for the community.</h3>
+                        <h1 className="text-7xl font-bold text-white">Come for the movies & stay for the community.</h1>
                         <div className="mt-10 flex items-center gap-x-6">
                             <div className="relative mt-1 rounded-md">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
