@@ -1,17 +1,19 @@
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
-const LandscapeSlider = ({ heading, movieArray }) => {
+const LandscapeSlider = ({ heading, movieArray, styling }) => {
   return (
-    <div className='text-white'>
-      <h3 className='font-bold text-[2rem]'>{heading}</h3>
-      <div className='flex items-center gap-10 bg-[#1f2230] rounded-xl justify-center py-10'>
-        <MdKeyboardArrowLeft className='w-[52px] h-[52px]' />
-        <div className='flex gap-[2rem] overflow-hidden w-[900px]'>
-          {movieArray.map((movie) => (
-            <LandscapeSliderItem movie={movie} key={movie.id} />
-          ))}
+    <div className={styling}>
+      <div className="text-white">
+        <h3 className='font-bold text-[2rem] mb-5'>{heading}</h3>
+        <div className='flex items-center gap-10 bg-[#1f2230] rounded-xl justify-center py-10'>
+          <MdKeyboardArrowLeft className='min-w-[52px] min-h-[52px]' />
+          <div className='flex gap-[2rem] overflow-hidden w-[900px]'>
+            {movieArray.map((movie) => (
+              <LandscapeSliderItem movie={movie} key={movie.id} />
+            ))}
+          </div>
+          <MdKeyboardArrowRight className='min-w-[52px] min-h-[52px]' />
         </div>
-        <MdKeyboardArrowRight className='w-[52px] h-[52px]' />
       </div>
     </div>
   );
