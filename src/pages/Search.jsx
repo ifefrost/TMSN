@@ -1,50 +1,28 @@
+import React, { useEffect, useCallback } from 'react';
 import { MdOutlineSearch } from "react-icons/md";
 import poster from "../assets/poster.jpg";
 import SearchResults from "../components/SearchResults";
 
+// @todo: transfer this to an env file
+const apiKey = 'f9ba2f61d6944cadd3955851658e35fa';
+
 const Search = () => {
-  const movieArray = [
-    {
-      id: 1,
-      title: "The Shawshank Redemption",
-      poster: poster,
-      rating: 9.2,
-      date: 1994,
-      genre: "Drama",
-    },
-    {
-      id: 2,
-      title: "The Godfather",
-      poster: poster,
-      rating: 9.2,
-      date: 1972,
-      genre: "Crime, Drama",
-    },
-    {
-      id: 3,
-      title: "The Godfather: Part II",
-      poster: poster,
-      rating: 9.0,
-      date: 1974,
-      genre: "Crime, Drama",
-    },
-    {
-      id: 4,
-      title: "The Dark Knight",
-      poster: poster,
-      rating: 9.0,
-      date: 2008,
-      genre: "Action, Crime, Drama",
-    },
-    {
-      id: 5,
-      title: "The Menu",
-      poster: poster,
-      rating: 8.9,
-      date: 2022,
-      genre: "Crime, Drama, Thriller",
-    },
-  ];
+  const [movies, setMovies] = React.useState([]);
+  const [query, setQuery] = React.useState('marvel');
+
+  const fetchData = React.useCallback(async () => {
+    try {
+      const response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&page=1&include_adult=false&query=${query}`);
+      const json = await response.json();
+      setMovies(json.results);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [query]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div className='mx-auto 2xl:max-w-screen-xl px-8 h-screen flex mt-10'>
@@ -116,16 +94,20 @@ const Search = () => {
               type='text'
               name='search'
               id='search'
+              onChange={(event) => setQuery(event.target.value)}
               className='focus:ring-gray-400 focus:border-gray-500 block w-[40rem] pl-14 sm:text-lg h-14 border-black border-1 rounded-full'
               placeholder='Search for any movie, tv show or actor...'
             />
           </div>
-          <button className='bg-blue-700 border-white border-2 hover:bg-black text-white font-bold py-3 px-8 rounded-full'>
+          <button
+            className='bg-blue-700 border-white border-2 hover:bg-black text-white font-bold py-3 px-8 rounded-full'
+            onClick={() => fetchData()}
+          >
             Search
           </button>
         </div>
 
-        <SearchResults results={movieArray} />
+        <SearchResults results={movies} />
       </div>
     </div>
   );
