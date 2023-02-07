@@ -9,13 +9,11 @@ import Movie from "./pages/Movie";
 
 function App() {
   return (
-    <div className="bg-[#11131B] h-full">
+    <div className='bg-[#11131B] min-h-screen flex flex-col'>
       <BrowserRouter>
         <Nav />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/movies' element={<Search />} />
-          <Route path='/tv' element={<Search />} />
           <Route path='/search' element={<Search />} />
           <Route path='/movie' element={<Movie />} />
         </Routes>

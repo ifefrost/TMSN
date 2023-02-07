@@ -1,31 +1,45 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from "react";
 import { MdOutlineSearch } from "react-icons/md";
-import poster from "../assets/poster.jpg";
+import { useSearchParams } from "react-router-dom";
 import SearchResults from "../components/SearchResults";
 
 // @todo: transfer this to an env file
-const apiKey = 'f9ba2f61d6944cadd3955851658e35fa';
+const apiKey = import.meta.env.VITE_API_KEY;
 
 const Search = () => {
-  const [movies, setMovies] = React.useState([]);
-  const [query, setQuery] = React.useState('marvel');
+  const [results, setResults] = useState([]);
+  const [query, setQuery] = useState();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const result = searchParams.get("result");
+  const [pageNum, setPageNum] = useState(1);
 
-  const fetchData = React.useCallback(async () => {
+  useEffect(() => {
+    if (result) {
+      setQuery(result);
+    }
+  }, [result]);
+
+  const fetchData = useCallback(async () => {
     try {
-      const response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&page=1&include_adult=false&query=${query}`);
+      const response = await fetch(
+        `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&language=en-US&query=${query}&page=${pageNum}`
+      );
       const json = await response.json();
-      setMovies(json.results);
+      setResults(json.results);
     } catch (error) {
       console.log(error);
     }
-  }, [query]);
+  }, [query, pageNum]);
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (query) {
+      fetchData();
+    }
+  }, [query, fetchData]);
+  
 
   return (
-    <div className='mx-auto 2xl:max-w-screen-xl px-8 h-screen flex mt-10'>
+    <div className='mx-auto 2xl:max-w-screen-xl px-8 flex mt-10'>
       <aside
         id='default-sidebar'
         className='z-40 w-64 h-fit'
@@ -85,29 +99,37 @@ const Search = () => {
       </aside>
 
       <div className='mx-auto'>
-        <div className='flex items-center gap-x-6'>
+        <form className='flex items-center gap-x-6'>
           <div className='relative mt-1 rounded-md'>
             <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
               <MdOutlineSearch className='h-8 w-8 text-gray-400' />
             </div>
             <input
               type='text'
-              name='search'
+              name='result'
               id='search'
-              onChange={(event) => setQuery(event.target.value)}
+              onSubmit={(event) => setQuery(event.target.value)}
               className='focus:ring-gray-400 focus:border-gray-500 block w-[40rem] pl-14 sm:text-lg h-14 border-black border-1 rounded-full'
               placeholder='Search for any movie, tv show or actor...'
             />
           </div>
           <button
+            type='submit'
             className='bg-blue-700 border-white border-2 hover:bg-black text-white font-bold py-3 px-8 rounded-full'
-            onClick={() => fetchData()}
           >
             Search
           </button>
-        </div>
-
-        <SearchResults results={movies} />
+        </form>
+        <SearchResults results={results} />
+        <button className="bg-blue-700 h-[46px] border-white border-2 hover:bg-black text-white font-bold py-1 px-4 mt-3 rounded-full"
+        onClick={(pageNum>1) ? (() => setPageNum(pageNum - 1)): null}
+        >
+          Previous
+        </button>
+        <button className="bg-blue-700 h-[46px] border-white border-2 hover:bg-black text-white font-bold py-1 px-4 mt-3 rounded-full"
+        onClick={(pageNum<results.total_pages) ? (() => setPageNum(pageNum + 1)) : null}>
+          Next
+        </button>
       </div>
     </div>
   );
