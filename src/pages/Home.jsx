@@ -1,58 +1,44 @@
 import { MdOutlineSearch, MdArrowForward } from "react-icons/md";
 import poster from "../assets/poster.jpg";
-import trailer from "../assets/trailer.png";
 import LandscapeSlider from "../components/LandscapeSlider";
 import PortraitSlider from "../components/PortraitSlider";
+import { useState, useEffect, useCallback } from "react";
 
 const Home = () => {
+  const apiKey = import.meta.env.VITE_API_KEY;
+  const [trending, setTrending] = useState([]);
+  const [trendingTV, setTrendingTV] = useState([]);
 
-const movieArray = [
-  {
-    id: 1,
-    title: "The Shawshank Redemption",
-    poster: poster,
-    rating: 9.2,
-    date: 1994,
-    genre: "Drama",
-    trailer: trailer,
-  },
-  {
-    id: 2,
-    title: "The Godfather",
-    poster: poster,
-    rating: 9.2,
-    date: 1972,
-    genre: "Crime, Drama",
-    trailer: trailer,
-  },
-  {
-    id: 3,
-    title: "The Godfather: Part II",
-    poster: poster,
-    rating: 9.0,
-    date: 1974,
-    genre: "Crime, Drama",
-    trailer: trailer,
-  },
-  {
-    id: 4,
-    title: "The Dark Knight",
-    poster: poster,
-    rating: 9.0,
-    date: 2008,
-    genre: "Action, Crime, Drama",
-    trailer: trailer,
-  },
-  {
-    id: 5,
-    title: "The Menu",
-    poster: poster,
-    rating: 8.9,
-    date: 2022,
-    genre: "Crime, Drama, Thriller",
-    trailer: trailer,
-  },
-];
+  const fetchTrending = useCallback(async () => {
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`
+      );
+      const json = await response.json();
+      setTrending(json.results);
+      console.log(json);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  const fetchTrendingTV = useCallback(async () => {
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/trending/tv/week?api_key=${apiKey}`
+      );
+      const json = await response.json();
+      setTrendingTV(json.results);
+      console.log(json);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchTrending();
+    fetchTrendingTV();
+  }, [fetchTrending, fetchTrendingTV]);
 
   return (
     <div className='mx-auto 2xl:max-w-screen-xl px-8'>
@@ -61,27 +47,25 @@ const movieArray = [
           <h3 className='text-7xl font-bold text-white'>
             Come for the movies & stay for the community.
           </h3>
-          <div className='mt-10 flex items-center gap-x-6'>
-            <div className='relative mt-1 rounded-md'>
-              <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
-                <MdOutlineSearch className='h-8 w-8 text-gray-400' />
+          <form action="search">
+            <div className='mt-10 flex items-center gap-x-6'>
+              <div className='relative mt-1 rounded-md'>
+                <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+                  <MdOutlineSearch className='h-8 w-8 text-gray-400' />
+                </div>
+                <input
+                  type='text'
+                  name='result'
+                  id='search'
+                  className='focus:ring-gray-400 focus:border-gray-500 block w-[40rem] pl-14 sm:text-lg h-14 border-black border-1 rounded-full'
+                  placeholder='Search for any movie, tv show or actor...'
+                />
               </div>
-              <input
-                type='text'
-                name='search'
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  
-                }}
-                id='search'
-                className='focus:ring-gray-400 focus:border-gray-500 block w-[40rem] pl-14 sm:text-lg h-14 border-black border-1 rounded-full'
-                placeholder='Search for any movie, tv show or actor...'
-              />
+              <button type="submit" className='bg-blue-700 border-white border-2 hover:bg-blue-900 text-white font-bold py-3 px-8 rounded-full hover:shadow'>
+                Search
+              </button>
             </div>
-            <button className='bg-blue-700 border-white border-2 hover:bg-blue-900 text-white font-bold py-3 px-8 rounded-full hover:shadow'>
-              Search
-            </button>
-          </div>
+          </form>
         </div>
       </div>
       <div className='my-20 lg:flex lg:justify-between'>
@@ -105,12 +89,23 @@ const movieArray = [
         </div>
       </div>
 
-      <PortraitSlider heading={"Trending this Week"} movieArray={movieArray} styling={'mb-24'} />
+      <PortraitSlider
+        heading={"Trending Movies this Week"}
+        resultArray={trending}
+        styling={"mb-24"}
+      />
 
-      <LandscapeSlider heading={"Latest Trailers"} movieArray={movieArray} styling={'mb-24'}/>
+      <LandscapeSlider
+        heading={"Latest Trailers"}
+        resultArray={trending}
+        styling={"mb-24"}
+      />
 
-      <PortraitSlider heading={"Free Ad Supported"} movieArray={movieArray} styling={'mb-24'}/>
-
+      <PortraitSlider
+        heading={"Trending TV Shows this Week"}
+        resultArray={trendingTV}
+        styling={"mb-24"}
+      />
 
       <div className='bg-blue-500 rounded-xl h-80 flex items-center mb-20'>
         <div className='ml-16'>

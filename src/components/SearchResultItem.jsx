@@ -1,10 +1,20 @@
-const imagesBaseUrl = 'https://image.tmdb.org/t/p/original';
+import { useNavigate } from "react-router-dom";
+
+
+const imagesBaseUrl = 'https://image.tmdb.org/t/p/w342';
 
 const SearchResultItem = ({ result }) => {
 
-  
+  const navigate = useNavigate();
+
+  const navigateToDetails = () => {
+    navigate(`/details/${result.media_type}/${result.id}`);
+  };
+
   return (
-    <div className="relative flex flex-col">
+    <div className="relative flex flex-col"
+      onClick={navigateToDetails}
+    >
       <div className='absolute w-full h-full justify-center bg-[#11131b] shadow bg-opacity-75 text-white flex flex-col items-center text-center opacity-0 hover:opacity-100 rounded-xl p-2'>
         <div className="mt-auto">
           <h3 className="text-[1.25rem] font-bold">{result.title ?? result.name}</h3>

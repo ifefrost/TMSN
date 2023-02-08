@@ -5,7 +5,7 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
-import Movie from "./pages/Movie";
+import Details from "./pages/Details";
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/search' element={<Search />} />
-          <Route path='/movie' element={<Movie />} />
+          <Route path='/details/:media_type/:id' element={<Details />} />
         </Routes>
       </BrowserRouter>
       <Footer />

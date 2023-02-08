@@ -110,7 +110,6 @@ const Search = () => {
               type='text'
               name='result'
               id='search'
-              onSubmit={(event) => setQuery(event.target.value)}
               className='focus:ring-gray-400 focus:border-gray-500 block w-[40rem] pl-14 sm:text-lg h-14 border-black border-1 rounded-full'
               placeholder='Search for any movie, tv show or actor...'
             />
@@ -122,20 +121,17 @@ const Search = () => {
             Search
           </button>
         </form>
-
+        {totalPages > 1 && (
+          <Pagination {...{ results, pageNum, totalResults }} />
+        )}
+        ;
         <SearchResults results={results} />
         {totalPages > 1 && (
           <div className='flex items-center justify-between rounded-3xl px-4 py-3 sm:px-6 bg-[#1F2230] mt-5'>
             <div className='hidden sm:flex sm:flex-1 sm:items-center sm:justify-between'>
-              <div>
-                <p className='text-lg text-white'>
-                  Showing <span className='font-medium'>{searchCount}</span> to{" "}
-                  <span className='font-medium'>
-                    {searchCount + results.length - 1}
-                  </span>{" "}
-                  of <span className='font-medium'>{totalResults}</span> results
-                </p>
-              </div>
+              <Pagination
+                {...{ results, pageNum, setPageNum, totalPages, totalResults }}
+              />
               <div aria-label='Pagination'>
                 <button
                   className='bg-blue-700 h-[46px] w-[105px] border-white border-2 hover:bg-blue-900 text-white font-bold py-1 px-4 mt-3 rounded-full hover:shadow'
@@ -146,9 +142,7 @@ const Search = () => {
                 <button
                   className='bg-blue-700 h-[46px] w-[105px] border-white border-2 hover:bg-blue-900 text-white font-bold py-1 px-4 mt-3 rounded-full hover:shadow'
                   onClick={
-                    pageNum < totalPages
-                      ? () => setPageNum(pageNum + 1)
-                      : null
+                    pageNum < totalPages ? () => setPageNum(pageNum + 1) : null
                   }
                 >
                   Next
@@ -158,6 +152,20 @@ const Search = () => {
           </div>
         )}
       </div>
+    </div>
+  );
+};
+
+const Pagination = ({ results, pageNum, totalResults }) => {
+  const searchCount = pageNum > 1 ? (pageNum - 1) * 20 + 1 : 1;
+
+  return (
+    <div>
+      <p className='text-lg text-white'>
+        Showing <span className='font-medium'>{searchCount}</span> to{" "}
+        <span className='font-medium'>{searchCount + results.length - 1}</span>{" "}
+        of <span className='font-medium'>{totalResults}</span> results
+      </p>
     </div>
   );
 };
