@@ -69,6 +69,10 @@ const movieArray = [
               <input
                 type='text'
                 name='search'
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  
+                }}
                 id='search'
                 className='focus:ring-gray-400 focus:border-gray-500 block w-[40rem] pl-14 sm:text-lg h-14 border-black border-1 rounded-full'
                 placeholder='Search for any movie, tv show or actor...'
