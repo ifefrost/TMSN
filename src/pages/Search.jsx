@@ -39,13 +39,13 @@ const Search = () => {
   
 
   return (
-    <div className='mx-auto 2xl:max-w-screen-xl px-8 flex mt-10'>
+    <div className='mx-auto 2xl:max-w-screen-xl px-8 flex mt-10 mb-20'>
       <aside
         id='default-sidebar'
-        className='z-40 w-64 h-fit'
+        className='w-64 h-fit'
         aria-label='Sidebar'
       >
-        <div className='px-3 py-4 overflow-y-auto bg-slate-900 dark:bg-slate-900 rounded-md'>
+        <div className='px-3 py-4 overflow-y-auto bg-[#1F2230] rounded-lg'>
           <ul className='space-y-2'>
             <li>
               <span className='ml-5 font-bold text-lg text-gray-50'>
@@ -98,7 +98,7 @@ const Search = () => {
         </div>
       </aside>
 
-      <div className='mx-auto'>
+      <div className='mx-auto ml-10'>
         <form className='flex items-center gap-x-6'>
           <div className='relative mt-1 rounded-md'>
             <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
@@ -115,21 +115,26 @@ const Search = () => {
           </div>
           <button
             type='submit'
-            className='bg-blue-700 border-white border-2 hover:bg-black text-white font-bold py-3 px-8 rounded-full'
+            className='bg-blue-700 border-white border-2 hover:bg-blue-900 text-white font-bold py-3 px-8 rounded-full hover:shadow'
           >
             Search
           </button>
         </form>
+
         <SearchResults results={results} />
-        <button className="bg-blue-700 h-[46px] border-white border-2 hover:bg-black text-white font-bold py-1 px-4 mt-3 rounded-full"
-        onClick={(pageNum>1) ? (() => setPageNum(pageNum - 1)): null}
-        >
-          Previous
-        </button>
-        <button className="bg-blue-700 h-[46px] border-white border-2 hover:bg-black text-white font-bold py-1 px-4 mt-3 rounded-full"
-        onClick={(pageNum<results.total_pages) ? (() => setPageNum(pageNum + 1)) : null}>
-          Next
-        </button>
+        
+        {results.length > 0 && (
+        <div className="flex w-full justify-center gap-5 mt-10">
+          <button className="bg-blue-700 h-[46px] w-[105px] border-white border-2 hover:bg-blue-900 text-white font-bold py-1 px-4 mt-3 rounded-full hover:shadow"
+          onClick={(pageNum>1) ? (() => setPageNum(pageNum - 1)) : null}>
+            Previous
+          </button>
+          <button className="bg-blue-700 h-[46px] w-[105px] border-white border-2 hover:bg-blue-900 text-white font-bold py-1 px-4 mt-3 rounded-full hover:shadow"
+          onClick={(pageNum<results.total_pages) ? (() => setPageNum(pageNum + 1)) : null}>
+            Next
+          </button>
+        </div>
+        )}
       </div>
     </div>
   );

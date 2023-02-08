@@ -56,7 +56,7 @@ const movieArray = [
 
   return (
     <div className='mx-auto 2xl:max-w-screen-xl px-8'>
-      <div className='bg-blue-500 rounded-b-[3rem] h-[32rem] flex items-center'>
+      <div className='bg-blue-500 rounded-b-[32px] h-[32rem] flex items-center'>
         <div className='ml-24 max-w-4xl'>
           <h3 className='text-7xl font-bold text-white'>
             Come for the movies & stay for the community.
@@ -74,7 +74,7 @@ const movieArray = [
                 placeholder='Search for any movie, tv show or actor...'
               />
             </div>
-            <button className='bg-blue-700 border-white border-2 hover:bg-black text-white font-bold py-3 px-8 rounded-full'>
+            <button className='bg-blue-700 border-white border-2 hover:bg-blue-900 text-white font-bold py-3 px-8 rounded-full hover:shadow'>
               Search
             </button>
           </div>
@@ -88,7 +88,7 @@ const movieArray = [
           <p className='mb-8 text-gray-300 mt-5 text-xl'>
             The best movies and TV shows of 2022.
           </p>
-          <button className='flex bg-blue-700 border-white border-2 hover:bg-black text-white font-bold py-2 px-4 rounded-full'>
+          <button className='flex bg-blue-700 border-white border-2 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-full hover:shadow'>
             Check them out <MdArrowForward className='h-6 w-6 ml-2' />{" "}
           </button>
         </div>
@@ -101,11 +101,11 @@ const movieArray = [
         </div>
       </div>
 
-      <PortraitSlider heading={"Trending this Week"} movieArray={movieArray} />
+      <PortraitSlider heading={"Trending this Week"} movieArray={movieArray} styling={'mb-24'} />
 
-      <LandscapeSlider heading={"Latest Trailers"} movieArray={movieArray} />
+      <LandscapeSlider heading={"Latest Trailers"} movieArray={movieArray} styling={'mb-24'}/>
 
-      <PortraitSlider heading={"Free Ad Supported"} movieArray={movieArray} />
+      <PortraitSlider heading={"Free Ad Supported"} movieArray={movieArray} styling={'mb-24'}/>
 
 
       <div className='bg-blue-500 rounded-xl h-80 flex items-center mb-20'>
@@ -114,7 +114,7 @@ const movieArray = [
           <p className='my-6 text-white w-96 text-xl'>
             Connect with a growing community with a love for movies and tv.
           </p>
-          <button className='flex bg-blue-700 border-white border-2 hover:bg-black text-white font-bold py-2 px-4 rounded-full'>
+          <button className='flex bg-blue-700 border-white border-2 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-full hover:shadow'>
             Sign Up <MdArrowForward className='h-6 w-6 ml-2' />{" "}
           </button>
         </div>

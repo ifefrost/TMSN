@@ -7,7 +7,7 @@ const Footer = () => {
             <h1 className='text-4xl mb-3 no-underline text-white font-sans font-bold text-right'>
               TMSN
             </h1>
-            <button className='bg-blue-700 h-[46px] border-white border-2 hover:bg-black text-white font-bold py-1 px-4 mt-3 rounded-full'>
+            <button className='bg-blue-700 h-[46px] border-white border-2 hover:bg-blue-900 text-white font-bold py-1 px-4 mt-3 rounded-full hover:shadow'>
               Join the community
             </button>
           </div>
