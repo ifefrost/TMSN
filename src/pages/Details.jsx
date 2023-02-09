@@ -96,7 +96,7 @@ const Details = () => {
         <div className='w-[800px] h-[450px] mx-8 text-white flex flex-col justify-start pt-3'>
           <div className="">
             <div>
-              <h1 className='text-[3.25rem] font-bold'>{details.title ?? details.name}</h1>
+              <h1 className='text-[3.25rem] leading-none font-bold'>{details.title ?? details.name}</h1>
             </div>
             <div className='flex gap-10'>
               <p>{details.runtime ? (details.runtime / 60).toFixed(0) + 'h ' + (details.runtime % 60) + 'm' : (details.number_of_seasons + ' Seasons')}</p>

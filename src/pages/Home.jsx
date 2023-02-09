@@ -85,9 +85,9 @@ const Home = () => {
 
   return (
     <div className='mx-auto 2xl:max-w-screen-xl px-8'>
-      <div className='bg-blue-500 rounded-b-[32px] h-[32rem] flex items-center'>
+      <div className='bg-blue-500 rounded-b-[32px] h-[32rem] flex items-center bg-hero-image bg-cover'>
         <div className='ml-24 max-w-4xl'>
-          <h3 className='text-7xl font-bold text-white'>
+          <h3 className='text-[4rem] leading-none font-bold text-white'>
             Come for the movies & stay for the community.
           </h3>
           <form action="search">
@@ -151,7 +151,7 @@ const Home = () => {
         styling={"mb-24"}
       />
 
-      <div className='bg-blue-500 rounded-xl h-80 flex items-center mb-20'>
+      <div className='rounded-xl h-80 flex items-center mb-20 bg-footer-image bg-cover'>
         <div className='ml-16'>
           <h3 className='text-5xl font-bold text-white'>Join TMSN today.</h3>
           <p className='my-6 text-white w-96 text-xl'>
