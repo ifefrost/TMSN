@@ -1,31 +1,65 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { MdOutlineSearch } from "react-icons/md";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import SearchResults from "../components/SearchResults";
 
-// @todo: transfer this to an env file
 const apiKey = import.meta.env.VITE_API_KEY;
 
 const Search = () => {
+  const navigate = useNavigate();
   const [results, setResults] = useState([]);
-  const [query, setQuery] = useState();
   const [searchParams, setSearchParams] = useSearchParams();
   const result = searchParams.get("result");
+  const [query, setQuery] = useState(result);
   const [pageNum, setPageNum] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [totalResults, setTotalResults] = useState(0);
+  const [category, setCategory] = React.useState('');
 
   useEffect(() => {
+    console.log(result, 'result');
     if (result) {
       setQuery(result);
+      fetchData(result);
     }
+
+
+    return () => {
+      // reset state on unmount
+      setQuery('');
+    };
   }, [result]);
 
-  const fetchData = useCallback(async () => {
+  // listen for category and page change
+  useEffect(() => {
+    if (query) {
+      fetchData(query);
+    }
+  }, [category, pageNum]);
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+
+    navigate(`/search?result=${query}`, {
+      options: {
+        replace: true,
+      },
+    });
+    fetchData(query);
+  };
+
+  const handleCategoryChange = (categoryName) => {
+    setPageNum(1);
+    setCategory(categoryName);
+  };
+
+
+  const fetchData = useCallback(async (searchQuery) => {
     try {
+      const searchCategory = category || 'multi';
       const response = await fetch(
-        `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&language=en-US&query=${query}&page=${pageNum}`
+        `https://api.themoviedb.org/3/search/${searchCategory}?api_key=${apiKey}&language=en-US&query=${searchQuery}&page=${pageNum}`
       );
       const json = await response.json();
       setResults(json.results);
@@ -34,13 +68,7 @@ const Search = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [query, pageNum]);
-
-  useEffect(() => {
-    if (query) {
-      fetchData();
-    }
-  }, [query, fetchData]);
+  }, [query, pageNum, category]);
 
   const searchCount = pageNum > 1 ? (pageNum - 1) * 20 + 1 : 1;
 
@@ -54,54 +82,34 @@ const Search = () => {
                 Filter by
               </span>
             </li>
-            <li>
-              <a
-                href='#'
+            <li className={(!category || category === 'multi') ? 'bg-gray-500 rounded-md' : ''} onClick={() => handleCategoryChange('multi')}>
+              <div
                 className='flex items-center p-2 text-base font-normal text-gray-50 rounded-lg dark:text-white'
               >
                 <span className='ml-7'>All</span>
-              </a>
+              </div>
             </li>
-            <li>
-              <a
-                href='#'
-                className='flex items-center p-2 text-base font-normal text-gray-50 rounded-lg dark:text-white'
-              >
+            <li className={category === 'movie' ? 'bg-gray-500 rounded-md' : ''} onClick={() => handleCategoryChange('movie')}>
+              <div className='flex items-center p-2 text-base font-normal text-gray-50 rounded-lg dark:text-white'>
                 <span className='flex-1 ml-7 whitespace-nowrap'>Movies</span>
-              </a>
+              </div>
             </li>
-            <li>
-              <a
-                href='#'
-                className='flex items-center p-2 text-base font-normal text-gray-50 rounded-lg dark:text-white'
-              >
+            <li className={category === 'tv' ? 'bg-gray-500 rounded-md' : ''} onClick={() => handleCategoryChange('tv')}>
+              <div className='flex items-center p-2 text-base font-normal text-gray-50 rounded-lg dark:text-white'>
                 <span className='flex-1 ml-7 whitespace-nowrap'>TV Shows</span>
-              </a>
+              </div>
             </li>
-            <li>
-              <a
-                href='#'
-                className='flex items-center p-2 text-base font-normal text-gray-50 rounded-lg dark:text-white'
-              >
-                <span className='flex-1 ml-7 whitespace-nowrap'>
-                  Documentaries
-                </span>
-              </a>
-            </li>
-            <li>
-              <a
-                href='#'
-                className='flex items-center p-2 text-base font-normal text-gray-50 rounded-lg dark:text-white'
-              >
-                <span className='flex-1 ml-7 whitespace-nowrap'>Specials</span>
-              </a>
+            <li className={category === 'person' ? 'bg-gray-500 rounded-md' : ''} onClick={() => handleCategoryChange('person')}>
+              <div className='flex items-center p-2 text-base font-normal text-gray-50 rounded-lg dark:text-white'>
+                <span className='flex-1 ml-7 whitespace-nowrap'>Person</span>
+              </div>
             </li>
           </ul>
         </div>
       </aside>
 
       <div className='mx-auto ml-10'>
-        <form className='flex items-center gap-x-6'>
+        <form className='flex items-center gap-x-6' onSubmit={handleFormSubmit}>
           <div className='relative mt-1 rounded-md'>
             <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
               <MdOutlineSearch className='h-8 w-8 text-gray-400' />
@@ -109,6 +117,8 @@ const Search = () => {
             <input
               type='text'
               name='result'
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
               id='search'
               className='focus:ring-gray-400 focus:border-gray-500 block w-[40rem] pl-14 sm:text-lg h-14 border-black border-1 rounded-full'
               placeholder='Search for any movie, tv show or actor...'
