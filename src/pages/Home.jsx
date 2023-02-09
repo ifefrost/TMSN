@@ -7,6 +7,8 @@ import { useState, useEffect, useCallback } from "react";
 const Home = () => {
   const apiKey = import.meta.env.VITE_API_KEY;
   const [trending, setTrending] = useState([]);
+  const [nowPlaying, setNowPlaying] = useState([]);
+  //const [latestTrailers, setLatestTrailers] = useState([]);
   const [trendingTV, setTrendingTV] = useState([]);
 
   const fetchTrending = useCallback(async () => {
@@ -16,11 +18,50 @@ const Home = () => {
       );
       const json = await response.json();
       setTrending(json.results);
+      //console.log(json);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  const fetchNowPlaying = useCallback(async () => {
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=1`
+      );
+      const json = await response.json();
+      setNowPlaying(json.results);
       console.log(json);
     } catch (error) {
       console.log(error);
     }
   }, []);
+
+
+// const fetchLatestTrailers = async () => {
+//   for (let i = 0; i < nowPlaying.length; i++) {
+//     const response = await fetch(
+//       `https://api.themoviedb.org/3/movie/${nowPlaying[i].id}/videos?api_key=${apiKey}&language=en-US`
+//     );
+//     const json = await response.json();
+    
+//     setLatestTrailers(latestTrailers => [...latestTrailers, json.results[0]]);
+//   }
+
+// };
+
+// console.log(latestTrailers);
+
+// // map latest trailers to now playing movies
+// const latestTrailersMapped = nowPlaying.map((movie, index) => {
+//   return {
+//     ...movie,
+//     trailer: latestTrailers[index],
+//   };
+// });
+
+// console.log(latestTrailersMapped);
+
 
   const fetchTrendingTV = useCallback(async () => {
     try {
@@ -29,7 +70,7 @@ const Home = () => {
       );
       const json = await response.json();
       setTrendingTV(json.results);
-      console.log(json);
+      //console.log(json);
     } catch (error) {
       console.log(error);
     }
@@ -37,8 +78,10 @@ const Home = () => {
 
   useEffect(() => {
     fetchTrending();
+    fetchNowPlaying();
+    // fetchLatestTrailers();
     fetchTrendingTV();
-  }, [fetchTrending, fetchTrendingTV]);
+  }, [fetchTrending, fetchTrendingTV, fetchNowPlaying]);
 
   return (
     <div className='mx-auto 2xl:max-w-screen-xl px-8'>
@@ -96,8 +139,9 @@ const Home = () => {
       />
 
       <LandscapeSlider
-        heading={"Latest Trailers"}
-        resultArray={trending}
+        heading={"Now Playing in Theaters"}
+        resultArray={nowPlaying}
+        media={"movie"}
         styling={"mb-24"}
       />
 

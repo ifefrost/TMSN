@@ -132,33 +132,33 @@ const Search = () => {
           </button>
         </form>
         {totalPages > 1 && (
-          <Pagination {...{ results, pageNum, totalResults }} />
+          <TotalResults {...{ results, pageNum, totalResults }} styling={'mt-10'} />
         )}
         ;
         <SearchResults results={results} />
         {totalPages > 1 && (
-          <div className='flex items-center justify-between rounded-3xl px-4 py-3 sm:px-6 bg-[#1F2230] mt-5'>
-            <div className='hidden sm:flex sm:flex-1 sm:items-center sm:justify-between'>
-              <Pagination
-                {...{ results, pageNum, setPageNum, totalPages, totalResults }}
-              />
-              <div aria-label='Pagination'>
-                <button
-                  className='bg-blue-700 h-[46px] w-[105px] border-white border-2 hover:bg-blue-900 text-white font-bold py-1 px-4 mt-3 rounded-full hover:shadow'
-                  onClick={pageNum > 1 ? () => setPageNum(pageNum - 1) : null}
-                >
-                  Previous
-                </button>
-                <button
-                  className='bg-blue-700 h-[46px] w-[105px] border-white border-2 hover:bg-blue-900 text-white font-bold py-1 px-4 mt-3 rounded-full hover:shadow'
-                  onClick={
-                    pageNum < totalPages ? () => setPageNum(pageNum + 1) : null
-                  }
-                >
-                  Next
-                </button>
-              </div>
+          <div className='flex items-center justify-between rounded-3xl p-6 sm:px-6 bg-[#1F2230] mt-10'>
+
+            <TotalResults
+              {...{ results, pageNum, setPageNum, totalPages, totalResults }}
+            />
+            <div aria-label='TotalResults' className="flex gap-5">
+              <button
+                className='bg-blue-700 h-[46px] w-[105px] border-white border-2 hover:bg-blue-900 text-white font-bold py-1 px-4 rounded-full hover:shadow'
+                onClick={pageNum > 1 ? () => setPageNum(pageNum - 1) : null}
+              >
+                Previous
+              </button>
+              <button
+                className='bg-blue-700 h-[46px] w-[105px] border-white border-2 hover:bg-blue-900 text-white font-bold py-1 px-4 rounded-full hover:shadow'
+                onClick={
+                  pageNum < totalPages ? () => setPageNum(pageNum + 1) : null
+                }
+              >
+                Next
+              </button>
             </div>
+
           </div>
         )}
       </div>
@@ -166,11 +166,11 @@ const Search = () => {
   );
 };
 
-const Pagination = ({ results, pageNum, totalResults }) => {
+const TotalResults = ({ results, pageNum, totalResults, styling }) => {
   const searchCount = pageNum > 1 ? (pageNum - 1) * 20 + 1 : 1;
 
   return (
-    <div>
+    <div className={styling}>
       <p className='text-lg text-white'>
         Showing <span className='font-medium'>{searchCount}</span> to{" "}
         <span className='font-medium'>{searchCount + results.length - 1}</span>{" "}

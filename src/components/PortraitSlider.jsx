@@ -1,7 +1,7 @@
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
-const PortraitSlider = ({ heading, resultArray, styling }) => {
+const PortraitSlider = ({ heading, resultArray, styling, media }) => {
   return (
     <div className={styling}>
       <div className='text-white'>
@@ -10,7 +10,7 @@ const PortraitSlider = ({ heading, resultArray, styling }) => {
           <MdKeyboardArrowLeft className='min-w-[52px] min-h-[52px]' />
           <div className='flex gap-[3.5rem] overflow-hidden bg-gradient-to-r from-[#11131B] via-transparent to-[#11131B]'>
             {resultArray.map((result) => (
-              <PortraitSliderItem result={result} key={result.id} />
+              <PortraitSliderItem result={result} key={result.id} media={media}/>
             ))}
           </div>
           <MdKeyboardArrowRight className='min-w-[52px] min-h-[52px]' />
@@ -20,16 +20,16 @@ const PortraitSlider = ({ heading, resultArray, styling }) => {
   );
 };
 
-const PortraitSliderItem = ({ result }) => {
+const PortraitSliderItem = ({ result, media }) => {
   const imagesBaseUrl = "https://image.tmdb.org/t/p/w185";
   const navigate = useNavigate();
 
   const navigateToDetails = () => {
-    navigate(`/details/${result.media_type}/${result.id}`);
+    navigate(`/details/${result.media_type ?? media}/${result.id}`);
   };
 
   return (
-    <div className='' onClick={navigateToDetails}>
+    <div className='cursor-pointer' onClick={navigateToDetails}>
       <img
         src={`${imagesBaseUrl}${result.profile_path ?? result.poster_path}`}
         alt={result.name ?? result.title}
