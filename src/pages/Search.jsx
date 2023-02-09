@@ -84,23 +84,23 @@ const Search = () => {
             </li>
             <li className={(!category || category === 'multi') ? 'bg-gray-500 rounded-md' : ''} onClick={() => handleCategoryChange('multi')}>
               <div
-                className='flex items-center p-2 text-base font-normal text-gray-50 rounded-lg dark:text-white'
+                className='cursor-pointer flex items-center p-2 text-base font-normal text-gray-50 rounded-lg dark:text-white'
               >
                 <span className='ml-7'>All</span>
               </div>
             </li>
             <li className={category === 'movie' ? 'bg-gray-500 rounded-md' : ''} onClick={() => handleCategoryChange('movie')}>
-              <div className='flex items-center p-2 text-base font-normal text-gray-50 rounded-lg dark:text-white'>
+              <div className='cursor-pointer flex items-center p-2 text-base font-normal text-gray-50 rounded-lg dark:text-white'>
                 <span className='flex-1 ml-7 whitespace-nowrap'>Movies</span>
               </div>
             </li>
             <li className={category === 'tv' ? 'bg-gray-500 rounded-md' : ''} onClick={() => handleCategoryChange('tv')}>
-              <div className='flex items-center p-2 text-base font-normal text-gray-50 rounded-lg dark:text-white'>
+              <div className='cursor-pointer flex items-center p-2 text-base font-normal text-gray-50 rounded-lg dark:text-white'>
                 <span className='flex-1 ml-7 whitespace-nowrap'>TV Shows</span>
               </div>
             </li>
             <li className={category === 'person' ? 'bg-gray-500 rounded-md' : ''} onClick={() => handleCategoryChange('person')}>
-              <div className='flex items-center p-2 text-base font-normal text-gray-50 rounded-lg dark:text-white'>
+              <div className='cursor-pointer flex items-center p-2 text-base font-normal text-gray-50 rounded-lg dark:text-white'>
                 <span className='flex-1 ml-7 whitespace-nowrap'>Person</span>
               </div>
             </li>
