@@ -113,10 +113,12 @@ const Details = () => {
                   <p>Score</p>
                 </div>
               </div>
+              {trailer && (
               <div className='cursor-pointer flex items-center gap-2' onClick={() => window.open(`https://www.youtube.com/watch?v=${trailer.key}`)}>
                 <MdPlayCircleOutline className='h-10 w-10' />
                 <p>Play Trailer</p>
               </div>
+              )}
             </div>
           </div>
 
