@@ -136,7 +136,7 @@ const Details = () => {
       />
 
       <LandscapeSlider
-        heading={"Similar Movies"}
+        heading={`Similar ${media_type === "movie" ? "Movies" : "TV Shows"}`}
         resultArray={similar}
         media={media}
         styling={"mb-24"}
