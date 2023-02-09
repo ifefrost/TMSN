@@ -70,8 +70,6 @@ const Search = () => {
     }
   }, [query, pageNum, category]);
 
-  const searchCount = pageNum > 1 ? (pageNum - 1) * 20 + 1 : 1;
-
   return (
     <div className='mx-auto 2xl:max-w-screen-xl px-8 flex mt-10 mb-20'>
       <aside id='default-sidebar' className='w-64 h-fit' aria-label='Sidebar'>
@@ -131,7 +129,7 @@ const Search = () => {
             Search
           </button>
         </form>
-        {totalPages > 1 && (
+        {totalPages > 0 && (
           <TotalResults {...{ results, pageNum, totalResults }} styling={'mt-10'} />
         )}
         ;

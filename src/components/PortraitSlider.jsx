@@ -1,14 +1,15 @@
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import noImage from '../assets/no-image.jpg';
 
 const PortraitSlider = ({ heading, resultArray, styling, media }) => {
   return (
     <div className={styling}>
       <div className='text-white'>
         <h3 className='font-bold text-[2rem] mb-5'>{heading}</h3>
-        <div className='flex items-center gap-8'>
+        <div className='flex items-center'>
           <MdKeyboardArrowLeft className='min-w-[52px] min-h-[52px]' />
-          <div className='flex gap-[3.5rem] overflow-hidden bg-gradient-to-r from-[#11131B] via-transparent to-[#11131B]'>
+          <div className='flex gap-4 overflow-hidden bg-gradient-to-r from-[#11131B] via-transparent to-[#11131B]'>
             {resultArray.map((result) => (
               <PortraitSliderItem result={result} key={result.id} media={media}/>
             ))}
@@ -29,11 +30,11 @@ const PortraitSliderItem = ({ result, media }) => {
   };
 
   return (
-    <div className='cursor-pointer' onClick={navigateToDetails}>
+    <div className='cursor-pointer p-5' onClick={navigateToDetails}>
       <img
-        src={`${imagesBaseUrl}${result.profile_path ?? result.poster_path}`}
+        src={(result.profile_path ?? result.poster_path) ? `${imagesBaseUrl}${result.profile_path ?? result.poster_path}` : noImage}
         alt={result.name ?? result.title}
-        className='rounded-xl object-cover h-[250px] w-[165px]'
+        className='rounded-xl object-cover h-[250px] w-[165px] hover:shadow'
       />
       <div className='w-[165px]'>
         <p className='mt-3 text-white font-bold text-[1.125rem]'>

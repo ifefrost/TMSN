@@ -1,6 +1,5 @@
 import { MdPlayCircleOutline } from "react-icons/md";
-import poster from "../assets/poster.jpg";
-import trailer from "../assets/trailer.png";
+import noImage from "../assets/no-image.jpg";
 import LandscapeSlider from "../components/LandscapeSlider";
 import PortraitSlider from "../components/PortraitSlider";
 import { useParams, useLocation } from "react-router-dom";
@@ -75,12 +74,11 @@ const Details = () => {
     fetchTrailer();
   }, [fetchDetails]);
 
-
   return (
     <div className='mx-auto max-w-screen-xl px-8'>
       <div className='relative w-full'>
         <img
-          src={`${imagesBaseUrl}${details.backdrop_path}`}
+          src={ details.backdrop_path ? `${imagesBaseUrl}${details.backdrop_path}` : noImage}
           alt='movie poster'
           className='rounded-b-xl brightness-[0.2] object-cover h-[515px] w-full'
         />
@@ -89,7 +87,7 @@ const Details = () => {
       <div className='-translate-y-64 flex items-center lg:mt-8 lg:mb-20 mx-10'>
         <div className='min-w-[300px] rounded-xl shadow'>
           <img
-            src={`${imagesBaseUrl}${details.poster_path}`}
+            src={ details.poster_path ? `${imagesBaseUrl}${details.poster_path}` : noImage}
             alt='movie poster'
             className='rounded-xl object-cover h-[450px] w-[300px]'
           />
