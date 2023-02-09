@@ -18,7 +18,6 @@ const Search = () => {
   const [category, setCategory] = React.useState('');
 
   useEffect(() => {
-    console.log(result, 'result');
     if (result) {
       setQuery(result);
       fetchData(result);
