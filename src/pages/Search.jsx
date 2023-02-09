@@ -135,7 +135,7 @@ const Search = () => {
           <Pagination {...{ results, pageNum, totalResults }} />
         )}
         ;
-        <SearchResults results={results} />
+        <SearchResults results={results} category={category} />
         {totalPages > 1 && (
           <div className='flex items-center justify-between rounded-3xl px-4 py-3 sm:px-6 bg-[#1F2230] mt-5'>
             <div className='hidden sm:flex sm:flex-1 sm:items-center sm:justify-between'>
