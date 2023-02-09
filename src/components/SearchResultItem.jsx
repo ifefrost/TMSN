@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import noImage from '../assets/no-image.jpg';
 
 
 const imagesBaseUrl = 'https://image.tmdb.org/t/p/w342';
@@ -21,7 +22,7 @@ const SearchResultItem = ({ result, media }) => {
         <p className="mt-auto mb-5">User Score: {result.vote_average}</p>
       </div>
       <img
-        src={result.poster_path ?? result.profile_path ? `${imagesBaseUrl}${result.poster_path ?? result.profile_path}` : 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'}
+        src={result.poster_path ?? result.profile_path ? `${imagesBaseUrl}${result.poster_path ?? result.profile_path}` : noImage}
         alt={result.title}
         className='rounded-xl object-cover h-[340px] w-[225px]'
       />
