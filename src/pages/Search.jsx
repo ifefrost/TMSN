@@ -135,7 +135,7 @@ const Search = () => {
           <TotalResults {...{ results, pageNum, totalResults }} styling={'mt-10'} />
         )}
         ;
-        <SearchResults results={results} />
+        <SearchResults results={results} media={category} />
         {totalPages > 1 && (
           <div className='flex items-center justify-between rounded-3xl p-6 sm:px-6 bg-[#1F2230] mt-10'>
 

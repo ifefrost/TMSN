@@ -1,6 +1,7 @@
 import SearchResultItem from "./SearchResultItem";
 
-const SearchResults = ({ results }) => {
+const SearchResults = ({ results, media }) => {
+
   return (
     <div className="flex flex-wrap mt-5 gap-5 w-[760px]">
       {results.length === 0 && (
@@ -9,7 +10,7 @@ const SearchResults = ({ results }) => {
         </div>
       )}
       {results.map((result) => (
-        <SearchResultItem key={result.id} result={result} />
+        <SearchResultItem key={result.id} result={result} media={media} />
       ))}
     </div>
   );

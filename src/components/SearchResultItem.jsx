@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 
 const imagesBaseUrl = 'https://image.tmdb.org/t/p/w342';
 
-const SearchResultItem = ({ result }) => {
+const SearchResultItem = ({ result, media }) => {
 
   const navigate = useNavigate();
 
   const navigateToDetails = () => {
-    navigate(`/details/${result.media_type}/${result.id}`);
+    navigate(`/details/${media}/${result.id}`);
   };
 
   return (
