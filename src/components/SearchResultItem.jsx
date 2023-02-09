@@ -8,7 +8,7 @@ const SearchResultItem = ({ result, media }) => {
   const navigate = useNavigate();
 
   const navigateToDetails = () => {
-    navigate(`/details/${media}/${result.id}`);
+    navigate(`/details/${result.media_type ?? media}/${result.id}`);
   };
 
   return (
