@@ -4,6 +4,7 @@ import LandscapeSlider from "../components/LandscapeSlider";
 import PortraitSlider from "../components/PortraitSlider";
 import { useParams, useLocation } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
+import Modal from "../components/Modal";
 
 const Details = () => {
   const apiKey = import.meta.env.VITE_API_KEY;
@@ -14,7 +15,9 @@ const Details = () => {
   const [trailer, setTrailer] = useState([]);
   const [cast, setCast] = useState([]);
   const [similar, setSimilar] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
+  const handleInvisible = () => setShowModal(false);
   const fetchDetails = useCallback(async () => {
     try {
       const response = await fetch(
@@ -78,7 +81,11 @@ const Details = () => {
     <div className='mx-auto max-w-screen-xl px-8'>
       <div className='relative w-full'>
         <img
-          src={ details.backdrop_path ? `${imagesBaseUrl}${details.backdrop_path}` : noImage}
+          src={
+            details.backdrop_path
+              ? `${imagesBaseUrl}${details.backdrop_path}`
+              : noImage
+          }
           alt='movie poster'
           className='rounded-b-xl brightness-[0.2] object-cover h-[515px] w-full'
         />
@@ -87,26 +94,45 @@ const Details = () => {
       <div className='-translate-y-64 flex items-center lg:mt-8 lg:mb-20 mx-10'>
         <div className='min-w-[300px] rounded-xl shadow'>
           <img
-            src={ details.poster_path ? `${imagesBaseUrl}${details.poster_path}` : noImage}
+            src={
+              details.poster_path
+                ? `${imagesBaseUrl}${details.poster_path}`
+                : noImage
+            }
             alt='movie poster'
             className='rounded-xl object-cover h-[450px] w-[300px]'
           />
         </div>
 
         <div className='w-[800px] h-[450px] mx-8 text-white flex flex-col justify-start pt-3'>
-          <div className="">
+          <div className=''>
             <div>
-              <h1 className='text-[3.25rem] leading-none font-bold'>{details.title ?? details.name}</h1>
+              <h1 className='text-[3.25rem] leading-none font-bold'>
+                {details.title ?? details.name}
+              </h1>
             </div>
             <div className='flex gap-10'>
-              <p>{details.runtime ? (details.runtime / 60).toFixed(0) + 'h ' + (details.runtime % 60) + 'm' : (details.number_of_seasons + ' Seasons')}</p>
+              <p>
+                {details.runtime
+                  ? (details.runtime / 60).toFixed(0) +
+                    "h " +
+                    (details.runtime % 60) +
+                    "m"
+                  : details.number_of_seasons + " Seasons"}
+              </p>
               <p>{details.genres?.map((genre) => genre.name).join(", ")}</p>
-              <p>{new Date(details.release_date ?? details.first_air_date).toDateString()}</p>
+              <p>
+                {new Date(
+                  details.release_date ?? details.first_air_date
+                ).toDateString()}
+              </p>
             </div>
             <div className='flex items-center gap-10 mt-8'>
               <div className='flex items-center gap-2'>
                 <div className='w-[55px] h-[55px] rounded-full border-white border-4 p-2 pt-3'>
-                  <h4 className='font-bold'>{(details.vote_average * 10).toFixed(0)}%</h4>
+                  <h4 className='font-bold'>
+                    {(details.vote_average * 10).toFixed(0)}%
+                  </h4>
                 </div>
                 <div>
                   <p>User</p>
@@ -114,10 +140,13 @@ const Details = () => {
                 </div>
               </div>
               {trailer && (
-              <div className='cursor-pointer flex items-center gap-2' onClick={() => window.open(`https://www.youtube.com/watch?v=${trailer.key}`)}>
-                <MdPlayCircleOutline className='h-10 w-10' />
-                <p>Play Trailer</p>
-              </div>
+                <div
+                  className='cursor-pointer flex items-center gap-2'
+                  onClick={() => setShowModal(true)}
+                >
+                  <MdPlayCircleOutline className='h-10 w-10' />
+                  <p>Play Trailer</p>
+                </div>
               )}
             </div>
           </div>
@@ -126,9 +155,13 @@ const Details = () => {
             <h2 className='text-[2.625rem] mb-4 font-bold'>Synopsis</h2>
             <p>{details.overview}</p>
           </div>
-
         </div>
       </div>
+      <Modal
+        trailerKey={trailer.key}
+        visible={showModal}
+        close={handleInvisible}
+      />
 
       <PortraitSlider
         heading={"Cast & Crew"}

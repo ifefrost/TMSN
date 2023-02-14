@@ -1,5 +1,4 @@
 import { MdOutlineSearch, MdArrowForward } from "react-icons/md";
-import poster from "../assets/poster.jpg";
 import LandscapeSlider from "../components/LandscapeSlider";
 import PortraitSlider from "../components/PortraitSlider";
 import { useState, useEffect, useCallback } from "react";
@@ -8,6 +7,7 @@ const Home = () => {
   const apiKey = import.meta.env.VITE_API_KEY;
   const [trending, setTrending] = useState([]);
   const [nowPlaying, setNowPlaying] = useState([]);
+  const [poster, setPoster] = useState([]);
   //const [latestTrailers, setLatestTrailers] = useState([]);
   const [trendingTV, setTrendingTV] = useState([]);
 
@@ -31,37 +31,27 @@ const Home = () => {
       );
       const json = await response.json();
       setNowPlaying(json.results);
-      console.log(json);
+      // console.log(json);
     } catch (error) {
       console.log(error);
     }
   }, []);
 
+  
 
-// const fetchLatestTrailers = async () => {
-//   for (let i = 0; i < nowPlaying.length; i++) {
-//     const response = await fetch(
-//       `https://api.themoviedb.org/3/movie/${nowPlaying[i].id}/videos?api_key=${apiKey}&language=en-US`
-//     );
-//     const json = await response.json();
-    
-//     setLatestTrailers(latestTrailers => [...latestTrailers, json.results[0]]);
-//   }
+  const fetchPoster = useCallback(async () => {
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=fr-FR&include_adult=false&with_genres=28&sort_by=popularity.desc&page=1`
+      );
+      const json = await response.json();
+      setPoster(json.results[Math.floor(Math.random() * json.results.length)].backdrop_path);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
-// };
-
-// console.log(latestTrailers);
-
-// // map latest trailers to now playing movies
-// const latestTrailersMapped = nowPlaying.map((movie, index) => {
-//   return {
-//     ...movie,
-//     trailer: latestTrailers[index],
-//   };
-// });
-
-// console.log(latestTrailersMapped);
-
+  console.log(poster);
 
   const fetchTrendingTV = useCallback(async () => {
     try {
@@ -79,6 +69,7 @@ const Home = () => {
   useEffect(() => {
     fetchTrending();
     fetchNowPlaying();
+    fetchPoster();
     // fetchLatestTrailers();
     fetchTrendingTV();
   }, [fetchTrending, fetchTrendingTV, fetchNowPlaying]);
@@ -125,7 +116,7 @@ const Home = () => {
         </div>
         <div className='h-80 mt-8'>
           <img
-            src={poster}
+            src={`https://image.tmdb.org/t/p/original/${poster}`}
             alt='placeholder movie poster'
             className='rounded-xl object-cover h-[25rem] w-[34rem]'
           />
