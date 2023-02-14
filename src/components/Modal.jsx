@@ -11,7 +11,7 @@ const Modal = ({ trailerKey, visible, close }) => {
     >
       <div className='relative w-[80rem] h-[45rem]'>
         <iframe
-          src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1&mute=1`}
+          src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1`}
           className='absolute inset-0 w-full h-full'
           allowFullScreen
           title='Embedded youtube'

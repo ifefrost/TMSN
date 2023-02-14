@@ -38,7 +38,7 @@ const Details = () => {
       );
       const json = await response.json();
       setTrailer(json.results[0]);
-      //console.log(json);
+      // console.log(json);
     } catch (error) {
       console.log(error);
     }
@@ -76,6 +76,12 @@ const Details = () => {
     fetchSimilar();
     fetchTrailer();
   }, [fetchDetails]);
+
+  if (trailer) {
+    var trailerKey = trailer.key;
+  } else {
+    var trailerKey = null;
+  }
 
   return (
     <div className='mx-auto max-w-screen-xl px-8'>
@@ -158,7 +164,7 @@ const Details = () => {
         </div>
       </div>
       <Modal
-        trailerKey={trailer.key}
+        trailerKey={trailerKey}
         visible={showModal}
         close={handleInvisible}
       />
