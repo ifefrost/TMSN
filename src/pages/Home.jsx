@@ -37,21 +37,20 @@ const Home = () => {
     }
   }, []);
 
-  
-
   const fetchPoster = useCallback(async () => {
     try {
       const response = await fetch(
         `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=fr-FR&include_adult=false&with_genres=28&sort_by=popularity.desc&page=1`
       );
       const json = await response.json();
-      setPoster(json.results[Math.floor(Math.random() * json.results.length)].backdrop_path);
+      setPoster(
+        json.results[Math.floor(Math.random() * json.results.length)]
+          .backdrop_path
+      );
     } catch (error) {
       console.log(error);
     }
   }, []);
-
-  console.log(poster);
 
   const fetchTrendingTV = useCallback(async () => {
     try {
@@ -81,7 +80,7 @@ const Home = () => {
           <h3 className='text-[4rem] leading-none font-bold text-white'>
             Come for the movies & stay for the community.
           </h3>
-          <form action="search">
+          <form action='search'>
             <div className='mt-10 flex items-center gap-x-6'>
               <div className='relative mt-1 rounded-md'>
                 <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
@@ -95,7 +94,10 @@ const Home = () => {
                   placeholder='Search for any movie, tv show or actor...'
                 />
               </div>
-              <button type="submit" className='bg-blue-700 border-white border-2 hover:bg-blue-900 text-white font-bold py-3 px-8 rounded-full hover:shadow'>
+              <button
+                type='submit'
+                className='bg-blue-700 border-white border-2 hover:bg-blue-900 text-white font-bold py-3 px-8 rounded-full hover:shadow'
+              >
                 Search
               </button>
             </div>
