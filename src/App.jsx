@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Details from "./pages/Details";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -14,11 +15,12 @@ function App() {
       <BrowserRouter>
         <Nav />
         <ScrollReset>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/search' element={<Search />} />
-          <Route path='/details/:media_type/:id' element={<Details />} />
-        </Routes>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/search' element={<Search />} />
+            <Route path='/details/:media_type/:id' element={<Details />} />
+            <Route path='/login' element={<Login />} />
+          </Routes>
         </ScrollReset>
       </BrowserRouter>
       <Footer />

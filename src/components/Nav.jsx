@@ -22,7 +22,7 @@ const Nav = () => {
                 <div className="ml-3 relative">
                   <div>
                     <button className="flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu" aria-expanded="false" aria-haspopup="true">
-                      <Link className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" to={"/"}>
+                      <Link className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" to={"/login"}>
                         <div className="flex items-center">
                         <span className="mr-3">Login</span>
                         <MdPersonOutline className="h-8 w-8 text-white" />

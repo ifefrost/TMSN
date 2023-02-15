@@ -2,6 +2,7 @@ import { MdOutlineSearch, MdArrowForward } from "react-icons/md";
 import LandscapeSlider from "../components/LandscapeSlider";
 import PortraitSlider from "../components/PortraitSlider";
 import { useState, useEffect, useCallback } from "react";
+import noImage from "../assets/no-image.jpg";
 
 const Home = () => {
   const apiKey = import.meta.env.VITE_API_KEY;
@@ -40,7 +41,7 @@ const Home = () => {
   const fetchPoster = useCallback(async () => {
     try {
       const response = await fetch(
-        `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=fr-FR&include_adult=false&with_genres=28&sort_by=popularity.desc&page=1`
+        `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&include_adult=false&with_genres=28&sort_by=popularity.desc&page=1`
       );
       const json = await response.json();
       setPoster(
@@ -118,7 +119,9 @@ const Home = () => {
         </div>
         <div className='h-80 mt-8'>
           <img
-            src={`https://image.tmdb.org/t/p/original/${poster}`}
+            src={
+              poster.length ? `https://image.tmdb.org/t/p/original/${poster}` : noImage
+            }
             alt='placeholder movie poster'
             className='rounded-xl object-cover h-[25rem] w-[34rem]'
           />
