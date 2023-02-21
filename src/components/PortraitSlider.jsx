@@ -12,9 +12,10 @@ const PortraitSlider = ({ heading, resultArray, styling, media }) => {
       <div className='text-white'>
         <h3 className='font-bold text-[2rem] mb-5'>{heading}</h3>
         <div className='flex items-center'>
-          <MdKeyboardArrowLeft className='min-w-[52px] min-h-[52px] port-arrow-left' />
+          <MdKeyboardArrowLeft className='min-w-[52px] min-h-[52px] port-arrow-left cursor-pointer' />
           <div className='flex gap-4 overflow-hidden bg-gradient-to-r from-[#11131B] via-transparent to-[#11131B]'>
             <Swiper
+            className="w-screen"
               modules={[Navigation]}
               spaceBetween={5}
               slidesPerView={5}
@@ -34,7 +35,7 @@ const PortraitSlider = ({ heading, resultArray, styling, media }) => {
               ))}
             </Swiper>
           </div>
-          <MdKeyboardArrowRight className='min-w-[52px] min-h-[52px] port-arrow-right' />
+          <MdKeyboardArrowRight className='min-w-[52px] min-h-[52px] port-arrow-right cursor-pointer' />
         </div>
       </div>
     </div>

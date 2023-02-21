@@ -59,7 +59,7 @@ const Search = () => {
     try {
       const searchCategory = category || 'multi';
       const response = await fetch(
-        `https://api.themoviedb.org/3/search/${searchCategory}?api_key=${apiKey}&language=en-US&query=${searchQuery}&page=${pageNum}`
+        `https://api.themoviedb.org/3/search/${searchCategory}?api_key=${apiKey}&language=en-US&query=${searchQuery}&page=${pageNum}&include_adult=false`
       );
       const json = await response.json();
       setResults(json.results);
