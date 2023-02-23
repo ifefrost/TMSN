@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Details from "./pages/Details";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path='/search' element={<Search />} />
             <Route path='/details/:media_type/:id' element={<Details />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
           </Routes>
         </ScrollReset>
       </BrowserRouter>

@@ -1,7 +1,7 @@
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import noImage from "../assets/no-image.jpg";
 import "swiper/css";
 import "swiper/css/navigation";
