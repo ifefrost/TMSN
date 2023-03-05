@@ -1,8 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {MdPersonOutline} from 'react-icons/md';
+import { useNavigate } from "react-router-dom";
 
 const Nav = () => {
+  const navigate = useNavigate()
+  const token = sessionStorage.getItem('token');
+
+  const logout = () => {
+    if (token) {
+      sessionStorage.removeItem('token');
+      navigate('/');
+    } else {
+      navigate('/login')
+    }
+  }
     return (
         <nav className="bg-[#11131B] sticky top-0 z-10">
           <div className="mx-auto 2xl:max-w-screen-xl px-2 sm:px-6 lg:px-8">
@@ -21,13 +33,17 @@ const Nav = () => {
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <div className="ml-3 relative">
                   <div>
-                    <button className="flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu" aria-expanded="false" aria-haspopup="true">
-                      <Link className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" to={"/login"}>
-                        <div className="flex items-center">
-                        <span className="mr-3">Login</span>
+                    <button
+                      className="flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                      id="user-menu"
+                      aria-expanded="false"
+                      aria-haspopup="true"
+                      onClick={() => logout()}
+                    >
+                      <div className="flex items-center">
+                        <span className="mr-3">{token ? 'Logout' : 'Login'}</span>
                         <MdPersonOutline className="h-8 w-8 text-white" />
-                        </div>
-                      </Link>
+                      </div>
                     </button>
                   </div>
                 </div>
