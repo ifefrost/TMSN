@@ -25,10 +25,9 @@ const PortraitSlider = ({ heading, resultArray, styling, media }) => {
               }}
             >
               {resultArray.map((result) => (
-                <SwiperSlide>
+                <SwiperSlide key={result.id}>
                   <PortraitSliderItem
                     result={result}
-                    key={result.id}
                     media={media}
                   />
                 </SwiperSlide>

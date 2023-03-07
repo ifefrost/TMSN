@@ -105,7 +105,7 @@ const Register = () => {
               />
             </div>
   
-            <button className='mt-14 bg-blue-700 h-[46px] w-[142px] border-white border-2 hover:bg-blue-900 text-white font-bold py-1 px-4 mt-3 rounded-full hover:shadow' disabled={loading}>
+            <button className='mt-14 bg-blue-700 h-[46px] w-[142px] border-white border-2 hover:bg-blue-900 text-white font-bold py-1 px-4 rounded-full hover:shadow' disabled={loading}>
                   Sign Up
             </button>
   

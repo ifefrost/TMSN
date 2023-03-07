@@ -75,7 +75,7 @@ const Home = () => {
   }, [fetchTrending, fetchTrendingTV, fetchNowPlaying]);
 
   return (
-    <div className='mx-auto 2xl:max-w-screen-xl px-8'>
+    <div className='mx-auto max-w-screen-xl px-8'>
       <div className='bg-blue-500 rounded-b-[32px] h-[32rem] flex items-center bg-hero-image bg-cover'>
         <div className='ml-24 max-w-4xl'>
           <h3 className='text-[4rem] leading-none font-bold text-white'>

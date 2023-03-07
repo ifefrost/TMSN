@@ -4,7 +4,7 @@ dotenv.config()
 import cors from "cors";
 import express from "express";
 import connection from "./resolvers/database/connection.js";
-import { login, store } from "./services/user-service.js";
+import { login, store, profile } from "./services/user-service.js";
 
 const app = express();
 const port = 8000;
@@ -47,6 +47,22 @@ app.post("/login", async (req, res) => {
         const user = await login(client, req.body);
 
         res.send({
+            message: "OK",
+            data: user,
+        });
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })
+    }
+})
+
+app.post("/profile", async (req, res) => {
+    try {
+        const client = await connection();
+        const user = await profile(client, req.body);
+
+        return res.send({
             message: "OK",
             data: user,
         });

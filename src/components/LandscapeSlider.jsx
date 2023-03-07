@@ -24,10 +24,9 @@ const LandscapeSlider = ({ heading, resultArray, styling, media }) => {
               }}
             >
               {resultArray.map((result) => (
-                <SwiperSlide>
+                <SwiperSlide key={result.id}>
                   <LandscapeSliderItem
                     result={result}
-                    key={result.id}
                     media={media}
                   />
                 </SwiperSlide>

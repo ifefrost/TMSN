@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
-import { generateToken } from '../resolvers/token/jwt.js';
+import { ObjectId } from 'mongodb';
+import { generateToken, verifyToken } from '../resolvers/token/jwt.js';
 
 export const store = async (client, input) => {
     const db = client.db("tmsn_db");
@@ -56,4 +57,22 @@ export const login = async (client, input) => {
             email: user.email
         },
     };
+};
+
+export const profile = async (client, value) => {
+    const db = client.db("tmsn_db");
+    const collection = db.collection('users');
+    const data = verifyToken(value.value);
+
+    const user = await collection.findOne({ _id: new ObjectId(data.id) });
+
+    if (!user) {
+        throw new Error('User does not exist');
+    }
+
+    return {
+        id: user._id.toString(),
+        email: user.email
+    };
+
 };

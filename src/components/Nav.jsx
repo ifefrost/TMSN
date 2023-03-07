@@ -1,7 +1,8 @@
-import React from "react";
+import React  from "react";
 import { Link } from "react-router-dom";
 import {MdPersonOutline} from 'react-icons/md';
 import { useNavigate } from "react-router-dom";
+import Dropdown from "./Dropdown";
 
 const Nav = () => {
   const navigate = useNavigate()
@@ -14,6 +15,26 @@ const Nav = () => {
     } else {
       navigate('/login')
     }
+  }
+
+  const profileMenu = [
+    {
+      label: 'Your Profile',
+      value: 'profile',
+      link: '/profile',
+    },
+    {
+      label: 'Sign Out',
+      value: 'logout',
+      link: '/login',
+      onClick: () => logout()
+    }
+  ]
+
+  const handleDropdown = () => {
+    return (
+          <Dropdown options={profileMenu} title="Profile Menu" icon={<MdPersonOutline size={'2rem'} color={'#FFF'} />} />
+    )  
   }
     return (
         <nav className="bg-[#11131B] sticky top-0 z-10">
@@ -31,22 +52,24 @@ const Nav = () => {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <div className="ml-3 relative">
-                  <div>
+                {token ? handleDropdown() : 
+                  <div className="ml-3 relative">
                     <button
-                      className="flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                      id="user-menu"
-                      aria-expanded="false"
-                      aria-haspopup="true"
-                      onClick={() => logout()}
-                    >
-                      <div className="flex items-center">
-                        <span className="mr-3">{token ? 'Logout' : 'Login'}</span>
-                        <MdPersonOutline className="h-8 w-8 text-white" />
-                      </div>
-                    </button>
+                        className="flex focus:outline-none  text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                        aria-expanded="false"
+                        aria-haspopup="false"
+                      >
+                        <div className="flex items-center">
+                          <span className="mr-3"> 
+                          <div className="flex items-center">
+                            <Link to="/login" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</Link>
+                            <MdPersonOutline className="h-8 w-8 text-white" />
+                          </div>
+                          </span>
+                        </div>
+                      </button>
                   </div>
-                </div>
+                }
               </div>
             </div>
           </div>

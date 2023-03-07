@@ -11,7 +11,7 @@ const Search = () => {
   const [results, setResults] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const result = searchParams.get("result");
-  const [query, setQuery] = useState(result);
+  const [query, setQuery] = useState(result ||'');
   const [pageNum, setPageNum] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [totalResults, setTotalResults] = useState(0);
@@ -23,7 +23,6 @@ const Search = () => {
       setQuery(result);
       fetchData(result);
     }
-
 
     return () => {
       // reset state on unmount
@@ -71,7 +70,7 @@ const Search = () => {
   }, [query, pageNum, category]);
 
   return (
-    <div className='mx-auto 2xl:max-w-screen-xl px-8 flex mt-10 mb-20'>
+    <div className='mx-auto max-w-screen-xl px-8 flex mt-10 mb-20'>
       <aside id='default-sidebar' className='w-64 h-fit' aria-label='Sidebar'>
         <div className='px-3 py-4 overflow-y-auto bg-[#1F2230] rounded-lg'>
           <ul className='space-y-2'>
