@@ -26,7 +26,6 @@ const PortraitSlider = ({ heading, resultArray, styling, media }) => {
             >
               {resultArray.map((result) => (
                 <SwiperSlide key={result.id}>
-                  {result.media_type}
                   <PortraitSliderItem
                     result={result}
                     media={media}
@@ -46,8 +45,14 @@ const PortraitSliderItem = ({ result, media }) => {
   const imagesBaseUrl = "https://image.tmdb.org/t/p/w185";
   const navigate = useNavigate();
   const navigateToDetails = () => {
-    // every result here is a person
-    navigate(`/person/${result.id}`);
+    //if person
+    if (media === "person" || result.media_type === "person") {
+      navigate(`/person/${result.id}`);
+    } else {
+      //if movie or tv
+      navigate(`/details/${result.media_type ?? media}/${result.id}`);
+      window.location.reload();
+    }
   };
 
   return (
