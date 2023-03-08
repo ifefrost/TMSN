@@ -46,7 +46,15 @@ const PortraitSliderItem = ({ result, media }) => {
   const navigate = useNavigate();
 
   const navigateToDetails = () => {
-    navigate(`/details/${result.media_type ?? media}/${result.id}`);
+    //if person
+    if (media === "person" || result.media_type === "person") {
+      navigate(`/person/${result.id}`);
+      window.location.reload();
+    } else {
+      //if movie or tv
+      navigate(`/details/${result.media_type ?? media}/${result.id}`);
+      window.location.reload();
+    }
   };
 
   return (

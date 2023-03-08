@@ -117,7 +117,7 @@ const Details = () => {
                 {details.title ?? details.name}
               </h1>
             </div>
-            <div className='flex gap-10'>
+            <div className='flex gap-10 mt-2'>
               <p>
                 {details.runtime
                   ? (details.runtime / 60).toFixed(0) +
