@@ -3,12 +3,17 @@ dotenv.config()
 
 import cors from "cors";
 import express from "express";
+
+// Database connection
 import connection from "./resolvers/database/connection.js";
+
+// Service layer - this is where we process/handle the http request
 import { login, store, profile } from "./services/user-service.js";
 
 const app = express();
 const port = 8000;
 
+// Allow request from the front end app (CORS - Cross Origin Resource Sharing)
 app.use(
     cors({
         origin: '*'
@@ -17,6 +22,7 @@ app.use(
 
 app.use(express.json())
 
+// Health Check endpoint (optional)
 app.get("/", (req, res) => {
     res.send({
         message: "OK",
@@ -25,6 +31,7 @@ app.get("/", (req, res) => {
     })
 })
 
+// Register Route
 app.post("/register", async (req, res) => {
     try {
         const client = await connection();
@@ -41,6 +48,7 @@ app.post("/register", async (req, res) => {
     }
 })
 
+// Login Route
 app.post("/login", async (req, res) => {
     try {
         const client = await connection();
