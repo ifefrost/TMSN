@@ -163,6 +163,7 @@ const Details = () => {
           </div>
         </div>
       </div>
+
       <Modal
         trailerKey={trailerKey}
         visible={showModal}

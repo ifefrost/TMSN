@@ -5,13 +5,19 @@ import { generateToken, verifyToken } from '../resolvers/token/jwt.js';
 export const store = async (client, input) => {
     const db = client.db("tmsn_db");
     const collection = db.collection('users');
-    const user = await collection.findOne({ email: input.email });
+    const emailValid = await collection.findOne({ email: input.email });
+    const username = await collection.findOne({ username: input.username });
 
-    if (user) {
-        throw new Error('User already exist');
+    if (emailValid) {
+        throw new Error('Account with this email already exists');
+    }
+
+    if (username) {
+        throw new Error('Username already exists');
     }
 
     const result = await collection.insertOne({
+        username: input.username,
         email: input.email,
         password: await bcrypt.hash(input.password, 10)
     });
@@ -36,13 +42,13 @@ export const login = async (client, input) => {
     const user = await collection.findOne({ email: input.email });
 
     if (!user) {
-        throw new Error('User does not exist');
+        throw new Error('Email does not exist');
     }
 
     const isPasswordValid = await bcrypt.compare(input.password, user.password);
 
     if (!isPasswordValid) {
-        throw new Error('Invalid Credentials');
+        throw new Error('Invalid Password');
     }
 
     const token = generateToken({
@@ -72,7 +78,8 @@ export const profile = async (client, value) => {
 
     return {
         id: user._id.toString(),
-        email: user.email
+        email: user.email,
+        username: user.username
     };
 
 };

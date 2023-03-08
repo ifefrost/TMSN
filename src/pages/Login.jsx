@@ -66,8 +66,8 @@ const Login = () => {
     <div className='mx-auto max-w-screen-xl px-8'>
       <div className='mt-16 mb-16 bg-[#1F2230] text-white p-10 flex flex-col items-center rounded-[12px]'>
         <h1 className="text-[2rem] font-bold">Welcome Back!</h1>
-        {error && <p>{error}</p>}
-        <form  onSubmit={(e) => handleSubmit(e)} className="mt-10 flex flex-col items-center">
+        {error ? (<p className='mt-3 rounded-lg bg-white p-2 text-red-700 font-[600] text-[0.875rem]'>{error}</p>) : <div className='mt-6 mb-6'></div>}
+        <form  onSubmit={(e) => handleSubmit(e)} className="mt-2 flex flex-col items-center">
 
           <div className="flex flex-col gap-2">
             <label htmlFor="email" className="text-[1.125rem] font-[600] mb-2">Email</label>

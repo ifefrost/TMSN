@@ -55,12 +55,12 @@ const Dropdown = ({ options, title, icon }) => {
       </button>
 
       {open && (
-        <div className='absolute right-0 mt-2 rounded-md shadow-lg px-1 py-2 w-full bg-gray-700 ring-1 ring-black ring-opacity-5'>
+        <div className='absolute right-0 mt-2 rounded-lg shadow-lg px-1 py-2 w-full bg-gray-700 ring-1 ring-black ring-opacity-5'>
           {options.map((option, index) => (
             <div key={index} className='text-center'>
               <Link
                 to={option.link}
-                className='block px-4 py-2 text-sm text-gray-300 hover:bg-gray-100 hover:text-[#11131B]'
+                className='block px-4 py-2 text-sm text-gray-300 hover:bg-gray-100 rounded-md hover:text-[#11131B]'
                 role='menuitem'
                 onClick={()=>handleClick(option.onClick)}
               >

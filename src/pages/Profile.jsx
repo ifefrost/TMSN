@@ -27,14 +27,18 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className='mx-auto max-w-screen-xl px-8'>
+    <div className='mx-auto max-w-screen-xl px-8 text-white my-20'>
+      {user.username ? (
       <div>
-        <h1 className='text-[2rem] text-white font-bold'>Profile Page</h1>
+          <h1 className='text-[3.25rem] font-bold'>{`${user.username}'s profile`}</h1>
         <div className="pt-4">
-          <p className='text-white'>User ID: {user.id}</p>
-          <p className='text-white'>Email: {user.email}</p>
+          <p><span className="font-bold">ID:</span> {user.id}</p>
+          <p><span className="font-bold">Email:</span> {user.email}</p>
         </div>
       </div>
+      ) : (
+        <h1 className='text-[2rem] font-bold'>Loading profile...</h1>
+      )}
     </div>
   );
 };

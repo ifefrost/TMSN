@@ -46,7 +46,7 @@ const PortraitSliderItem = ({ result, media }) => {
   const navigate = useNavigate();
   const navigateToDetails = () => {
     //if person
-    if (media === "person" || result.media_type === "person") {
+    if (result.credit_id) {
       navigate(`/person/${result.id}`);
     } else {
       //if movie or tv

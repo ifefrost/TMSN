@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
+import noImage from "../assets/no-image.jpg";
 
 const Person = () => {
 
@@ -32,7 +33,8 @@ const Person = () => {
             <div className='flex flex-col md:flex-row'>
                 <div className='min-w-[300px] rounded-xl'>
                     <img
-                        src={`${imagesBaseUrl}${details.profile_path}`}
+                        // if no profile image is available show a placeholder image
+                        src={details.profile_path ? `${imagesBaseUrl}${details.profile_path}` : noImage}
                         alt={details.name}
                         className='rounded-xl object-cover h-[450px] w-[300px]'
                     />
@@ -42,14 +44,30 @@ const Person = () => {
                     <h1 className='text-[3.25rem] leading-none font-bold mb-2'>{details.name}</h1>
                     {/* date of birth */}
                     <div className='text-lg'>
-                        <p>
+                        {/* <p>
                             {`Born on ${new Date (details.birthday).toLocaleDateString('en-US', {
                                 year: 'numeric',
                                 month: 'long',
                                 day: 'numeric'
                             })} in ${details.place_of_birth}`}
-                        </p>
-                        <h2 className='text-[2rem] mb-5 mt-8 font-bold'>Biography</h2>
+                        </p> */}
+                        {/* if the actor has a birthday show birthday or if they have a place of birth show the birth place */}
+                        {details.birthday ? (
+                            <p>
+                                {`Born on ${new Date (details.birthday).toLocaleDateString('en-US', {
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: 'numeric'
+                                })} in ${details.place_of_birth}`}
+                            </p>
+                        ) : (
+                            <p className='text-[1rem]'>Date of birth not available</p>
+                        )}
+                        {details.biography ? (
+                            <h2 className='text-[2rem] mb-5 mt-8 font-bold'>Biography</h2>
+                        ) : (
+                            <h2 className='text-[1rem] mb-5 mt-8'>Biography not available</h2>
+                        )}
                         <p className='text-[1rem]'>{details.biography}</p>
                     </div>
                 </div>
