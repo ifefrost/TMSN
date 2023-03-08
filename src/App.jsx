@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Details from "./pages/Details";
+import Person from "./pages/Actor";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
@@ -20,6 +21,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/search' element={<Search />} />
+            <Route path='/person/:id' element={<Person />} />
             <Route path='/details/:media_type/:id' element={<Details />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
