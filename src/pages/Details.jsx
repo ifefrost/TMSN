@@ -1,4 +1,4 @@
-import { MdPlayCircleOutline } from "react-icons/md";
+import { MdPlayCircleOutline, MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import noImage from "../assets/no-image.jpg";
 import LandscapeSlider from "../components/LandscapeSlider";
 import PortraitSlider from "../components/PortraitSlider";
@@ -16,6 +16,7 @@ const Details = () => {
   const [cast, setCast] = useState([]);
   const [similar, setSimilar] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [isFav, setIsFav] = useState(false);
 
   const handleInvisible = () => setShowModal(false);
   const fetchDetails = useCallback(async () => {
@@ -154,6 +155,19 @@ const Details = () => {
                   <p>Play Trailer</p>
                 </div>
               )}
+              {/* add or remove fromnm favourites */}
+              <div
+                className='flex items-center gap-2 cursor-pointer'
+                onClick={() => setIsFav(!isFav)}
+              >
+                {isFav ? (
+                  <MdFavorite className='h-8 w-8' />
+                ) : (
+                  <MdFavoriteBorder className='h-8 w-8' />
+                )}
+                {isFav ? <p>Added to favourites</p> : <p>Add to favourites</p>}
+              </div>
+              
             </div>
           </div>
 
