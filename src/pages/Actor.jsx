@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import noImage from "../assets/no-image.jpg";
+import { MdArrowBack } from "react-icons/md";
 
 const Person = () => {
 
@@ -8,6 +10,7 @@ const Person = () => {
     const { id } = useParams();
     const imagesBaseUrl = "https://image.tmdb.org/t/p/original";
     const [details, setDetails] = useState({});
+    const navigate = useNavigate();
 
     const fetchDetails = useCallback(async () => {
         try {
@@ -26,11 +29,17 @@ const Person = () => {
         fetchDetails();
       }, [fetchDetails]);
 
+    
 
     return (
-        <div className='mx-auto max-w-screen-xl px-8 text-white my-20'>
-            {/* actor image */}
-            <div className='flex flex-col md:flex-row'>
+        <div className='mx-auto max-w-screen-xl px-8 text-white mb-20'>
+            {/* back button using useNavigate */}
+            <button className='flex items-center bg-blue-700 h-[46px] border-white border-2 hover:bg-blue-900 text-white font-bold py-1 pr-5 pl-4 mt-3 mt-10 rounded-full hover:shadow' onClick={() => navigate(-1)}>
+                <MdArrowBack className='h-5 w-5 mr-2'/>Back
+            </button>
+            
+            {/* actor image and details */}
+            <div className='flex flex-col md:flex-row mt-10'>
                 <div className='min-w-[300px] rounded-xl'>
                     <img
                         // if no profile image is available show a placeholder image
@@ -44,14 +53,6 @@ const Person = () => {
                     <h1 className='text-[3.25rem] leading-none font-bold mb-2'>{details.name}</h1>
                     {/* date of birth */}
                     <div className='text-lg'>
-                        {/* <p>
-                            {`Born on ${new Date (details.birthday).toLocaleDateString('en-US', {
-                                year: 'numeric',
-                                month: 'long',
-                                day: 'numeric'
-                            })} in ${details.place_of_birth}`}
-                        </p> */}
-                        {/* if the actor has a birthday show birthday or if they have a place of birth show the birth place */}
                         {details.birthday ? (
                             <p>
                                 {`Born on ${new Date (details.birthday).toLocaleDateString('en-US', {
