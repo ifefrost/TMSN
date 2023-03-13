@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import PortraitSlider from "../components/PortraitSlider";
 
 const Profile = () => {
   const [user, setUser] = useState({});
-  const token = { value: sessionStorage.getItem("token") };
+  const token = { token: sessionStorage.getItem("token") };
   const navigate = useNavigate();
 
   const getUser = async () => {
-    if (!token.value) {
+    if (!token.token) {
       navigate("/login");
     } else {
       const response = await fetch("http://localhost:8000/profile", {
@@ -22,6 +23,17 @@ const Profile = () => {
     }
   };
 
+  const showLiked = (title, likedValue)=> {
+    if (likedValue.length > 0) {
+      return (
+        <PortraitSlider heading={`Liked ${title}`} media={title} resultArray={likedValue} styling={""} />
+      )
+    } else {
+      return (
+        <p className="text-[1.5rem] font-bold my-5">No liked {title}</p>
+      )
+    }
+  }
   useEffect(() => {
     getUser();
   }, []);
@@ -34,6 +46,8 @@ const Profile = () => {
         <div className="pt-4">
           <p><span className="font-bold">ID:</span> {user.id}</p>
           <p><span className="font-bold">Email:</span> {user.email}</p>
+          {showLiked("Movies", user.likedMovie)}
+          {showLiked("TV shows", user.likedTV)}
         </div>
       </div>
       ) : (

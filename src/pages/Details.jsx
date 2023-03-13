@@ -17,6 +17,7 @@ const Details = () => {
   const [similar, setSimilar] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [isFav, setIsFav] = useState(false);
+  const token = sessionStorage.getItem("token");
 
   const handleInvisible = () => setShowModal(false);
   const fetchDetails = useCallback(async () => {
@@ -26,7 +27,6 @@ const Details = () => {
       );
       const json = await response.json();
       setDetails(json);
-      //console.log(json);
     } catch (error) {
       console.log(error);
     }
@@ -71,7 +71,59 @@ const Details = () => {
     }
   }, []);
 
+  const checkFav = async() => {
+    const response = await fetch(`http://localhost:8000/favourites`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        token: token,
+        media_id: id,
+        media_type: media_type,
+      }),
+    });
+    const data = await response.json();
+    console.log(data);
+  };
+
+  const getFavorite = async () => {
+    const response = await fetch(`http://localhost:8000/favour`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        token: token,
+      }),
+    });
+    const data = await response.json();
+    console.log(data);
+    const  {movie, tv} = data;
+    if (media_type === "movie") {
+      if (movie.includes(id)) {
+        setIsFav(true);
+      } else {
+        setIsFav(false);
+      }
+    } else {
+      if (tv.includes(id)) {
+        setIsFav(true);
+      } else {
+        setIsFav(false);
+      }
+    }
+  };
+
+  const handleFav= () => {
+    checkFav();
+    setIsFav(!isFav);
+  };
+
   useEffect(() => {
+    if(token){
+      getFavorite();
+    }
     fetchDetails();
     fetchCast();
     fetchSimilar();
@@ -155,10 +207,11 @@ const Details = () => {
                   <p>Play Trailer</p>
                 </div>
               )}
-              {/* add or remove fromnm favourites */}
+              {/* add or remove from favourites */
+              token && (
               <div
                 className='flex items-center gap-2 cursor-pointer'
-                onClick={() => setIsFav(!isFav)}
+                onClick={() => handleFav()}
               >
                 {isFav ? (
                   <MdFavorite className='h-8 w-8' />
@@ -167,7 +220,7 @@ const Details = () => {
                 )}
                 {isFav ? <p>Added to favourites</p> : <p>Add to favourites</p>}
               </div>
-              
+              )}
             </div>
           </div>
 

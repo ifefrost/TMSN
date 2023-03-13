@@ -19,7 +19,9 @@ export const store = async (client, input) => {
     const result = await collection.insertOne({
         username: input.username,
         email: input.email,
-        password: await bcrypt.hash(input.password, 10)
+        password: await bcrypt.hash(input.password, 10),
+        likedMovie:[],
+        likedTV:[]
     });
 
     const token = generateToken({
@@ -65,10 +67,10 @@ export const login = async (client, input) => {
     };
 };
 
-export const profile = async (client, value) => {
+export const profile = async (client, input) => {
     const db = client.db("tmsn_db");
     const collection = db.collection('users');
-    const data = verifyToken(value.value);
+    const data = verifyToken(input.token);
 
     const user = await collection.findOne({ _id: new ObjectId(data.id) });
 
@@ -79,7 +81,61 @@ export const profile = async (client, value) => {
     return {
         id: user._id.toString(),
         email: user.email,
-        username: user.username
+        username: user.username,
+        likedMovie: user.likedMovie,
+        likedTV: user.likedTV
     };
 
 };
+
+export const favourites = async (client, input) => {
+    const db = client.db("tmsn_db");
+    const collection = db.collection('users');
+    const data = verifyToken(input.token);
+
+    // find the logged in user
+    const user = await collection.findOne({ _id: new ObjectId(data.id) });
+
+    // if user doesnt exist
+    if (!user) {
+        throw new Error('User does not exist');
+    }
+
+    // if user exists and media type is movie and media id is in the likedMovie array then remove it
+    if (input.media_type === 'movie') {
+        if (user.likedMovie.includes(input.media_id)) {
+            await collection.updateOne(
+                { _id: new ObjectId(data.id) },
+                { $pull: { likedMovie: input.media_id } }
+            );
+        } else {
+            // if user exists and media type is movie and media id is not in the likedMovie array then add it
+            await collection.updateOne(
+                { _id: new ObjectId(data.id) },
+                { $push: { likedMovie: input.media_id } }
+            );
+        }
+    }
+
+    // if user exists and media type is tv and media id is in the likedTV array then remove it
+    if (input.media_type === 'tv') {
+        if (user.likedTV.includes(input.media_id)) {
+            await collection.updateOne(
+                { _id: new ObjectId(data.id) },
+                { $pull: { likedTV: input.media_id } }
+            );
+        } else {
+            // if user exists and media type is tv and media id is not in the likedTV array then add it
+            await collection.updateOne(
+                { _id: new ObjectId(data.id) },
+                { $push: { likedTV: input.media_id } }
+            );
+        }
+    }
+
+    return {
+        id: user._id.toString(),
+        likedMovie: user.likedMovie,
+        likedTV: user.likedTV
+    };
+}

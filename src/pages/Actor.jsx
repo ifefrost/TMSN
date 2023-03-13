@@ -34,7 +34,7 @@ const Person = () => {
     return (
         <div className='mx-auto max-w-screen-xl px-8 text-white mb-20'>
             {/* back button using useNavigate */}
-            <button className='flex items-center bg-blue-700 h-[46px] border-white border-2 hover:bg-blue-900 text-white font-bold py-1 pr-5 pl-4 mt-3 mt-10 rounded-full hover:shadow' onClick={() => navigate(-1)}>
+            <button className='flex items-center bg-blue-700 h-[46px] border-white border-2 hover:bg-blue-900 text-white font-bold py-1 pr-5 pl-4 mt-10 rounded-full hover:shadow' onClick={() => navigate(-1)}>
                 <MdArrowBack className='h-5 w-5 mr-2'/>Back
             </button>
             

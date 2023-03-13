@@ -8,7 +8,7 @@ import express from "express";
 import connection from "./resolvers/database/connection.js";
 
 // Service layer - this is where we process/handle the http request
-import { login, store, profile } from "./services/user-service.js";
+import { login, store, profile, favourites } from "./services/user-service.js";
 
 const app = express();
 const port = 8000;
@@ -65,6 +65,40 @@ app.post("/login", async (req, res) => {
     }
 })
 
+//get user favourites
+app.post("/favour", async (req, res) => {
+    try {
+        const client = await connection();
+        const data = await profile(client, req.body);
+        if (!data.likedMovie){
+            data.likedMovie = [];
+        }
+        if (!data.likedTV){
+            data.likedTV = [];
+        }
+        res.send({movie:data.likedMovie, tv: data.likedTV});
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })
+    }
+})
+
+// Add or remove favourites Route
+app.post("/favourites", async (req, res) => {
+    try {
+        const client = await connection();
+        const data = await favourites(client, req.body);
+
+        return res.send(data);
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })
+    }
+})
+
+// User Profile Route
 app.post("/profile", async (req, res) => {
     try {
         const client = await connection();
@@ -81,6 +115,9 @@ app.post("/profile", async (req, res) => {
     }
 })
 
+
+
+// Start the server
 app.listen(port, () => {
     console.log(`Server listening to port ${port}`);
 })
