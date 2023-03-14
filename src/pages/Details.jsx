@@ -52,7 +52,7 @@ const Details = () => {
       );
       const json = await response.json();
       setCast(json.cast);
-      //console.log(json);
+      console.log(json);
     } catch (error) {
       console.log(error);
     }
@@ -84,7 +84,7 @@ const Details = () => {
       }),
     });
     const data = await response.json();
-    console.log(data);
+    //console.log(data);
   };
 
   const getFavorite = async () => {
@@ -98,7 +98,7 @@ const Details = () => {
       }),
     });
     const data = await response.json();
-    console.log(data);
+    //console.log(data);
     const  {movie, tv} = data;
     if (media_type === "movie") {
       if (movie.includes(id)) {

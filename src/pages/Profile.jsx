@@ -3,9 +3,12 @@ import { useNavigate } from "react-router-dom";
 import PortraitSlider from "../components/PortraitSlider";
 
 const Profile = () => {
+  const apiKey = import.meta.env.VITE_API_KEY;
   const [user, setUser] = useState({});
   const token = { token: sessionStorage.getItem("token") };
   const navigate = useNavigate();
+  const [movieList, setMovieList] = useState([]);
+  const [tvList, setTvList] = useState([]);
 
   const getUser = async () => {
     if (!token.token) {
@@ -23,20 +26,37 @@ const Profile = () => {
     }
   };
 
-  const showLiked = (title, likedValue)=> {
-    if (likedValue.length > 0) {
-      return (
-        <PortraitSlider heading={`Liked ${title}`} media={title} resultArray={likedValue} styling={""} />
-      )
-    } else {
-      return (
-        <p className="text-[1.5rem] font-bold my-5">No liked {title}</p>
-      )
+  // for every liked movie, get the details from the API and add it to an array
+  const getLikedDetails = async (likedArray, mediaType) => {
+    //console.log(likedArray);
+    const likedDetails = [];
+    if (likedArray) {
+      for (let i = 0; i < likedArray.length; i++) {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/${mediaType}/${likedArray[i]}?api_key=${apiKey}&language=en-US`
+        );
+        const json = await response.json();
+        likedDetails.push(json);
+      };
     }
-  }
+    if (mediaType === "movie") {
+      setMovieList(likedDetails);
+    }
+    if (mediaType === "tv") {
+      setTvList(likedDetails);
+    }
+
+  };
+
+
   useEffect(() => {
     getUser();
   }, []);
+
+  useEffect(() => {
+    getLikedDetails(user.likedMovie, "movie");
+    getLikedDetails(user.likedTV, "tv");
+  }, [user]);
 
   return (
     <div className='mx-auto max-w-screen-xl px-8 text-white my-20'>
@@ -46,8 +66,20 @@ const Profile = () => {
         <div className="pt-4">
           <p><span className="font-bold">ID:</span> {user.id}</p>
           <p><span className="font-bold">Email:</span> {user.email}</p>
-          {showLiked("Movies", user.likedMovie)}
-          {showLiked("TV shows", user.likedTV)}
+
+          {/* liked movies */}
+          {user.likedMovie && user.likedMovie.length > 0 ? (
+            <PortraitSlider heading="Liked Movies" media="movie" resultArray={movieList} styling={"mt-10"} />
+          ) : (
+            <p className="text-[1.5rem] font-bold my-5">No liked movies</p>
+          )}
+          {/* liked tv shows */}
+          {user.likedTV && user.likedTV.length > 0 ? (
+            <PortraitSlider heading="Liked TV Shows" media="tv" resultArray={tvList} styling={"mt-10"} />
+          ) : (
+            <p className="text-[1.5rem] font-bold my-5">No liked TV shows</p>
+          )}
+          
         </div>
       </div>
       ) : (

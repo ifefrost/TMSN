@@ -26,7 +26,10 @@ const SearchResultItem = ({ result, media }) => {
           <h3 className="text-[1.25rem] font-bold">{result.title ?? result.name}</h3>
           <p>{result.release_date ?? result.first_air_date}</p>
         </div>
-        <p className="mt-auto mb-5">User Score: {result.vote_average}</p>
+
+        {media === "person" || result.media_type === "person" ? <p className="mt-auto mb-5"></p> : (
+          <p className="mt-auto mb-5">User Score: {result.vote_average}</p>
+        )}
       </div>
       <img
         src={result.poster_path ?? result.profile_path ? `${imagesBaseUrl}${result.poster_path ?? result.profile_path}` : noImage}
