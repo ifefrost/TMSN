@@ -68,15 +68,15 @@ const Profile = () => {
 
           {/* liked movies */}
           {user.likedMovie && user.likedMovie.length > 0 ? (
-            <PortraitSlider heading="Liked Movies" media="movie" resultArray={movieList} styling={"mt-10"} />
+            <PortraitSlider heading="Favourited Movies" media="movie" resultArray={movieList} styling={"mt-10"} />
           ) : (
-            <p className="text-[1.5rem] font-bold my-5">No liked movies</p>
+            <p className="text-[1.5rem] font-bold my-5">No favourited movies</p>
           )}
           {/* liked tv shows */}
           {user.likedTV && user.likedTV.length > 0 ? (
-            <PortraitSlider heading="Liked TV Shows" media="tv" resultArray={tvList} styling={"mt-10"} />
+            <PortraitSlider heading="Favourited TV Shows" media="tv" resultArray={tvList} styling={"mt-10"} />
           ) : (
-            <p className="text-[1.5rem] font-bold my-5">No liked TV shows</p>
+            <p className="text-[1.5rem] font-bold my-5">No favourited TV shows</p>
           )}
           
         </div>
