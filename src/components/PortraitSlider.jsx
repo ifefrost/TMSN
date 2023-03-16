@@ -7,12 +7,14 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 const PortraitSlider = ({ heading, resultArray, styling, media }) => {
+  const portRight = `${heading.toLowerCase().replace(/\s+/g, "-")}-arrow-right`;
+  const portLeft = `${heading.toLowerCase().replace(/\s+/g, "-")}-arrow-left`;
   return (
     <div className={styling}>
       <div className='text-white'>
         <h3 className='font-bold text-[2rem] mb-5'>{heading}</h3>
         <div className='flex items-center'>
-          <MdKeyboardArrowLeft className='min-w-[52px] min-h-[52px] port-arrow-left cursor-pointer' />
+          <MdKeyboardArrowLeft className={`min-w-[52px] min-h-[52px] cursor-pointer ${portLeft}`} />
           <div className='flex gap-4 overflow-hidden bg-gradient-to-r from-[#11131B] via-transparent to-[#11131B]'>
             <Swiper
             className="w-screen"
@@ -20,8 +22,8 @@ const PortraitSlider = ({ heading, resultArray, styling, media }) => {
               spaceBetween={5}
               slidesPerView={5}
               navigation={{
-                nextEl: ".port-arrow-right",
-                prevEl: ".port-arrow-left",
+                nextEl: `.${portRight}`,
+                prevEl: `.${portLeft}`,
               }}
             >
               {resultArray.map((result) => (
@@ -34,7 +36,7 @@ const PortraitSlider = ({ heading, resultArray, styling, media }) => {
               ))}
             </Swiper>
           </div>
-          <MdKeyboardArrowRight className='min-w-[52px] min-h-[52px] port-arrow-right cursor-pointer' />
+          <MdKeyboardArrowRight className={`min-w-[52px] min-h-[52px] cursor-pointer ${portRight}`} />
         </div>
       </div>
     </div>
