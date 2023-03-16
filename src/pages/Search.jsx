@@ -98,7 +98,7 @@ const Search = () => {
             </li>
             <li className={category === 'person' ? 'bg-gray-500 rounded-md' : ''} onClick={() => handleCategoryChange('person')}>
               <div className='cursor-pointer flex items-center p-2 text-base font-normal text-gray-50 rounded-lg dark:text-white'>
-                <span className='flex-1 ml-7 whitespace-nowrap'>Person</span>
+                <span className='flex-1 ml-7 whitespace-nowrap'>Actor</span>
               </div>
             </li>
           </ul>
