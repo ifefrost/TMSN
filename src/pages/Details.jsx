@@ -87,7 +87,7 @@ const Details = () => {
     //console.log(data);
   };
 
-  const getFavorite = async () => {
+  const getFavorite = useCallback(async () => {
     const response = await fetch(`http://localhost:8000/favour`, {
       method: "POST",
       headers: {
@@ -113,7 +113,7 @@ const Details = () => {
         setIsFav(false);
       }
     }
-  };
+  }, [token]);
 
   const handleFav= () => {
     checkFav();

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PortraitSlider from "../components/PortraitSlider";
 
@@ -10,7 +10,7 @@ const Profile = () => {
   const [movieList, setMovieList] = useState([]);
   const [tvList, setTvList] = useState([]);
 
-  const getUser = async () => {
+  const getUser = useCallback(async () => {
     if (!token.token) {
       navigate("/login");
     } else {
@@ -24,10 +24,10 @@ const Profile = () => {
       const data = await response.json();
       setUser(data.data);
     }
-  };
+  }, [token]);
 
   // for every liked movie, get the details from the API and add it to an array
-  const getLikedDetails = async (likedArray, mediaType) => {
+  const getLikedDetails = useCallback(async (likedArray, mediaType) => {
     //console.log(likedArray);
     const likedDetails = [];
     if (likedArray) {
@@ -46,7 +46,7 @@ const Profile = () => {
       setTvList(likedDetails);
     }
 
-  };
+  }, []);
 
 
   useEffect(() => {
@@ -64,7 +64,6 @@ const Profile = () => {
       <div>
           <h1 className='text-[3.25rem] font-bold'>{`${user.username}'s profile`}</h1>
         <div className="pt-4">
-          <p><span className="font-bold">ID:</span> {user.id}</p>
           <p><span className="font-bold">Email:</span> {user.email}</p>
 
           {/* liked movies */}
