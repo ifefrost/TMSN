@@ -36,16 +36,18 @@ app.post("/register", async (req, res) => {
     try {
         const client = await connection();
         const user = await store(client, req.body);
-
+        
         res.send({
             message: "OK",
             data: user,
         });
+        client.close();
     } catch (error) {
         res.status(400).send({
             message: error.message
         })
     }
+    
 })
 
 // Login Route
@@ -58,6 +60,7 @@ app.post("/login", async (req, res) => {
             message: "OK",
             data: user,
         });
+        client.close();
     } catch (error) {
         res.status(400).send({
             message: error.message
@@ -77,6 +80,7 @@ app.post("/favour", async (req, res) => {
             data.likedTV = [];
         }
         res.send({movie:data.likedMovie, tv: data.likedTV});
+        client.close();
     } catch (error) {
         res.status(400).send({
             message: error.message
@@ -89,7 +93,7 @@ app.post("/favourites", async (req, res) => {
     try {
         const client = await connection();
         const data = await favourites(client, req.body);
-
+        client.close();
         return res.send(data);
     } catch (error) {
         res.status(400).send({
@@ -103,11 +107,12 @@ app.post("/profile", async (req, res) => {
     try {
         const client = await connection();
         const user = await profile(client, req.body);
-
+        client.close();
         return res.send({
             message: "OK",
             data: user,
         });
+        
     } catch (error) {
         res.status(400).send({
             message: error.message
