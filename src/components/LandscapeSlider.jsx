@@ -7,20 +7,22 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 const LandscapeSlider = ({ heading, resultArray, styling, media }) => {
+  const landRight = `${heading.toLowerCase().replace(/\s+/g, "-")}-arrow-right`;
+  const landLeft = `${heading.toLowerCase().replace(/\s+/g, "-")}-arrow-left`;
   return (
     <div className={styling}>
       <div className='text-white'>
         <h3 className='font-bold text-[2rem] mb-5'>{heading}</h3>
         <div className='flex items-center gap-10 bg-[#1f2230] rounded-xl justify-center py-10'>
-          <MdKeyboardArrowLeft className='min-w-[52px] min-h-[52px] land-arrow-left cursor-pointer' />
+          <MdKeyboardArrowLeft className={`min-w-[52px] min-h-[52px] cursor-pointer ${landLeft}`} />
           <div className='flex gap-[2rem] overflow-hidden w-[900px]'>
             <Swiper
               modules={[Navigation]}
               spaceBetween={50}
               slidesPerView={3}
               navigation={{
-                nextEl: ".land-arrow-right",
-                prevEl: ".land-arrow-left",
+                nextEl: `.${landRight}`,
+                prevEl: `.${landLeft}`,
               }}
             >
               {resultArray.map((result) => (
@@ -33,7 +35,7 @@ const LandscapeSlider = ({ heading, resultArray, styling, media }) => {
               ))}
             </Swiper>
           </div>
-          <MdKeyboardArrowRight className='min-w-[52px] min-h-[52px] land-arrow-right cursor-pointer' />
+          <MdKeyboardArrowRight className={`min-w-[52px] min-h-[52px] cursor-pointer ${landRight}`} />
         </div>
       </div>
     </div>

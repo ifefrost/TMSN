@@ -139,3 +139,17 @@ export const favourites = async (client, input) => {
         likedTV: user.likedTV
     };
 }
+
+//Get Users
+export const getUsers = async (client, filter, limit = 10) => {
+    const db = client.db("tmsn_db");
+    const collection = db.collection('users');
+
+    const user = await collection
+      .find({ username: new RegExp(".*" + filter + ".*") }) // similar to % like in SQL
+      .project({ password: 0, email: 0 }) // remove attribute from the query result
+      .limit(limit) //limited to 10
+      .toArray();
+
+    return user
+}
