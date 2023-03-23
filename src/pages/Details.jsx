@@ -239,7 +239,7 @@ const Details = () => {
       />
 
       <PortraitSlider
-        heading={"Cast & Crew"}
+        heading={"Cast and Crew"}
         resultArray={cast}
         media={media}
         styling={"-mt-52 mb-24"}

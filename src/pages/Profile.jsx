@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import PortraitSlider from "../components/PortraitSlider";
 import { MdAdd, MdPersonAdd, MdPersonRemove } from "react-icons/md";
 import PopUpModal from "../components/PopUpModal";
@@ -13,18 +13,22 @@ const Profile = () => {
   const [tvList, setTvList] = useState([]);
   const [followed, setFollowed] = useState(false);
   const [showFollow, setShowFollow] = useState(false);
+  const { username } = useParams();
 
   const getUser = useCallback(async () => {
     if (!token.token) {
       navigate("/login");
     } else {
-      const response = await fetch("http://localhost:8000/profile", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(token),
-      });
+      const response = await fetch(
+        `http://localhost:8000/profile/${username}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(token),
+        }
+      );
       const data = await response.json();
       setUser(data.data);
     }
@@ -94,13 +98,17 @@ const Profile = () => {
             </div>
           </button>
           <div className='pt-4'>
-            <p className='mb-2' onClick={()=>setShowFollow(true)}>
+            <p className='mb-2' onClick={() => setShowFollow(true)}>
               <span className='font-bold'>Followers</span> {0}{" "}
               <span className='font-bold ml-2'>Following</span> {0}
             </p>
-            <p>
-              <span className='font-bold'>Email:</span> {user.email}
-            </p>
+
+            {/*if user is current user show*/}
+            {user.currentUser && (
+              <p>
+                <span className='font-bold'>Email:</span> {user.email}
+              </p>
+            )}
 
             {/* liked movies */}
             {user.likedMovie && user.likedMovie.length > 0 ? (

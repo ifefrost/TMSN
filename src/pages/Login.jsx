@@ -51,9 +51,10 @@ const Login = () => {
         console.log(error.message);
         throw new Error(error.message)
       }
-      const data = await response.json();
-      console.log(data);
-      sessionStorage.setItem('token', data.data.token);
+      const result = await response.json();
+      console.log(result);
+      sessionStorage.setItem('token', result.data.token);
+      sessionStorage.setItem('user', result.data.username);
       setLoading(false);
       navigate('/');
     } catch (error) {

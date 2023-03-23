@@ -7,10 +7,12 @@ import Dropdown from "./Dropdown";
 const Nav = () => {
   const navigate = useNavigate()
   const token = sessionStorage.getItem('token');
+  const username = sessionStorage.getItem('user');
 
   const logout = () => {
     if (token) {
       sessionStorage.removeItem('token');
+      sessionStorage.removeItem('user');
       navigate('/');
     } else {
       navigate('/login')
@@ -21,7 +23,8 @@ const Nav = () => {
     {
       label: 'Your Profile',
       value: 'profile',
-      link: '/profile',
+      link: `/${username}`,
+      onClick: () => {navigate(`/${username}`); window.location.reload()}
     },
     {
       label: 'Sign Out',

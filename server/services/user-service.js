@@ -31,10 +31,7 @@ export const store = async (client, input) => {
 
     return {
         token,
-        user: {
-            id: result.insertedId.toString(),
-            email: input.email
-        },
+        user: input.username
     };
 };
 
@@ -60,19 +57,29 @@ export const login = async (client, input) => {
 
     return {
         token,
-        user: {
-            id: user._id.toString(),
-            email: user.email
-        },
+        user: user.username
     };
 };
 
-export const profile = async (client, input) => {
+export const profile = async (client, input, username) => {
     const db = client.db("tmsn_db");
     const collection = db.collection('users');
     const data = verifyToken(input.token);
 
-    const user = await collection.findOne({ _id: new ObjectId(data.id) });
+    const currentUser = await collection.findOne({ _id: new ObjectId(data.id) });
+
+    const user =  await collection.findOne({ username: username.username });
+
+    if (currentUser.username === user.username) {
+        return {
+            id: user._id.toString(),
+            email: user.email,
+            username: user.username,
+            likedMovie: user.likedMovie,
+            likedTV: user.likedTV,
+            currentUser: true
+        };
+    }
 
     if (!user) {
         throw new Error('User does not exist');
@@ -80,10 +87,10 @@ export const profile = async (client, input) => {
 
     return {
         id: user._id.toString(),
-        email: user.email,
         username: user.username,
         likedMovie: user.likedMovie,
-        likedTV: user.likedTV
+        likedTV: user.likedTV,
+        currentUser: false
     };
 
 };

@@ -104,10 +104,10 @@ app.post("/favourites", async (req, res) => {
 })
 
 // User Profile Route
-app.post("/profile", async (req, res) => {
+app.post("/profile/:username", async (req, res) => {
     try {
         const client = await connection();
-        const user = await profile(client, req.body);
+        const user = await profile(client, req.body, req.params);
         client.close();
         return res.send({
             message: "OK",

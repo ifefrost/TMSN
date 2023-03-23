@@ -26,7 +26,7 @@ function App() {
             <Route path='/details/:media_type/:id' element={<Details />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
-            <Route path='/profile' element={<Profile />} />
+            <Route path='/:username' element={<Profile />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
         </ScrollReset>
