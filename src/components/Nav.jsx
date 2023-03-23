@@ -24,7 +24,7 @@ const Nav = () => {
       label: 'Your Profile',
       value: 'profile',
       link: `/${username}`,
-      onClick: () => {navigate(`/${username}`); window.location.reload()}
+      onClick: () => {navigate(`/${username}`); window.location.reload(); console.log(username)}
     },
     {
       label: 'Sign Out',

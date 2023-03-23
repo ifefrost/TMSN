@@ -54,7 +54,7 @@ const Login = () => {
       const result = await response.json();
       console.log(result);
       sessionStorage.setItem('token', result.data.token);
-      sessionStorage.setItem('user', result.data.username);
+      sessionStorage.setItem('user', result.data.user);
       setLoading(false);
       navigate('/');
     } catch (error) {
