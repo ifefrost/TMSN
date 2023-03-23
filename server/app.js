@@ -8,7 +8,8 @@ import express from "express";
 import connection from "./resolvers/database/connection.js";
 
 // Service layer - this is where we process/handle the http request
-import { login, store, profile, favourites } from "./services/user-service.js";
+import { login, store, profile, favourites, getUsers } from "./services/user-service.js";
+import { verifyToken } from "./resolvers/token/jwt.js";
 
 const app = express();
 const port = 8000;
@@ -117,6 +118,27 @@ app.post("/profile", async (req, res) => {
         res.status(400).send({
             message: error.message
         })
+    }
+})
+
+// Search Users
+app.get('/users', async (req, res) => {
+    const client = await connection();
+    try {
+        const token = req.headers.authorization
+        verifyToken(token); //token must be present in the request header
+        const username = req.query.username;
+        const user = await getUsers(client, username);
+        return res.send({
+            message: "OK",
+            data: user
+        })
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })
+    } finally {
+        await client.close();
     }
 })
 
