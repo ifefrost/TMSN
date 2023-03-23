@@ -5,6 +5,7 @@ import PortraitSlider from "../components/PortraitSlider";
 import { useParams, useLocation } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import Modal from "../components/Modal";
+import Reviews from "../components/Reviews";
 
 const Details = () => {
   const apiKey = import.meta.env.VITE_API_KEY;
@@ -250,6 +251,8 @@ const Details = () => {
         media={media}
         styling={"mb-24"}
       />
+
+      <Reviews />
     </div>
   );
 };

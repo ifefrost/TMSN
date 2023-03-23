@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PortraitSlider from "../components/PortraitSlider";
 import { MdAdd, MdPersonAdd, MdPersonRemove } from "react-icons/md";
+import PopUpModal from "../components/PopUpModal";
 
 const Profile = () => {
   const apiKey = import.meta.env.VITE_API_KEY;
@@ -11,6 +12,7 @@ const Profile = () => {
   const [movieList, setMovieList] = useState([]);
   const [tvList, setTvList] = useState([]);
   const [followed, setFollowed] = useState(false);
+  const [showFollow, setShowFollow] = useState(false);
 
   const getUser = useCallback(async () => {
     if (!token.token) {
@@ -58,6 +60,8 @@ const Profile = () => {
     getLikedDetails(user.likedTV, "tv");
   }, [user]);
 
+  const handleClose = () => setShowFollow(false);
+
   return (
     <div className='mx-auto max-w-screen-xl px-8 text-white my-20'>
       {user.username ? (
@@ -90,7 +94,7 @@ const Profile = () => {
             </div>
           </button>
           <div className='pt-4'>
-            <p className='mb-2'>
+            <p className='mb-2' onClick={()=>setShowFollow(true)}>
               <span className='font-bold'>Followers</span> {0}{" "}
               <span className='font-bold ml-2'>Following</span> {0}
             </p>
@@ -125,6 +129,8 @@ const Profile = () => {
               </p>
             )}
           </div>
+
+          <PopUpModal visible={showFollow} close={handleClose} />
         </div>
       ) : (
         <h1 className='text-[2rem] font-bold'>Loading profile...</h1>
