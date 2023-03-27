@@ -56,19 +56,16 @@ const Profile = () => {
     }
   }, []);
 
+  //update the followed state and the user when followed is changed
   useEffect(() => {
+    checkFollowing();
     getUser();
-  }, []);
+  }, [followed]);
 
   useEffect(() => {
     getLikedDetails(user.likedMovie, "movie");
     getLikedDetails(user.likedTV, "tv");
   }, [user]);
-
-  useEffect(() => {
-    checkFollowing();
-    console.log(followed, 'in use effect');
-  }, [followed]);
 
   const handleClose = () => setShowFollow(false);
 
@@ -89,6 +86,8 @@ const Profile = () => {
       const data = await response.json();
       console.log(data);
     }
+    // runs checkFollowing to update the followed state
+    checkFollowing();
   }, [token, username]);
 
   const checkFollowing = useCallback(async () => {
@@ -121,33 +120,35 @@ const Profile = () => {
     <div className='mx-auto max-w-screen-xl px-8 text-white my-20'>
       {user.username ? (
         <div>
-          <h1 className='text-[3.25rem] font-bold'>{`${user.username}'s profile`}</h1>
-          { !user.currentUser && <button
-            className='flex focus:outline-none  text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
-            aria-expanded='false'
-            aria-haspopup='false'
-            onClick={handleFollow}
-          >
-            <div className='flex items-center'>
-              <span className='mr-3'>
-                {followed ? (
-                  <div className='flex items-center'>
-                    <span className='px-3 py-2 rounded-md text-sm font-medium'>
-                      Follow
-                    </span>
-                    <MdPersonAdd className='h-8 w-8 text-white' />
-                  </div>
-                ) : (
-                  <div className='flex items-center'>
-                    <span className='px-3 py-2 rounded-md text-sm font-medium'>
-                      Unfollow
-                    </span>
-                    <MdPersonRemove className='h-8 w-8 text-white' />
-                  </div>
-                )}
-              </span>
-            </div>
-          </button>}
+          <div className='flex gap-8 items-center'>
+            <h1 className='text-[3.25rem] font-bold'>{`${user.username}'s profile`}</h1>
+            { !user.currentUser && <button
+              className='flex h-[50px] bg-gray-700 text-white focus:outline-none text-gray-300 hover:bg-gray-300 hover:text-black px-3 py-2 rounded-md text-sm font-medium'
+              aria-expanded='false'
+              aria-haspopup='false'
+              onClick={handleFollow}
+            >
+              <div className='flex items-center'>
+                <span className='mr-3'>
+                  {followed ? (
+                    <div className='flex items-center'>
+                      <span className='px-3 py-2 rounded-md text-sm font-medium'>
+                        Follow
+                      </span>
+                      <MdPersonAdd className='h-8 w-8' />
+                    </div>
+                  ) : (
+                    <div className='flex items-center'>
+                      <span className='px-3 py-2 rounded-md text-sm font-medium'>
+                        Unfollow
+                      </span>
+                      <MdPersonRemove className='h-8 w-8' />
+                    </div>
+                  )}
+                </span>
+              </div>
+            </button>}
+          </div>
           <div className='pt-4'>
             <p className='mb-2' onClick={() => setShowFollow(true)}>
               <span className='font-bold'>Followers</span> {user.followers.length}{" "}
