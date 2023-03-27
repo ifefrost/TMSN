@@ -19,6 +19,7 @@ const Details = () => {
   const [showModal, setShowModal] = useState(false);
   const [isFav, setIsFav] = useState(false);
   const token = sessionStorage.getItem("token");
+  const user = sessionStorage.getItem("user");
 
   const handleInvisible = () => setShowModal(false);
   const fetchDetails = useCallback(async () => {
@@ -72,7 +73,7 @@ const Details = () => {
     }
   }, []);
 
-  const checkFav = async() => {
+  const addRemoveFav = async() => {
     const response = await fetch(`http://localhost:8000/favourites`, {
       method: "POST",
       headers: {
@@ -88,14 +89,15 @@ const Details = () => {
     //console.log(data);
   };
 
-  const getFavorite = useCallback(async () => {
-    const response = await fetch(`http://localhost:8000/favour`, {
+  const checkFav = useCallback(async () => {
+    const response = await fetch(`http://localhost:8000/check-fav`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         token: token,
+        username: user,
       }),
     });
     const data = await response.json();
@@ -117,13 +119,13 @@ const Details = () => {
   }, [token]);
 
   const handleFav= () => {
-    checkFav();
+    addRemoveFav();
     setIsFav(!isFav);
   };
 
   useEffect(() => {
     if(token){
-      getFavorite();
+      checkFav();
     }
     fetchDetails();
     fetchCast();

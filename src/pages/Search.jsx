@@ -4,6 +4,7 @@ import { MdOutlineSearch } from "react-icons/md";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import SearchResults from "../components/SearchResults";
 import noImage from '../assets/no-image.jpg';
+import UserSearchResults from "../components/UserSearchResults";
 
 const apiKey = import.meta.env.VITE_API_KEY;
 
@@ -81,10 +82,10 @@ const Search = () => {
       }
     }
     //Search User
-    if (type === 'users') {
+    if (type === 'users' && searchQuery.trim()) {
       try {
         const result = await fetch(
-          `http://localhost:8000/users?username=${searchQuery}`,
+          `http://localhost:8000/users?username=${searchQuery.trim()}`,
           {
             method: "GET",
             headers: {
@@ -95,7 +96,7 @@ const Search = () => {
         );
         const data = await result.json();
         setUserResults(data.data);
-        console.log(data.data);
+        console.log(userResults, 'userResults');
       } catch (error) {
         console.log(error);
       }
@@ -215,25 +216,9 @@ const Search = () => {
         {resultType === "users" &&
           userResults.length > 0 &&
           userResults.map((user) => (
-            <div className="flex flex-wrap mt-5 gap-5 w-[760px]">
-              <div className="cursor-pointer relative flex flex-col">
-                <div className="absolute w-full h-full justify-center bg-[#11131b] shadow bg-opacity-75 text-white flex flex-col items-center text-center opacity-0 hover:opacity-100 rounded-xl p-2">
-                  <div className="mt-auto">
-                    <h3 className="text-[1.25rem] font-bold">
-                      {user.username}
-                    </h3>
-                    <p>{result.release_date ?? result.first_air_date}</p>
-                  </div>
-                  <p className="mt-auto mb-5"></p>
-                </div>
-                <img
-                  src={noImage}
-                  alt={result.username}
-                  className="rounded-xl object-cover h-[340px] w-[225px]"
-                />
-              </div>
-            </div>
-          ))}
+            <UserSearchResults key={user.id} user={user} />
+          ))
+        }
         {resultType === "tmsn" && totalPages > 1 && (
           <div className="flex items-center justify-between rounded-3xl p-6 sm:px-6 bg-[#1F2230] mt-10">
             <TotalResults

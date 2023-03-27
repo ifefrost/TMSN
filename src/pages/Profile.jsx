@@ -6,14 +6,15 @@ import PopUpModal from "../components/PopUpModal";
 
 const Profile = () => {
   const apiKey = import.meta.env.VITE_API_KEY;
+  const { username } = useParams();
   const [user, setUser] = useState({});
   const token = { token: sessionStorage.getItem("token") };
+  const profileUsername = sessionStorage.getItem("user");
   const navigate = useNavigate();
   const [movieList, setMovieList] = useState([]);
   const [tvList, setTvList] = useState([]);
   const [followed, setFollowed] = useState(false);
   const [showFollow, setShowFollow] = useState(false);
-  const { username } = useParams();
 
   const getUser = useCallback(async () => {
     if (!token.token) {
@@ -64,18 +65,68 @@ const Profile = () => {
     getLikedDetails(user.likedTV, "tv");
   }, [user]);
 
+  useEffect(() => {
+    checkFollowing();
+    console.log(followed, 'in use effect');
+  }, [followed]);
+
   const handleClose = () => setShowFollow(false);
+
+  const handleFollow = useCallback(async () => {
+    if (!token.token) {
+      navigate("/login");
+    } else {
+      const response = await fetch(`http://localhost:8000/follow`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          token: token.token,
+          username: username,
+        }),
+      });
+      const data = await response.json();
+      console.log(data);
+    }
+  }, [token, username]);
+
+  const checkFollowing = useCallback(async () => {
+    // console.log(username, 'username');
+    if (!token.token) {
+      navigate("/login");
+    } else {
+      const response = await fetch(`http://localhost:8000/check-following`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          token: token.token,
+          username: username,
+        }),
+      });
+      const data = await response.json();
+      // console.log(data, 'followers');
+      // console.log(profileUsername, 'user');
+      if(data.includes(profileUsername)) {
+        setFollowed(false);
+      } else {
+        setFollowed(true);
+      }
+    }
+  }, [token, username]);
 
   return (
     <div className='mx-auto max-w-screen-xl px-8 text-white my-20'>
       {user.username ? (
         <div>
           <h1 className='text-[3.25rem] font-bold'>{`${user.username}'s profile`}</h1>
-          <button
+          { !user.currentUser && <button
             className='flex focus:outline-none  text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
             aria-expanded='false'
             aria-haspopup='false'
-            onClick={() => setFollowed(!followed)}
+            onClick={handleFollow}
           >
             <div className='flex items-center'>
               <span className='mr-3'>
@@ -96,11 +147,11 @@ const Profile = () => {
                 )}
               </span>
             </div>
-          </button>
+          </button>}
           <div className='pt-4'>
             <p className='mb-2' onClick={() => setShowFollow(true)}>
-              <span className='font-bold'>Followers</span> {0}{" "}
-              <span className='font-bold ml-2'>Following</span> {0}
+              <span className='font-bold'>Followers</span> {user.followers.length}{" "}
+              <span className='font-bold ml-2'>Following</span> {user.following.length}
             </p>
 
             {/*if user is current user show*/}

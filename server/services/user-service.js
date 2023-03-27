@@ -21,7 +21,9 @@ export const store = async (client, input) => {
         email: input.email,
         password: await bcrypt.hash(input.password, 10),
         likedMovie:[],
-        likedTV:[]
+        likedTV:[],
+        following:[],
+        followers:[]
     });
 
     const token = generateToken({
@@ -77,6 +79,8 @@ export const profile = async (client, input, username) => {
             username: user.username,
             likedMovie: user.likedMovie,
             likedTV: user.likedTV,
+            following: user.following,
+            followers: user.followers,
             currentUser: true
         };
     }
@@ -90,6 +94,8 @@ export const profile = async (client, input, username) => {
         username: user.username,
         likedMovie: user.likedMovie,
         likedTV: user.likedTV,
+        following: user.following,
+        followers: user.followers,
         currentUser: false
     };
 
@@ -160,3 +166,53 @@ export const getUsers = async (client, filter, limit = 10) => {
 
     return user
 }
+
+//Follow User
+export const followUser = async (client, input) => {
+    const db = client.db("tmsn_db");
+    const collection = db.collection('users');
+
+    const data = verifyToken(input.token);
+
+    // find the logged in user
+    const user = await collection.findOne({ _id: new ObjectId(data.id) });
+    // find user to follow
+    const userToFollow = await collection.findOne({ username: input.username });
+
+    // if users do not exist
+    if (!user || !userToFollow) {
+        throw new Error('User does not exist');
+    }
+
+    // if user is already following then unfollow
+    if (user.following.includes(input.username)) {
+        await collection.updateOne(
+            { _id: new ObjectId(user._id) },
+            { $pull: { following: input.username } }
+        );
+
+        await collection.updateOne(
+            { _id: new ObjectId(userToFollow._id) },
+            { $pull: { followers: user.username } }
+        );
+    // if user is not following then follow
+    } else {
+        await collection.updateOne(
+            { _id: new ObjectId(user._id) },
+            { $push: { following: input.username } }
+        );
+
+        await collection.updateOne(
+            { _id: new ObjectId(userToFollow._id) },
+            { $push: { followers: user.username } }
+        );
+    }
+
+    return {
+        id: user._id.toString(),
+        following: user.following,
+        followers: user.followers
+    };
+
+}
+

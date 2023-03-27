@@ -8,7 +8,7 @@ import express from "express";
 import connection from "./resolvers/database/connection.js";
 
 // Service layer - this is where we process/handle the http request
-import { login, store, profile, favourites, getUsers } from "./services/user-service.js";
+import { login, store, profile, favourites, getUsers, followUser } from "./services/user-service.js";
 import { verifyToken } from "./resolvers/token/jwt.js";
 
 const app = express();
@@ -70,10 +70,10 @@ app.post("/login", async (req, res) => {
 })
 
 //get user favourites
-app.post("/favour", async (req, res) => {
+app.post("/check-fav", async (req, res) => {
     try {
         const client = await connection();
-        const data = await profile(client, req.body);
+        const data = await profile(client, req.body, req.body);
         if (!data.likedMovie){
             data.likedMovie = [];
         }
@@ -129,6 +129,7 @@ app.get('/users', async (req, res) => {
         verifyToken(token); //token must be present in the request header
         const username = req.query.username;
         const user = await getUsers(client, username);
+        client.close();
         return res.send({
             message: "OK",
             data: user
@@ -137,8 +138,38 @@ app.get('/users', async (req, res) => {
         res.status(400).send({
             message: error.message
         })
-    } finally {
-        await client.close();
+    }
+})
+
+app.post('/follow', async (req, res) => {
+    const client = await connection();
+    try {
+        const user = await followUser(client, req.body);
+        client.close();
+        return res.send({
+            message: "OK",
+            data: user
+        })
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })
+    }
+})
+
+app.post('/check-following', async (req, res) => {
+    const client = await connection();
+    try {
+        const data = await profile(client, req.body, req.body);
+        if (!data.followers){
+            data.followers = [];
+        }
+        client.close();
+        return res.send(data.followers);
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })
     }
 })
 
