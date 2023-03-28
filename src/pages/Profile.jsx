@@ -190,7 +190,7 @@ const Profile = () => {
             )}
           </div>
 
-          <PopUpModal visible={showFollow} close={handleClose} />
+          <PopUpModal visible={showFollow} close={handleClose} followers={user.followers} following={user.following} />
         </div>
       ) : (
         <h1 className='text-[2rem] font-bold'>Loading profile...</h1>
