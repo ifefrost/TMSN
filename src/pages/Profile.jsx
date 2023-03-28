@@ -123,7 +123,7 @@ const Profile = () => {
           <div className='flex gap-8 items-center'>
             <h1 className='text-[3.25rem] font-bold'>{`${user.username}'s profile`}</h1>
             { !user.currentUser && <button
-              className='flex h-[50px] bg-gray-700 text-white focus:outline-none text-gray-300 hover:bg-gray-300 hover:text-black px-3 py-2 rounded-md text-sm font-medium'
+              className='flex h-[50px] bg-gray-700 text-white focus:outline-none hover:bg-gray-300 hover:text-black px-3 py-2 rounded-md text-sm font-medium'
               aria-expanded='false'
               aria-haspopup='false'
               onClick={handleFollow}
@@ -150,7 +150,7 @@ const Profile = () => {
             </button>}
           </div>
           <div className='pt-4'>
-            <p className='mb-2' onClick={() => setShowFollow(true)}>
+            <p className='mb-2 w-min truncate' onClick={() => setShowFollow(true)}>
               <span className='font-bold'>Followers</span> {user.followers.length}{" "}
               <span className='font-bold ml-2'>Following</span> {user.following.length}
             </p>

@@ -6,11 +6,11 @@ const PopUpModal = ({ visible, close }) => {
   
     return (
       <div
-        className='fixed inset-0 bg-black text-white flex justify-center items-center'
+        className='fixed inset-0 bg-black bg-opacity-50 text-white flex justify-center items-center z-10'
         onClick={handleInvisible}
       >
-        <div className='relative w-[80rem] h-[45rem]'>
-          List of followers 
+        <div className='relative w-[50rem] h-[40rem] bg-[#1F2230]'>
+           
           <div className='absolute top-0 right-0 p-4'>
             <button className='text-3xl font-bold leading-none' onClick={close}>
               &times;
