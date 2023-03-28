@@ -178,18 +178,18 @@ const Search = () => {
         </form>
         {/* If user is logged in */}
         {token && ( 
-          <div className="py-8">
+          <div className="w-min py-5 px-3 bg-[#1F2230] rounded-lg mt-5">
             <span
-              className={`ml-5 font-bold text-l text-gray-50 cursor-pointer ${
-                resultType === "tmsn" && "underline"
+              className={`ml-2 truncate text-l text-gray-50 cursor-pointer ${
+                resultType === "tmsn" && "bg-gray-500 rounded-md p-3 mr-5 ml-0"
               }`}
               onClick={() => handleTypeChange("tmsn")}
             >
               All Results
             </span>
             <span
-              className={`ml-5 font-bold text-l text-gray-50 cursor-pointer ${
-                resultType === "users" && "underline"
+              className={`mr-2 text-l text-gray-50 cursor-pointer ${
+                resultType === "users" && "bg-gray-500 rounded-md p-3 ml-5 mr-0"
               }`}
               onClick={() => handleTypeChange("users")}
             >
