@@ -30,8 +30,8 @@ function App() {
             <Route path='*' element={<NotFound />} />
           </Routes>
         </ScrollReset>
+        <Footer />
       </BrowserRouter>
-      <Footer />
     </div>
   );
 }

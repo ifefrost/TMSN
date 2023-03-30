@@ -85,7 +85,7 @@ const Search = () => {
     if (type === 'users' && searchQuery.trim()) {
       try {
         const result = await fetch(
-          `http://localhost:8000/users?username=${searchQuery.trim()}`,
+          `http://localhost:8000/users?username=${searchQuery.trim().toLowerCase()}`,
           {
             method: "GET",
             headers: {

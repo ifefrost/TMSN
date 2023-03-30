@@ -17,11 +17,10 @@ const PopUpModal = ({ visible, close, followers, following }) => {
 
     return (
       <div
-        className='fixed inset-0 bg-black bg-opacity-50 text-white flex justify-center items-center z-10'
-        onClick={handleInvisible}
-      >
-        <div className='relative w-[30rem] h-[30rem] bg-[#1F2230] rounded-xl p-5'>
-           <div className="text-sm font-medium text-center border-b border-gray-200 dark:text-gray-400 dark:border-gray-700 mb-5">
+        className='fixed inset-0 bg-black bg-opacity-50 text-white backdrop-blur flex justify-center items-center z-10'
+        onClick={handleInvisible}>
+        <div className='relative w-[25rem] h-[30rem] bg-[#1F2230] rounded-xl p-5'>
+           <div className="font-[1.5rem] font-[600] text-center border-b border-gray-200 dark:text-gray-400 dark:border-gray-700 mb-5">
             <div className="flex">
                   <a href="#" className={`w-full inline-block p-4 border-b-2 border-transparent rounded-t-lg  ${activeTab ? "text-blue-500 border-blue-700" : "hover:text-white hover:border-gray-300"}`} onClick={()=>setActiveTab(true)}>Followers</a>
                   <a href="#" className={`w-full inline-block p-4 border-b-2 border-transparent rounded-t-lg  ${!activeTab ? "text-blue-500 border-blue-700" : "hover:text-white hover:border-gray-300"}`} aria-current="page" onClick={()=>setActiveTab(false)}>Following</a>

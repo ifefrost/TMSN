@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 const Footer = () => {
+  const navigate = useNavigate();
   return (
     <footer className='bg-[#1F2230] py-10 text-white text-center w-full mt-auto'>
       <div className='mx-auto 2xl:max-w-screen-xl py-10 px-2 sm:px-6 lg:px-8 flex flex-col items-center'>
@@ -7,7 +10,7 @@ const Footer = () => {
             <h1 className='text-4xl mb-3 no-underline text-white font-sans font-bold text-right'>
               TMSN
             </h1>
-            <button className='bg-blue-700 h-[46px] border-white border-2 hover:bg-blue-900 text-white font-bold py-1 px-4 mt-3 rounded-full hover:shadow'>
+            <button className='bg-blue-700 h-[46px] border-white border-2 hover:bg-blue-900 text-white font-bold py-1 px-4 mt-3 rounded-full hover:shadow' onClick={() => navigate('/register')}>
               Join the community
             </button>
           </div>

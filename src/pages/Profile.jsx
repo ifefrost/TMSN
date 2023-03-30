@@ -123,7 +123,7 @@ const Profile = () => {
           <div className='flex gap-8 items-center'>
             <h1 className='text-[3.25rem] font-bold'>{`${user.username}'s profile`}</h1>
             { !user.currentUser && <button
-              className='flex h-[50px] bg-gray-700 text-white focus:outline-none hover:bg-gray-300 hover:text-black px-3 py-2 rounded-md text-sm font-medium'
+              className='flex h-[50px] bg-[#303446] text-white focus:outline-none hover:bg-gray-300 hover:text-black px-3 py-2 rounded-md text-sm font-medium'
               aria-expanded='false'
               aria-haspopup='false'
               onClick={handleFollow}
@@ -150,12 +150,12 @@ const Profile = () => {
             </button>}
           </div>
           <div className='pt-4'>
-            <p className='mb-2 w-min truncate' onClick={() => setShowFollow(true)}>
+            <p className='px-5 py-3 mb-5 w-min bg-[#1F2230] hover:bg-[#303446] rounded-lg truncate cursor-pointer' onClick={() => setShowFollow(true)}>
               <span className='font-bold'>Followers</span> {user.followers.length}{" "}
               <span className='font-bold ml-2'>Following</span> {user.following.length}
             </p>
 
-            {/*if user is current user show*/}
+            {/*if user is current user show email*/}
             {user.currentUser && (
               <p>
                 <span className='font-bold'>Email:</span> {user.email}
@@ -165,27 +165,27 @@ const Profile = () => {
             {/* liked movies */}
             {user.likedMovie && user.likedMovie.length > 0 ? (
               <PortraitSlider
-                heading='Favourited Movies'
+                heading='Favourite Movies'
                 media='movie'
                 resultArray={movieList}
                 styling={"mt-10"}
               />
             ) : (
               <p className='text-[1.5rem] font-bold my-5'>
-                No favourited movies
+                No favourite movies
               </p>
             )}
             {/* liked tv shows */}
             {user.likedTV && user.likedTV.length > 0 ? (
               <PortraitSlider
-                heading='Favourited TV Shows'
+                heading='Favourite TV Shows'
                 media='tv'
                 resultArray={tvList}
                 styling={"mt-10"}
               />
             ) : (
               <p className='text-[1.5rem] font-bold my-5'>
-                No favourited TV shows
+                No favourite TV shows
               </p>
             )}
           </div>

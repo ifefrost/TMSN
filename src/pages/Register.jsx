@@ -13,6 +13,20 @@ const Register = () => {
     confirmPassword: '',
   });
 
+
+  const token = { value: sessionStorage.getItem("token") };
+
+  const redirectIfLoggedIn = async () => {
+    if (token.value) {
+      navigate("/");
+    }
+  };
+
+  useEffect(() => {
+    redirectIfLoggedIn();
+  }, []);
+
+
   const handleChange = (prop) => (event) => {
     setValues({
       ...values, [prop]: event.target.value
