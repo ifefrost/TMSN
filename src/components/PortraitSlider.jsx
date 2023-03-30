@@ -15,9 +15,9 @@ const PortraitSlider = ({ heading, resultArray, styling, media }) => {
         <h3 className='font-bold text-[2rem] mb-5'>{heading}</h3>
         <div className='flex items-center'>
           <MdKeyboardArrowLeft className={`min-w-[52px] min-h-[52px] cursor-pointer ${portLeft}`} />
-          <div className='flex gap-4 overflow-hidden bg-gradient-to-r from-[#11131B] via-transparent to-[#11131B]'>
+          <div className='flex gap-4 overflow-hidden'>
             <Swiper
-            className="w-screen"
+            className="w-screen p-5"
               modules={[Navigation]}
               spaceBetween={5}
               slidesPerView={5}
@@ -58,7 +58,7 @@ const PortraitSliderItem = ({ result, media }) => {
   };
 
   return (
-    <div className='cursor-pointer p-5' onClick={navigateToDetails}>
+    <div className='cursor-pointer p-5 transform transition duration-500 hover:scale-105' onClick={navigateToDetails}>
       <img
         src={
           result.profile_path ?? result.poster_path

@@ -6,7 +6,7 @@ const Modal = ({ trailerKey, visible, close }) => {
 
   return (
     <div
-      className='fixed inset-0 bg-black text-white bg-opacity-50 backdrop-blur-sm flex justify-center items-center'
+      className='fixed inset-0 bg-black text-white bg-opacity-50 backdrop-blur-sm flex justify-center items-center z-10'
       onClick={handleInvisible}
     >
       <div className='relative w-[80rem] h-[45rem]'>

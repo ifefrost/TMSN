@@ -17,6 +17,7 @@ const LandscapeSlider = ({ heading, resultArray, styling, media }) => {
           <MdKeyboardArrowLeft className={`min-w-[52px] min-h-[52px] cursor-pointer ${landLeft}`} />
           <div className='flex gap-[2rem] overflow-hidden w-[900px]'>
             <Swiper
+              className="p-5"
               modules={[Navigation]}
               spaceBetween={50}
               slidesPerView={3}
@@ -51,7 +52,7 @@ const LandscapeSliderItem = ({ result, media }) => {
     window.location.reload();
   };
   return (
-    <div className='cursor-pointer' onClick={navigateToDetails}>
+    <div className='cursor-pointer transform transition duration-500 hover:scale-105' onClick={navigateToDetails}>
       <img
         src={
           result.backdrop_path
