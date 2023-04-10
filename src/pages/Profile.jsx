@@ -117,83 +117,102 @@ const Profile = () => {
   }, [token, username]);
 
   return (
-    <div className='mx-auto max-w-screen-xl px-8 text-white my-20'>
+    <div className="mx-auto max-w-screen-xl px-8 text-white my-20">
       {user.username ? (
         <div>
-          <div className='flex gap-8 items-center'>
-            <h1 className='text-[3.25rem] font-bold'>{`${user.username}'s profile`}</h1>
-            { !user.currentUser && <button
-              className='flex h-[50px] bg-[#303446] text-white focus:outline-none hover:bg-gray-300 hover:text-black px-3 py-2 rounded-md text-sm font-medium'
-              aria-expanded='false'
-              aria-haspopup='false'
-              onClick={handleFollow}
-            >
-              <div className='flex items-center'>
-                <span className='mr-3'>
-                  {followed ? (
-                    <div className='flex items-center'>
-                      <span className='px-3 py-2 rounded-md text-sm font-medium'>
-                        Follow
-                      </span>
-                      <MdPersonAdd className='h-8 w-8' />
-                    </div>
-                  ) : (
-                    <div className='flex items-center'>
-                      <span className='px-3 py-2 rounded-md text-sm font-medium'>
-                        Unfollow
-                      </span>
-                      <MdPersonRemove className='h-8 w-8' />
-                    </div>
-                  )}
-                </span>
-              </div>
-            </button>}
+          <div className="flex gap-8 items-center">
+            <div class="w-32 h-32 rounded-full overflow-hidden border-2 dark:border-white border-gray-900">
+              <img
+                src={`https://api.dicebear.com/6.x/bottts-neutral/svg?seed=${user.username}`}
+                alt="avatar"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <h1 className="text-[3.25rem] font-bold">{`${user.username}'s profile`}</h1>
+            {!user.currentUser && (
+              <button
+                className="flex h-[50px] bg-[#303446] text-white focus:outline-none hover:bg-gray-300 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
+                aria-expanded="false"
+                aria-haspopup="false"
+                onClick={handleFollow}
+              >
+                <div className="flex items-center">
+                  <span className="mr-3">
+                    {followed ? (
+                      <div className="flex items-center">
+                        <span className="px-3 py-2 rounded-md text-sm font-medium">
+                          Follow
+                        </span>
+                        <MdPersonAdd className="h-8 w-8" />
+                      </div>
+                    ) : (
+                      <div className="flex items-center">
+                        <span className="px-3 py-2 rounded-md text-sm font-medium">
+                          Unfollow
+                        </span>
+                        <MdPersonRemove className="h-8 w-8" />
+                      </div>
+                    )}
+                  </span>
+                </div>
+              </button>
+            )}
           </div>
-          <div className='pt-4'>
-            <p className='px-5 py-3 mb-5 w-min bg-[#1F2230] hover:bg-[#303446] rounded-lg truncate cursor-pointer' onClick={() => setShowFollow(true)}>
-              <span className='font-bold'>Followers</span> {user.followers.length}{" "}
-              <span className='font-bold ml-2'>Following</span> {user.following.length}
+          <div className="pt-4">
+            <p
+              className="px-5 py-3 mb-5 w-min bg-[#1F2230] hover:bg-[#303446] rounded-lg truncate cursor-pointer"
+              onClick={() => setShowFollow(true)}
+            >
+              <span className="font-bold">Followers</span>{" "}
+              {user.followers.length}{" "}
+              <span className="font-bold ml-2">Following</span>{" "}
+              {user.following.length}
             </p>
 
             {/*if user is current user show email*/}
             {user.currentUser && (
               <p>
-                <span className='font-bold'>Email:</span> {user.email}
+                <span className="font-bold">Email:</span> {user.email}
               </p>
             )}
 
             {/* liked movies */}
             {user.likedMovie && user.likedMovie.length > 0 ? (
               <PortraitSlider
-                heading='Favourite Movies'
-                media='movie'
+                heading="Favourite Movies"
+                media="movie"
                 resultArray={movieList}
                 styling={"mt-10"}
               />
             ) : (
-              <p className='text-[1.5rem] font-bold my-5'>
+              <p className="text-[1.5rem] font-bold my-5">
                 No favourite movies
               </p>
             )}
             {/* liked tv shows */}
             {user.likedTV && user.likedTV.length > 0 ? (
               <PortraitSlider
-                heading='Favourite TV Shows'
-                media='tv'
+                heading="Favourite TV Shows"
+                media="tv"
                 resultArray={tvList}
                 styling={"mt-10"}
               />
             ) : (
-              <p className='text-[1.5rem] font-bold my-5'>
+              <p className="text-[1.5rem] font-bold my-5">
                 No favourite TV shows
               </p>
             )}
           </div>
 
-          <PopUpModal visible={showFollow} close={handleClose} followers={user.followers} following={user.following} />
+          <PopUpModal
+            visible={showFollow}
+            close={handleClose}
+            followers={user.followers}
+            following={user.following}
+          />
         </div>
       ) : (
-        <h1 className='text-[2rem] font-bold'>Loading profile...</h1>
+        <h1 className="text-[2rem] font-bold">Loading profile...</h1>
       )}
     </div>
   );
