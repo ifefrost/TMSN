@@ -12,15 +12,34 @@ const PortraitSlider = ({ heading, resultArray, styling, media }) => {
   return (
     <div className={styling}>
       <div className='text-white'>
-        <h3 className='font-bold text-[2rem] mb-5'>{heading}</h3>
+        <h3 className='font-bold sm:text-[2rem] text-[1.7rem] mb-5'>{heading}</h3>
         <div className='flex items-center'>
           <MdKeyboardArrowLeft className={`min-w-[52px] min-h-[52px] cursor-pointer ${portLeft}`} />
           <div className='flex gap-4 overflow-hidden'>
             <Swiper
             className="w-screen p-5"
               modules={[Navigation]}
-              spaceBetween={5}
-              slidesPerView={5}
+              breakpoints={{
+                0: {
+                  slidesPerView: 1,
+                  spaceBetween: 0,
+                },
+                640: {
+                  slidesPerView: 2,
+                  spaceBetween: 0,
+                },
+                768:{
+                  slidesPerView:3,
+                  spaceBetween: 0,
+                },
+                1024:{
+                  slidesPerView:4,
+                  spaceBetween: 0,
+                },
+                1280:{
+                  slidesPerView:5,
+                  spaceBetween: 0,
+              }}}
               navigation={{
                 nextEl: `.${portRight}`,
                 prevEl: `.${portLeft}`,
@@ -66,9 +85,9 @@ const PortraitSliderItem = ({ result, media }) => {
             : noImage
         }
         alt={result.name ?? result.title}
-        className='rounded-xl object-cover h-[250px] w-[165px] hover:shadow'
+        className='m-auto rounded-xl object-cover h-[250px] w-[165px] hover:shadow'
       />
-      <div className='w-[165px]'>
+      <div className='m-auto w-[165px]'>
         <p className='mt-3 text-white font-bold text-[1.125rem]'>
           {result.name ?? result.title}
         </p>
