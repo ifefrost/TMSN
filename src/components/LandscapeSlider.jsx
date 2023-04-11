@@ -12,15 +12,27 @@ const LandscapeSlider = ({ heading, resultArray, styling, media }) => {
   return (
     <div className={styling}>
       <div className='text-white'>
-        <h3 className='font-bold text-[2rem] mb-5'>{heading}</h3>
+        <h3 className='font-bold sm:text-[2rem] text-[1.7rem] mb-5'>{heading}</h3>
         <div className='flex items-center gap-10 bg-[#1f2230] rounded-xl justify-center py-10'>
           <MdKeyboardArrowLeft className={`min-w-[52px] min-h-[52px] cursor-pointer ${landLeft}`} />
           <div className='flex gap-[2rem] overflow-hidden w-[900px]'>
             <Swiper
-              className="p-5"
+              className="w-screen p-5"
               modules={[Navigation]}
               spaceBetween={50}
-              slidesPerView={3}
+              breakpoints={{
+                0: {
+                  slidesPerView: 1,
+                },
+                640: {
+                  slidesPerView: 1,
+                },
+                768:{
+                  slidesPerView:2,
+                },
+                1024:{
+                  slidesPerView:3,
+              }}}
               navigation={{
                 nextEl: `.${landRight}`,
                 prevEl: `.${landLeft}`,
@@ -60,9 +72,9 @@ const LandscapeSliderItem = ({ result, media }) => {
             : noImage
         }
         alt={result.title ?? result.name}
-        className='rounded-xl object-cover h-[155px] w-[275px] border-2 border-[#ffffff]'
+        className='m-auto rounded-xl object-cover h-[155px] w-[275px] border-2 border-[#ffffff]'
       />
-      <div className='w-[275px] text-center pt-2'>
+      <div className='m-auto w-[275px] text-center pt-2'>
         <p className='text-white font-bold text-[1.125rem]'>
           {result.title ?? result.name}
         </p>

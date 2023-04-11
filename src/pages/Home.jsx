@@ -76,16 +76,16 @@ const Home = () => {
   }, [fetchTrending, fetchTrendingTV, fetchNowPlaying]);
 
   return (
-    <div className='mx-auto max-w-screen-xl px-8'>
+    <div className='mx-auto px-2 md:px-8 xl:max-w-screen-xl lg:max-w-screen-lg md:max-w-screen-md sm:max-w-screen-sm xs:max-w-screen-xs max-w-sm'>
       {poster ? <div>
         <div className='bg-blue-500 rounded-b-[32px] h-[32rem] flex items-center bg-hero-image bg-cover'>
-          <div className='ml-24 max-w-4xl'>
-            <h3 className='text-[4rem] leading-none font-bold text-white'>
+          <div className='xl:ml-48 xl:mr-48 lg:ml-24 lg:mr-24 md:ml-8 md:mr-8 ml-5 mr-5'>
+            <h3 className='lg:text-[4rem] md:text-[3rem] text-[2.5rem] leading-none font-bold text-white'>
               Come for the movies & stay for the community.
             </h3>
             <form action='search'>
-              <div className='mt-10 flex items-center gap-x-6'>
-                <div className='relative mt-1 rounded-md'>
+              <div className='mt-10 flex flex-col sm:flex-row items-center gap-6'>
+                <div className='relative mt-1 rounded-md w-full'>
                   <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
                     <MdOutlineSearch className='h-8 w-8 text-gray-400' />
                   </div>
@@ -93,7 +93,7 @@ const Home = () => {
                     type='text'
                     name='result'
                     id='search'
-                    className='focus:ring-gray-400 focus:border-gray-500 block w-[40rem] pl-14 sm:text-lg h-14 border-black border-1 rounded-full'
+                    className='focus:ring-gray-400 focus:border-gray-500 block w-full pl-14 lg:text-lg h-14 border-black border-1 rounded-full'
                     placeholder='Search for any movie, tv show or actor...'
                   />
                 </div>
@@ -107,25 +107,25 @@ const Home = () => {
             </form>
           </div>
         </div>
-        <div className='my-20 lg:flex lg:justify-between'>
-          <div className='mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left'>
-            <h2 className='font-bold text-white text-5xl'>
+        <div className='my-20 flex flex-col lg:flex-row content-start lg:justify-between'>
+          <div className='flex flex-col max-w-md lg:mx-0 lg:flex-auto lg:py-32 lg:text-left'>
+            <h2 className='font-bold text-white md:text-5xl sm:text-[2.5rem] text-[2rem]'>
               This year in review.
             </h2>
-            <p className='mb-8 text-gray-300 mt-5 text-xl'>
+            <p className='mb-8 text-gray-300 mt-5 sm:text-xl text=[1.25]'>
               The best movies and TV shows of 2022.
             </p>
-            <button className='flex bg-blue-700 border-white border-2 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-full hover:shadow'>
+            <button className='flex w-[200px] bg-blue-700 border-white border-2 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-full hover:shadow'>
               Check them out <MdArrowForward className='h-6 w-6 ml-2' />{" "}
             </button>
           </div>
-          <div className='h-80 mt-8'>
+          <div className='mt-8'>
             <img
               src={
                 poster.length ? `https://image.tmdb.org/t/p/original/${poster}` : noImage
               }
               alt='placeholder movie poster'
-              className='rounded-xl object-cover h-[25rem] w-[34rem]'
+              className='rounded-xl object-cover h-[25rem] w-[34rem] lg:mx-0'
             />
           </div>
         </div>
@@ -133,7 +133,7 @@ const Home = () => {
         <PortraitSlider
           heading={"Trending Movies this Week"}
           resultArray={trending}
-          styling={"mb-24"}
+          styling={"mb-20"}
         />
 
         <LandscapeSlider
@@ -150,9 +150,9 @@ const Home = () => {
         />
 
         <div className='rounded-xl h-80 flex items-center mb-20 bg-footer-image bg-cover'>
-          <div className='ml-16'>
-            <h3 className='text-5xl font-bold text-white'>Join TMSN today.</h3>
-            <p className='my-6 text-white w-96 text-xl'>
+          <div className='xs:ml-16 mx-5'>
+            <h3 className='md:text-5xl text-[2rem] font-bold text-white'>Join TMSN today.</h3>
+            <p className='my-6 text-white sm:w-96 xs:w-72  sm:text-xl text-[1rem]'>
               Connect with a growing community with a love for movies and tv.
             </p>
             <button className='flex bg-blue-700 border-white border-2 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-full hover:shadow' onClick={() => navigate('/register')}>

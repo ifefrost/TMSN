@@ -117,18 +117,30 @@ const Profile = () => {
   }, [token, username]);
 
   return (
-    <div className="mx-auto max-w-screen-xl px-8 text-white my-20">
+    <div className='my-20 text-white mx-auto px-2 md:px-8 xl:max-w-screen-xl lg:max-w-screen-lg md:max-w-screen-md sm:max-w-screen-sm xs:max-w-screen-xs max-w-sm'>
       {user.username ? (
         <div>
-          <div className="flex gap-8 items-center">
-            <div class="w-32 h-32 rounded-full overflow-hidden border-2 dark:border-white border-gray-900">
+          <div className="flex flex-col sm:flex-row gap-8 items-center sm:items-start">
+            <div className="w-32 h-32 rounded-full overflow-hidden border-2 dark:border-white border-gray-900">
               <img
                 src={`https://api.dicebear.com/6.x/bottts-neutral/svg?seed=${user.username}`}
                 alt="avatar"
-                class="w-full h-full object-cover"
+                className="w-full h-full object-cover"
               />
             </div>
-            <h1 className="text-[3.25rem] font-bold">{`${user.username}'s profile`}</h1>
+            <div className="flex flex-col">
+              <h1 className="mx-auto sm:text-5xl text-[2.5rem] sm:w-min md:w-auto font-bold">{`${user.username}'s profile`}</h1>
+              <p
+                className="px-5 py-3 mt-5 sm:mx-0 mx-auto w-min bg-[#1F2230] hover:bg-[#303446] rounded-lg truncate cursor-pointer"
+                onClick={() => setShowFollow(true)}
+              >
+                <span className="font-bold">Followers</span>{" "}
+                {user.followers.length}{" "}
+                <span className="font-bold ml-2">Following</span>{" "}
+                {user.following.length}
+              </p>
+            </div>
+
             {!user.currentUser && (
               <button
                 className="flex h-[50px] bg-[#303446] text-white focus:outline-none hover:bg-gray-300 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
@@ -158,22 +170,16 @@ const Profile = () => {
               </button>
             )}
           </div>
+
           <div className="pt-4">
-            <p
-              className="px-5 py-3 mb-5 w-min bg-[#1F2230] hover:bg-[#303446] rounded-lg truncate cursor-pointer"
-              onClick={() => setShowFollow(true)}
-            >
-              <span className="font-bold">Followers</span>{" "}
-              {user.followers.length}{" "}
-              <span className="font-bold ml-2">Following</span>{" "}
-              {user.following.length}
-            </p>
 
             {/*if user is current user show email*/}
             {user.currentUser && (
-              <p>
-                <span className="font-bold">Email:</span> {user.email}
-              </p>
+              <div className="w-full flex flex-col">
+                <p className="mt-4 mx-auto sm:mx-0">
+                  <span className="font-bold">Email:</span> {user.email}
+                </p>
+              </div>
             )}
 
             {/* liked movies */}
