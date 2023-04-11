@@ -9,6 +9,7 @@ import connection from "./resolvers/database/connection.js";
 
 // Service layer - this is where we process/handle the http request
 import { login, store, profile, favourites, getUsers, followUser } from "./services/user-service.js";
+import { saveReview, getReviews } from "./services/review-service.js";
 import { verifyToken } from "./resolvers/token/jwt.js";
 
 const app = express();
@@ -172,6 +173,44 @@ app.post('/check-following', async (req, res) => {
         })
     }
 })
+
+
+// Save Review Route
+app.post("/review", async (req, res) => {
+    try {
+        const client = await connection();
+        const review = await saveReview(client, req.body);
+        
+        res.send({
+            message: "OK",
+            data: review,
+        });
+        client.close();
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })
+    }
+})
+
+
+// Get Reviews Route
+app.get("/reviews/:type/:id", async (req, res) => {
+    try {
+        const client = await connection();
+        const reviews = await getReviews(client, req.params);
+        client.close();
+        return res.send({
+            message: "OK",
+            data: reviews[0],
+        });
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })
+    }
+})
+
 
 
 

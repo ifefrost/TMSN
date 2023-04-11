@@ -43,9 +43,9 @@ const Dropdown = ({ options, title, icon }) => {
         aria-haspopup='true'
       >
         <div className='flex items-center'>
-          <span className='mr-3'>
+          <span className='sm:mr-3'>
             <div className='flex items-center'>
-              <span className=' hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium'>
+              <span className=' hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium sr-only sm:not-sr-only'>
                 {title}
               </span>
               {icon}
@@ -55,7 +55,7 @@ const Dropdown = ({ options, title, icon }) => {
       </button>
 
       {open && (
-        <div className='absolute right-0 mt-2 rounded-lg shadow-lg px-1 py-2 w-full bg-gray-700 ring-1 ring-black ring-opacity-5'>
+        <div className='absolute right-0 mt-2 rounded-lg shadow-lg px-1 py-2 sm:w-full bg-gray-700 ring-1 ring-black ring-opacity-5 w-max'>
           {options.map((option, index) => (
             <div key={index} className='text-center'>
               <Link
