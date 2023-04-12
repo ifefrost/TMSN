@@ -34,7 +34,7 @@ const SearchResultItem = ({ result, media }) => {
       <img
         src={result.poster_path ?? result.profile_path ? `${imagesBaseUrl}${result.poster_path ?? result.profile_path}` : noImage}
         alt={result.title}
-        className='rounded-xl object-cover h-[272px] w-[180px] sm:h-[340px] sm:w-[225px]'
+        className='rounded-xl object-cover h-[272px] w-[180px] lg:h-[340px] lg:w-[225px]'
       />
     </div>
   );
