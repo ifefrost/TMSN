@@ -70,15 +70,15 @@ const Nav = () => {
               <MdMenu className='h-8 w-8'/>
             </button>
             <div className={`${navOpen ? "block" : "hidden"} sm:block sm:ml-6`}>
-              <div className='flex flex-col sm:flex-row sm:space-x-4 absolute sm:static left-0 mt-5 sm:mt-0 bg-gray-700 sm:bg-inherit rounded-lg shadow-lg px-1 py-2 w-[30vw] items-center gap-4 sm:gap-0'>
+              <div className='flex flex-col sm:flex-row sm:space-x-4 absolute sm:static left-2 top-11 mt-5 sm:mt-0 bg-gray-700 sm:bg-inherit rounded-lg shadow-lg px-1 py-2 w-[115px] items-center sm:gap-0'>
                 <Link
-                  className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+                  className='text-center w-full text-gray-300 hover:bg-gray-200 hover:text-black px-3 py-2 rounded-md text-sm font-medium'
                   to={"/"}
                 >
                   Home
                 </Link>
                 <Link
-                  className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+                  className='text-center w-full text-gray-300 hover:bg-gray-200 hover:text-black px-3 py-2 rounded-md text-sm font-medium'
                   to={"/search"}
                 >
                   Search

@@ -13,7 +13,7 @@ const LandscapeSlider = ({ heading, resultArray, styling, media }) => {
     <div className={styling}>
       <div className='text-white'>
         <h3 className='font-bold sm:text-[2rem] text-[1.7rem] mb-5'>{heading}</h3>
-        <div className='flex items-center gap-10 bg-[#1f2230] rounded-xl justify-center py-10'>
+        <div className='flex items-center gap-10 bg-[#1f2230] rounded-xl justify-center py-5'>
           <MdKeyboardArrowLeft className={`min-w-[52px] min-h-[52px] cursor-pointer ${landLeft}`} />
           <div className='flex gap-[2rem] overflow-hidden w-[900px]'>
             <Swiper
@@ -74,7 +74,7 @@ const LandscapeSliderItem = ({ result, media }) => {
         alt={result.title ?? result.name}
         className='m-auto rounded-xl object-cover h-[155px] w-[275px] border-2 border-[#ffffff]'
       />
-      <div className='m-auto w-[275px] text-center pt-2'>
+      <div className='m-auto max-w-[275px] text-center pt-2'>
         <p className='text-white font-bold text-[1.125rem]'>
           {result.title ?? result.name}
         </p>
