@@ -9,7 +9,7 @@ import connection from "./resolvers/database/connection.js";
 
 // Service layer - this is where we process/handle the http request
 import { login, store, profile, favourites, getUsers, followUser } from "./services/user-service.js";
-import { saveReview, getReviews } from "./services/review-service.js";
+import { saveReview, getReviews, getUserReviews } from "./services/review-service.js";
 import { verifyToken } from "./resolvers/token/jwt.js";
 
 const app = express();
@@ -211,6 +211,21 @@ app.get("/reviews/:type/:id", async (req, res) => {
     }
 })
 
+app.get("/reviews/:user", async (req, res) => {
+    try {
+        const client = await connection();
+        const reviews = await getUserReviews(client, req.params);
+        client.close();
+        return res.send({
+            message: "OK",
+            data: reviews,
+        });
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })
+    }
+})
 
 
 

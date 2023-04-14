@@ -254,7 +254,7 @@ const Details = () => {
         styling={"mb-24"}
       />
 
-      <Reviews />
+      <Reviews token={token} />
     </div>
   );
 };

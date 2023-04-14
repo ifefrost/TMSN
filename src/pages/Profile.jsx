@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import PortraitSlider from "../components/PortraitSlider";
 import { MdAdd, MdPersonAdd, MdPersonRemove } from "react-icons/md";
 import PopUpModal from "../components/PopUpModal";
+import MyReviews from "../components/MyReviews";
 
 const Profile = () => {
   const apiKey = import.meta.env.VITE_API_KEY;
@@ -209,6 +210,7 @@ const Profile = () => {
               </p>
             )}
           </div>
+          <MyReviews user={user.username} />
 
           <PopUpModal
             visible={showFollow}
