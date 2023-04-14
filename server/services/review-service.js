@@ -1,8 +1,11 @@
+// save a review to the database
 export const saveReview = async (client, input) => {
     const db = client.db("tmsn_db");
     const collection = db.collection('reviews');
 
+    // check if movie or tv show already has a review
     const itemExists = await collection.findOne({[input.type + 'Id']: input.id});
+    // if it does, add new review to the array
     if (itemExists) {
         await collection.updateOne(
             {[input.type + 'Id']: input.id},
@@ -17,6 +20,7 @@ export const saveReview = async (client, input) => {
             }
         );
     } else{
+        // if it doesn't, create a new document with the review for the movie or tv show
         const newItem = await collection.insertOne({
             [input.type + 'Id']: input.id,
             reviews: [{
@@ -28,6 +32,7 @@ export const saveReview = async (client, input) => {
     }
 };
 
+// get all reviews for a movie or tv show
 export const getReviews = async (client,filter) => {
     const db = client.db("tmsn_db");
     const collection = db.collection('reviews');
@@ -35,3 +40,12 @@ export const getReviews = async (client,filter) => {
     const reviews = await collection.find({[filter.type + 'Id']: filter.id}).toArray();
     return reviews
 };
+
+// get all reviews for a user
+export const getUserReviews = async (client,filter) => {
+    const db = client.db("tmsn_db");
+    const collection = db.collection('reviews');
+
+    const reviews = await collection.find({'reviews.user': filter.user}).toArray();
+    return reviews
+}

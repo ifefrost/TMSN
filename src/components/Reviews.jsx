@@ -3,7 +3,7 @@ import { MdRateReview } from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
 import StarRating from "./StarRating";
 
-const Reviews = () => {
+const Reviews = ({token}) => {
   const [addReview, setAddReview] = useState(false);
   const [rating, setRating] = useState(0);
   const params = useParams();
@@ -63,11 +63,12 @@ const Reviews = () => {
     getReviews();
   }, [getReviews]);
 
+
   return (
     <div className='text-white flex flex-col'>
       <div className='flex gap-10'>
         <h3 className='font-bold text-[2rem] mb-5'>Reviews</h3>
-        <button
+        {token && (<button
           className='flex h-[50px] bg-[#303446] text-white focus:outline-none hover:bg-gray-300 hover:text-black px-3 py-2 rounded-md text-sm font-medium'
           aria-expanded='false'
           aria-haspopup='false'
@@ -83,7 +84,7 @@ const Reviews = () => {
               </div>
             </span>
           </div>
-        </button>
+        </button>)}
       </div>
 
       {addReview && (
