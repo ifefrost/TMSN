@@ -107,8 +107,8 @@ const Search = () => {
     <div className="mt-10 mb-20 mx-auto px-2 md:px-8 xl:max-w-screen-xl lg:max-w-screen-lg md:max-w-screen-md sm:max-w-screen-sm xs:max-w-screen-xs max-w-sm">
 
         <div className="mx-auto">
-          <form className="flex items-center gap-2 sm:gap-6 w-full md:min-w-[700px] lg:min-w-[900px] max-w-[900px]" onSubmit={handleFormSubmit}>
-            <div className="relative mt-1 rounded-md w-full">
+          <form className="flex items-center gap-2 sm:gap-6 w-full md:min-w-[700px] lg:min-w-[960px] xl:min-w-[1212px] max-w-[900px]" onSubmit={handleFormSubmit}>
+            <div className="relative mt-1 rounded-md w-full lg:w-7/12">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <MdOutlineSearch className="h-8 w-8 text-gray-400" />
               </div>

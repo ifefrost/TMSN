@@ -75,6 +75,7 @@ const Register = () => {
       const data = await response.json();
       console.log(data);
       sessionStorage.setItem('token', data.data.token);
+      sessionStorage.setItem('user', data.data.user);
       setLoading(false);
       navigate('/');
     } catch (error) {
