@@ -91,7 +91,7 @@ const Reviews = ({token}) => {
         <form className='flex flex-col gap-5' onSubmit={saveReview}>
           <div className='flex flex-col gap-2'>
             <textarea
-              className='bg-[#1F2230] w-full h-40 p-3 rounded-md'
+              className='bg-[#1F2230] max-w-[750px] min-h-[150px] h-40 p-3 rounded-md'
               placeholder='Write your review here...'
               value={reviewDetails}
               name='review'
@@ -107,7 +107,7 @@ const Reviews = ({token}) => {
               </div>
             </div>
           </div>
-          <button className='bg-[#303446] text-white px-3 py-2 rounded-md text-sm font-medium'>
+          <button className='bg-[#303446] max-w-[200px] text-white px-3 py-3 hover:bg-gray-200 hover:text-black rounded-md text-md font-medium'>
             Submit
           </button>
         </form>
@@ -125,15 +125,19 @@ const Reviews = ({token}) => {
                   />
                 </div>
                 <p>{review.user}</p>
-                <StarRating rate={review.rating} />
+                {/* <StarRating rate={review.rating} /> */}
+                {/* add reviews to the 5 stars */}
+
+
+
               </div>
               <p className="italic text-xl">{review.details}</p>
             </div>
           ))}
         </div>
       ) : (
-        <p className='text-[1.5rem] font-bold my-5'>
-          No Reviews yet. Be the first to review this {media_type}.
+        <p className='text-[1.25rem] my-5'>
+          No reviews. Be the first to review this {media_type}.
         </p>
       )}
     </div>
