@@ -18,6 +18,8 @@ const Profile = () => {
   const [followed, setFollowed] = useState(false);
   const [showFollow, setShowFollow] = useState(false);
 
+  console.log({ API_HOST });
+
   const getUser = useCallback(async () => {
     if (!token.token) {
       navigate("/login");
