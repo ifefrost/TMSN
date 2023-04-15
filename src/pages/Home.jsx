@@ -113,11 +113,11 @@ const Home = () => {
               This year in review.
             </h2>
             <p className='mb-8 text-gray-300 mt-5 sm:text-xl text=[1.25]'>
-              The best movies and TV shows of 2022.
+              Check back at the end of the year to see the best movies and TV shows of 2023.
             </p>
-            <button className='flex w-[200px] bg-blue-700 border-white border-2 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-full hover:shadow'>
+            {/* <button className='flex w-[200px] bg-blue-700 border-white border-2 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-full hover:shadow'>
               Check them out <MdArrowForward className='h-6 w-6 ml-2' />{" "}
-            </button>
+            </button> */}
           </div>
           <div className='mt-8'>
             <img
