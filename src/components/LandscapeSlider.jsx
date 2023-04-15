@@ -61,7 +61,7 @@ const LandscapeSliderItem = ({ result, media }) => {
 
   const navigateToDetails = () => {
     navigate(`/details/${result.media_type ?? media}/${result.id}`);
-    window.location.reload();
+    
   };
   return (
     <div className='cursor-pointer transform transition duration-500 hover:scale-105' onClick={navigateToDetails}>

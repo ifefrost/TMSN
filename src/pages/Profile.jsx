@@ -18,7 +18,8 @@ const Profile = () => {
   const [followed, setFollowed] = useState(false);
   const [showFollow, setShowFollow] = useState(false);
 
-  console.log({ API_HOST });
+  //console.log({ API_HOST });
+  //console.log(username)
 
   const getUser = useCallback(async () => {
     if (!token.token) {
@@ -35,9 +36,10 @@ const Profile = () => {
         }
       );
       const data = await response.json();
+      console.log(data.data, "data");
       setUser(data.data);
     }
-  }, [token]);
+  }, [token, username]);
 
   // for every liked movie, get the details from the API and add it to an array
   const getLikedDetails = useCallback(async (likedArray, mediaType) => {
@@ -58,13 +60,13 @@ const Profile = () => {
     if (mediaType === "tv") {
       setTvList(likedDetails);
     }
-  }, []);
+  }, [username]);
 
   //update the followed state and the user when followed is changed
   useEffect(() => {
     checkFollowing();
     getUser();
-  }, [followed]);
+  }, [followed, username]);
 
   useEffect(() => {
     getLikedDetails(user.likedMovie, "movie");

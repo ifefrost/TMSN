@@ -33,7 +33,7 @@ const Details = () => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [id, media_type]);
 
   const fetchTrailer = useCallback(async () => {
     try {
@@ -46,7 +46,7 @@ const Details = () => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [id, media_type]);
 
   const fetchCast = useCallback(async () => {
     try {
@@ -59,7 +59,7 @@ const Details = () => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [id, media_type]);
 
   const fetchSimilar = useCallback(async () => {
     try {
@@ -72,7 +72,7 @@ const Details = () => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [id, media_type]);
 
   const addRemoveFav = async() => {
     const response = await fetch(`${API_HOST}/favourites`, {
@@ -117,7 +117,7 @@ const Details = () => {
         setIsFav(false);
       }
     }
-  }, [token]);
+  }, [token, id, media_type]);
 
   const handleFav= () => {
     addRemoveFav();
