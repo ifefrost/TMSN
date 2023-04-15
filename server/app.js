@@ -13,7 +13,7 @@ import { saveReview, getReviews, getUserReviews } from "./services/review-servic
 import { verifyToken } from "./resolvers/token/jwt.js";
 
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 8000;
 
 // Allow request from the front end app (CORS - Cross Origin Resource Sharing)
 app.use(
