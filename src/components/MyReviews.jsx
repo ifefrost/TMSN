@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { API_HOST } from "../util/api";
 import StarRating from "./StarRating";
 
 const MyReviews = ({ user }) => {
@@ -8,7 +9,7 @@ const MyReviews = ({ user }) => {
   let reviewedTv = [];
   const getUserReviews = useCallback(async () => {
     try {
-      const response = await fetch(`http://localhost:8000/reviews/${user}`);
+      const response = await fetch(`${API_HOST}/reviews/${user}`);
       if (!response.ok) {
         const error = await response.json();
         console.log(error.message, "error");

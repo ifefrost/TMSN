@@ -4,6 +4,7 @@ import PortraitSlider from "../components/PortraitSlider";
 import { MdAdd, MdPersonAdd, MdPersonRemove } from "react-icons/md";
 import PopUpModal from "../components/PopUpModal";
 import MyReviews from "../components/MyReviews";
+import {API_HOST} from "../util/api";
 
 const Profile = () => {
   const apiKey = import.meta.env.VITE_API_KEY;
@@ -22,7 +23,7 @@ const Profile = () => {
       navigate("/login");
     } else {
       const response = await fetch(
-        `http://localhost:8000/profile/${username}`,
+        `${API_HOST}/profile/${username}`,
         {
           method: "POST",
           headers: {
@@ -74,7 +75,7 @@ const Profile = () => {
     if (!token.token) {
       navigate("/login");
     } else {
-      const response = await fetch(`http://localhost:8000/follow`, {
+      const response = await fetch(`${API_HOST}/follow`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -96,7 +97,7 @@ const Profile = () => {
     if (!token.token) {
       navigate("/login");
     } else {
-      const response = await fetch(`http://localhost:8000/check-following`, {
+      const response = await fetch(`${API_HOST}/check-following`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

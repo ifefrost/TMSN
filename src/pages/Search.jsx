@@ -5,6 +5,7 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import SearchResults from "../components/SearchResults";
 import noImage from '../assets/no-image.jpg';
 import UserSearchResults from "../components/UserSearchResults";
+import { API_HOST } from "../util/api";
 
 const apiKey = import.meta.env.VITE_API_KEY;
 
@@ -85,7 +86,7 @@ const Search = () => {
     if (type === 'users' && searchQuery.trim()) {
       try {
         const result = await fetch(
-          `http://localhost:8000/users?username=${searchQuery.trim().toLowerCase()}`,
+          `${API_HOST}/users?username=${searchQuery.trim().toLowerCase()}`,
           {
             method: "GET",
             headers: {

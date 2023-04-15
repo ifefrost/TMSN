@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { API_HOST } from '../util/api';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -60,7 +61,7 @@ const Register = () => {
       if (values.confirmPassword !== values.password) {
         throw new Error('Passwords do not match');
       }
-      const response = await fetch('http://localhost:8000/register', {
+      const response = await fetch(`${API_HOST}/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

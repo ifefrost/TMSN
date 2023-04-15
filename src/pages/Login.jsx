@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_HOST } from '../util/api';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ const Login = () => {
       password: values.password,
     };
     try {
-      const response = await fetch('http://localhost:8000/login', {
+      const response = await fetch(`${API_HOST}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
