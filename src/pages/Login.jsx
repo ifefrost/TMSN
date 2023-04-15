@@ -65,8 +65,8 @@ const Login = () => {
     }
   }
   return (
-    <div className='mx-auto max-w-screen-xl px-8'>
-      <div className='mt-16 mb-16 bg-[#1F2230] text-white p-10 flex flex-col items-center rounded-[12px]'>
+    <div className='mx-auto px-2 md:px-8 xl:max-w-screen-xl lg:max-w-screen-lg md:max-w-screen-md sm:max-w-screen-sm xs:max-w-screen-xs max-w-sm'>
+      <div className='mt-16 mb-16 bg-[#1F2230] text-white p-5 sm:p-10 flex flex-col items-center rounded-[12px]'>
         <h1 className="text-[2rem] font-bold">Welcome Back!</h1>
         {error ? (<p className='mt-3 rounded-lg bg-white p-2 text-red-700 font-[600] text-[0.875rem]'>{error}</p>) : <div className='mt-6 mb-6'></div>}
         <form  onSubmit={(e) => handleSubmit(e)} className="mt-2 flex flex-col items-center">
@@ -77,7 +77,7 @@ const Login = () => {
               type="email"
               name="email"
               id="email"
-              className='text-black focus:ring-gray-400 focus:border-gray-500 block w-[385px] px-5 sm:text-lg h-[42px] border-black border-1 rounded-full'
+              className='text-black focus:ring-gray-400 focus:border-gray-500 block w-[250px] sm:w-[385px] px-5 sm:text-lg h-[42px] border-black border-1 rounded-full'
               placeholder="example@email.com"
               onChange={handleChange('email')}
               value={values.email}
@@ -87,7 +87,7 @@ const Login = () => {
               type="password"
               name="password"
               id="password"
-              className='text-black focus:ring-gray-400 focus:border-gray-500 block w-[385px] px-5 sm:text-lg h-[42px] border-black border-1 rounded-full'
+              className='text-black focus:ring-gray-400 focus:border-gray-500 block w-[250px] sm:w-[385px] px-5 sm:text-lg h-[42px] border-black border-1 rounded-full'
               placeholder="********"
               onChange={handleChange('password')}
               value={values.password}
