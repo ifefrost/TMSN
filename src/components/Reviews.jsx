@@ -88,7 +88,7 @@ const Reviews = ({token}) => {
       </div>
 
       {addReview && (
-        <form className='flex flex-col gap-5' onSubmit={saveReview}>
+        <form className='flex flex-col gap-5' onSubmit={saveReview} method="post">
           <div className='flex flex-col gap-2'>
             <textarea
               className='bg-[#1F2230] max-w-[750px] min-h-[150px] h-40 p-3 rounded-md'
@@ -125,7 +125,7 @@ const Reviews = ({token}) => {
                   />
                 </div>
                 <p>{review.user}</p>
-                {/* <StarRating rate={review.rating} /> */}
+                <StarRating rate={review.rating} />
                 {/* add reviews to the 5 stars */}
 
 
