@@ -235,7 +235,7 @@ const Details = () => {
         </div>
 
         {/* for smaller screens */}
-        <div className='block sm:hidden flex items-center gap-6 xs:gap-10 mt-10 text-white'>
+        <div className='sm:hidden flex items-center gap-6 xs:gap-10 mt-10 text-white'>
           <div className='flex items-center gap-2'>
             <div className='w-[55px] h-[55px] rounded-full border-white border-4 p-2 pt-3'>
               <h4 className='font-bold'>

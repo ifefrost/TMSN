@@ -7,6 +7,12 @@ export const saveReview = async (client, input) => {
     const itemExists = await collection.findOne({[input.type + 'Id']: input.id});
     // if it does, add new review to the array
     if (itemExists) {
+        if (itemExists.reviews.find(review => review.user === input.user)){
+            await collection.updateOne(
+                {[input.type + 'Id']: input.id},
+                { $pull: { reviews: { user: input.user } } }
+            );
+        }
         await collection.updateOne(
             {[input.type + 'Id']: input.id},
             { $push: { 
@@ -47,5 +53,6 @@ export const getUserReviews = async (client,filter) => {
     const collection = db.collection('reviews');
 
     const reviews = await collection.find({'reviews.user': filter.user}).toArray();
-    return reviews
+    const userReviews = reviews.map(review => review.reviews.filter(review => review.user === filter.user));
+    return userReviews
 }
