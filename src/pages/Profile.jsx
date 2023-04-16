@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import PortraitSlider from "../components/PortraitSlider";
 import { MdAdd, MdPersonAdd, MdPersonRemove } from "react-icons/md";
 import PopUpModal from "../components/PopUpModal";
+import {API_HOST} from "../util/api";
 import UserReviews from "../components/MyReviews";
 
 const Profile = () => {
@@ -17,12 +18,15 @@ const Profile = () => {
   const [followed, setFollowed] = useState(false);
   const [showFollow, setShowFollow] = useState(false);
 
+  //console.log({ API_HOST });
+  //console.log(username)
+
   const getUser = useCallback(async () => {
     if (!token.token) {
       navigate("/login");
     } else {
       const response = await fetch(
-        `http://localhost:8000/profile/${username}`,
+        `${API_HOST}/profile/${username}`,
         {
           method: "POST",
           headers: {
@@ -32,9 +36,10 @@ const Profile = () => {
         }
       );
       const data = await response.json();
+      console.log(data.data, "data");
       setUser(data.data);
     }
-  }, [token]);
+  }, [token, username]);
 
   // for every liked movie, get the details from the API and add it to an array
   const getLikedDetails = useCallback(async (likedArray, mediaType) => {
@@ -55,13 +60,13 @@ const Profile = () => {
     if (mediaType === "tv") {
       setTvList(likedDetails);
     }
-  }, []);
+  }, [username]);
 
   //update the followed state and the user when followed is changed
   useEffect(() => {
     checkFollowing();
     getUser();
-  }, [followed]);
+  }, [followed, username]);
 
   useEffect(() => {
     getLikedDetails(user.likedMovie, "movie");
@@ -74,7 +79,7 @@ const Profile = () => {
     if (!token.token) {
       navigate("/login");
     } else {
-      const response = await fetch(`http://localhost:8000/follow`, {
+      const response = await fetch(`${API_HOST}/follow`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -96,7 +101,7 @@ const Profile = () => {
     if (!token.token) {
       navigate("/login");
     } else {
-      const response = await fetch(`http://localhost:8000/check-following`, {
+      const response = await fetch(`${API_HOST}/check-following`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { API_HOST } from '../util/api';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -60,7 +61,7 @@ const Register = () => {
       if (values.confirmPassword !== values.password) {
         throw new Error('Passwords do not match');
       }
-      const response = await fetch('http://localhost:8000/register', {
+      const response = await fetch(`${API_HOST}/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -98,8 +99,8 @@ const Register = () => {
     }
   }, [])
     return (
-      <div className='mx-auto max-w-screen-xl px-8'>
-        <div className='mt-16 mb-16 bg-[#1F2230] text-white p-10 flex flex-col items-center rounded-[12px]'>
+      <div className='mx-auto px-2 md:px-8 xl:max-w-screen-xl lg:max-w-screen-lg md:max-w-screen-md sm:max-w-screen-sm xs:max-w-screen-xs max-w-sm'>
+        <div className='mt-16 mb-16 bg-[#1F2230] text-white p-5 sm:p-10 flex flex-col items-center rounded-[12px]'>
           <h1 className="text-[2rem] font-bold">Sign Up</h1>
           {error ? (<p className='mt-3 rounded-lg bg-white p-2 text-red-700 font-[600] text-[0.875rem]' >{error}</p>) : <div className='mt-6 mb-6'></div>}
           <form onSubmit={(e) => handleSubmit(e)} className="mt-2 flex flex-col items-center">
@@ -112,7 +113,7 @@ const Register = () => {
                 id="username"
                 onChange={handleChange('username')}
                 value={values.username}
-                className='text-black focus:ring-gray-400 focus:border-gray-500 block w-[385px] px-5 sm:text-lg h-[42px] border-black border-1 rounded-full'
+                className='text-black focus:ring-gray-400 focus:border-gray-500 block w-[250px] sm:w-[385px] px-5 sm:text-lg h-[42px] border-black border-1 rounded-full'
                 placeholder="username"
               />
               <label htmlFor="email" className="text-[1.125rem] font-[600] mb-2">Email</label>
@@ -122,7 +123,7 @@ const Register = () => {
                 id="email"
                 onChange={handleChange('email')}
                 value={values.email}
-                className='text-black focus:ring-gray-400 focus:border-gray-500 block w-[385px] px-5 sm:text-lg h-[42px] border-black border-1 rounded-full'
+                className='text-black focus:ring-gray-400 focus:border-gray-500 block w-[250px] sm:w-[385px] px-5 sm:text-lg h-[42px] border-black border-1 rounded-full'
                 placeholder="example@email.com"
               />
               <label htmlFor="password" className="text-[1.125rem] font-[600] mb-2 mt-5">Password</label>
@@ -132,7 +133,7 @@ const Register = () => {
                 id="password"
                 value={values.password}
                 onChange={handleChange('password')}
-                className='text-black focus:ring-gray-400 focus:border-gray-500 block w-[385px] px-5 sm:text-lg h-[42px] border-black border-1 rounded-full'
+                className='text-black focus:ring-gray-400 focus:border-gray-500 block w-[250px] sm:w-[385px] px-5 sm:text-lg h-[42px] border-black border-1 rounded-full'
                 placeholder="********"
               />
               <label htmlFor="passwordConfirm" className="text-[1.125rem] font-[600] mb-2 mt-5">Confirm Password</label>
@@ -142,7 +143,7 @@ const Register = () => {
                 id="passwordConfirm"
                 onChange={handleChange('confirmPassword')}
                 value={values.confirmPassword}
-                className='text-black focus:ring-gray-400 focus:border-gray-500 block w-[385px] px-5 sm:text-lg h-[42px] border-black border-1 rounded-full'
+                className='text-black focus:ring-gray-400 focus:border-gray-500 block w-[250px] sm:w-[385px] px-5 sm:text-lg h-[42px] border-black border-1 rounded-full'
                 placeholder="********"
               />
             </div>

@@ -11,9 +11,10 @@ const PopUpModal = ({ visible, close, followers, following }) => {
     const navigate = useNavigate();
 
     const navigateToUser = (user) => {
+      //console.log(user);
+      close();
       navigate(`/${user}`);
-      window.location.reload();
-  }
+    }
 
     return (
       <div
@@ -32,7 +33,7 @@ const PopUpModal = ({ visible, close, followers, following }) => {
             </button>
           </div>
           {(activeTab ? followers : following).map((item) => (
-            <div className='flex flex-row items-center p-2 rounded-md hover:cursor-pointer hover:bg-gray-700 hover:text-white' key={item} onClick={()=>{navigateToUser(item)}}>
+            <button className='flex flex-row items-center p-2 rounded-md hover:cursor-pointer hover:bg-gray-700 hover:text-white w-full' key={item} onClick={()=>{navigateToUser(item)}}>
               <div className="w-8 h-8 rounded-full overflow-hidden border-2 dark:border-white border-gray-900">
                 <img
                   src={`https://api.dicebear.com/6.x/bottts-neutral/svg?seed=${item}`}
@@ -41,7 +42,7 @@ const PopUpModal = ({ visible, close, followers, following }) => {
                 />
               </div>
               <p className="ml-2">{item}</p>
-            </div>
+            </button>
           ))}
         </div>
       </div>

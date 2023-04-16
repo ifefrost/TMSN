@@ -6,6 +6,7 @@ import { useParams, useLocation } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import Modal from "../components/Modal";
 import Reviews from "../components/Reviews";
+import { API_HOST } from "../util/api";
 
 const Details = () => {
   const apiKey = import.meta.env.VITE_API_KEY;
@@ -32,7 +33,7 @@ const Details = () => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [id, media_type]);
 
   const fetchTrailer = useCallback(async () => {
     try {
@@ -45,7 +46,7 @@ const Details = () => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [id, media_type]);
 
   const fetchCast = useCallback(async () => {
     try {
@@ -58,7 +59,7 @@ const Details = () => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [id, media_type]);
 
   const fetchSimilar = useCallback(async () => {
     try {
@@ -71,10 +72,10 @@ const Details = () => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [id, media_type]);
 
   const addRemoveFav = async() => {
-    const response = await fetch(`http://localhost:8000/favourites`, {
+    const response = await fetch(`${API_HOST}/favourites`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -90,7 +91,7 @@ const Details = () => {
   };
 
   const checkFav = useCallback(async () => {
-    const response = await fetch(`http://localhost:8000/check-fav`, {
+    const response = await fetch(`${API_HOST}/check-fav`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -116,7 +117,7 @@ const Details = () => {
         setIsFav(false);
       }
     }
-  }, [token]);
+  }, [token, id, media_type]);
 
   const handleFav= () => {
     addRemoveFav();

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { MdRateReview } from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
+import { API_HOST } from "../util/api";
 import StarRating from "./StarRating";
 
 const Reviews = ({token}) => {
@@ -23,7 +24,7 @@ const Reviews = ({token}) => {
     };
     console.log(body, "saved review");
     try {
-      const response = await fetch(`http://localhost:8000/review`, {
+      const response = await fetch(`${API_HOST}/review`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -44,7 +45,7 @@ const Reviews = ({token}) => {
   const getReviews = useCallback(async () => {
     try {
       const response = await fetch(
-        `http://localhost:8000/reviews/${media_type}/${id}`
+        `${API_HOST}/reviews/${media_type}/${id}`
       );
       if (!response.ok) {
         const error = await response.json();

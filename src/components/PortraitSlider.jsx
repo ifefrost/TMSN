@@ -72,7 +72,7 @@ const PortraitSliderItem = ({ result, media }) => {
     } else {
       //if movie or tv
       navigate(`/details/${result.media_type ?? media}/${result.id}`);
-      window.location.reload();
+      
     }
   };
 
