@@ -9,6 +9,8 @@ const UserReviews = ({ user }) => {
   const [reviewedMovies, setReviewedMovies] = useState([]);
   const [reviewedTv, setReviewedTv] = useState([]);
 
+  const [reviewsReady, setReviewsReady] = useState(false);
+
   // get all reviews for the user
   const getUserReviews = useCallback(async () => {
     try {
@@ -20,13 +22,14 @@ const UserReviews = ({ user }) => {
       }
       const data = await response.json();
       setUserReviews(data.data);
+      setReviewsReady(true);
     } catch (error) {
       console.log(error);
     }
   }, [user]);
 
   // get the movie/tv title for each review
-  const getReviewDetails = async () => {
+  const getReviewDetails = useCallback(async () => {
     setReviewedMovies([]);
     setReviewedTv([]);
     if (userReviews.length > 0) {
@@ -56,15 +59,18 @@ const UserReviews = ({ user }) => {
             });
         }
       });
+      console.log(reviewedMovies, "reviewedMovies", reviewedTv, "reviewedTv");
     }
-  };
+  }, [userReviews]);
+
   useEffect(() => {
+    setReviewsReady(false);
     getUserReviews();
   }, [user]);
 
   useEffect(() => {
     getReviewDetails();
-  }, [userReviews]);
+  }, [reviewsReady]);
 
   return (
     <div className='mt-10 text-white'>
@@ -72,36 +78,40 @@ const UserReviews = ({ user }) => {
         <p className='text-[1.2rem] italic pb-10'>No movie reviews</p>
       ) : (
         <div className='flex flex-col gap-5'>
-          <h3 className='font-bold text-[2rem]'>{`${user}'s Movie reviews`}</h3>
-          {reviewedMovies.map((review) => {
-            return (
-              <div className='flex flex-col gap-2' key={review._id}>
-                <Link to={`/details/movie/${review.movieId}`} className='text-[1.2rem] hover:underline'>{review.title}</Link>
-                <div className='flex flex-col gap-2'>
-                  <StarRating rate={review.reviews[0].rating} />
-                  <p className='text-[1.2rem]'>{review.reviews[0].details}</p>
+          <h3 className='font-bold text-[2rem]'>{`${user}'s movie reviews`}</h3>
+          <div className="flex gap-8 flex-wrap">
+            {reviewedMovies.map((review) => {
+              return (
+                <div className='flex flex-col gap-2 bg-[#1F2230] p-5 rounded-xl min-w-[300px] max-w-[400px] h-min' key={review._id}>
+                  <Link to={`/details/movie/${review.movieId}`} className='font-[600] text-[1.4rem] hover:underline w-min truncate'>{review.title}</Link>
+                  <div className='flex flex-col gap-2'>
+                    <StarRating rate={review.reviews[0].rating} />
+                    <p className='text-[1rem]'>{review.reviews[0].details}</p>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       )}
       {reviewedTv.length === 0 ? (
         <p className='text-[1.2rem]'>No TV reviews</p>
       ) : (
-        <div className='flex flex-col gap-5 mt-10'>
-          <h3 className='font-bold text-[2rem]'>{`${user}'s TV show reviews`}</h3>
-          {reviewedTv.map((review) => {
-            return (
-              <div className='flex flex-col gap-2' key={review._id}>
-                <Link to={`/details/movie/${review.tvId}`} className='text-[1.2rem] hover:underline'>{review.title}</Link>
-                <div className='flex flex-col gap-2'>
-                  <StarRating rate={review.reviews[0].rating} />
-                  <p className='text-[1.2rem]'>{review.reviews[0].details}</p>
+        <div className='flex flex-col gap-5 mt-20'>
+          <h3 className='font-bold text-[2rem]'>{`${user}'s tv show reviews`}</h3>
+          <div className="flex gap-8 flex-wrap">
+            {reviewedTv.map((review) => {
+              return (
+                <div className='flex flex-col gap-2 bg-[#1F2230] p-5 rounded-xl min-w-[300px] max-w-[400px] h-min' key={review._id}>
+                  <Link to={`/details/tv/${review.tvId}`} className='font-[600] text-[1.4rem] hover:underline w-min truncate'>{review.title}</Link>
+                  <div className='flex flex-col gap-2'>
+                    <StarRating rate={review.reviews[0].rating} />
+                    <p className='text-[1rem]'>{review.reviews[0].details}</p>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       )}
     </div>

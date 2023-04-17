@@ -32,15 +32,15 @@ const Person = () => {
     
 
     return (
-        <div className='mx-auto max-w-screen-xl px-8 text-white mb-20'>
+        <div className='text-white my-10 text-white mx-auto px-2 md:px-8 xl:max-w-screen-xl lg:max-w-screen-lg md:max-w-screen-md sm:max-w-screen-sm xs:max-w-screen-xs max-w-sm'>
             {/* back button using useNavigate */}
-            <button className='flex items-center bg-blue-700 h-[46px] border-white border-2 hover:bg-blue-900 text-white font-bold py-1 pr-5 pl-4 mt-10 rounded-full hover:shadow' onClick={() => navigate(-1)}>
+            <button className='flex items-center bg-blue-700 h-[46px] border-white border-2 hover:bg-blue-900 text-white font-bold py-1 pr-5 pl-4 rounded-full hover:shadow' onClick={() => navigate(-1)}>
                 <MdArrowBack className='h-5 w-5 mr-2'/>Back
             </button>
             
             {/* actor image and details */}
-            <div className='flex flex-col md:flex-row mt-10'>
-                <div className='min-w-[300px] rounded-xl'>
+            <div className='flex flex-col lg:flex-row mt-10'>
+                <div className='min-w-[300px] rounded-xl mb-14'>
                     <img
                         // if no profile image is available show a placeholder image
                         src={details.profile_path ? `${imagesBaseUrl}${details.profile_path}` : noImage}
@@ -49,7 +49,7 @@ const Person = () => {
                     />
                 </div>
                 {/* actor details */}
-                <div className='w-full md:w-2/3 md:pl-8'>
+                <div className='w-full lg:w-2/3 md:pl-8'>
                     <h1 className='text-[3.25rem] leading-none font-bold mb-2'>{details.name}</h1>
                     {/* date of birth */}
                     <div className='text-lg'>

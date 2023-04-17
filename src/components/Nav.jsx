@@ -59,6 +59,7 @@ const Nav = () => {
               </h1>
             </div>
             <button
+            type="button"
               className={`focus:outline-none ${
                 navOpen
                   ? "bg-gray-700 text-white"
@@ -92,6 +93,7 @@ const Nav = () => {
             ) : (
               <div className='ml-3 relative'>
                 <button
+                  type="button"
                   className='flex focus:outline-none  text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
                   aria-expanded='false'
                   aria-haspopup='false'
