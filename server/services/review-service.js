@@ -53,6 +53,7 @@ export const getUserReviews = async (client,filter) => {
     const collection = db.collection('reviews');
 
     const reviews = await collection.find({'reviews.user': filter.user}).toArray();
-    const userReviews = reviews.map(review => review.reviews.filter(review => review.user === filter.user));
-    return userReviews
+    return reviews.map((review) => {
+        return {...review, reviews: review.reviews.filter((item) => item.user === filter.user)}
+      })
 }

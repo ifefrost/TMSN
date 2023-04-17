@@ -4,7 +4,7 @@ import PortraitSlider from "../components/PortraitSlider";
 import { MdAdd, MdPersonAdd, MdPersonRemove } from "react-icons/md";
 import PopUpModal from "../components/PopUpModal";
 import {API_HOST} from "../util/api";
-import UserReviews from "../components/MyReviews";
+import UserReviews from "../components/UserReviews";
 
 const Profile = () => {
   const apiKey = import.meta.env.VITE_API_KEY;
@@ -36,7 +36,6 @@ const Profile = () => {
         }
       );
       const data = await response.json();
-      console.log(data.data, "data");
       setUser(data.data);
     }
   }, [token, username]);
@@ -90,7 +89,6 @@ const Profile = () => {
         }),
       });
       const data = await response.json();
-      console.log(data);
     }
     // runs checkFollowing to update the followed state
     checkFollowing();
