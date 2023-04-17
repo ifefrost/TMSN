@@ -212,7 +212,7 @@ const Profile = () => {
               </p>
             )}
           </div>
-          <UserReviews user={user.username} />
+          <UserReviews user={username} />
 
           <PopUpModal
             visible={showFollow}

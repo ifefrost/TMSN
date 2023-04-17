@@ -298,7 +298,8 @@ const Details = () => {
         styling={"mb-24"}
       />
 
-      <Reviews token={token} />
+      <Reviews token={token} id={id} media_type={media_type} />
+      
     </div>
   );
 };

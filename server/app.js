@@ -183,7 +183,6 @@ app.post("/review", async (req, res) => {
         
         res.send({
             message: "OK",
-            data: review,
         });
         client.close();
     } catch (error) {
