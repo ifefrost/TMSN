@@ -8,9 +8,20 @@
     "start:server": "cd server && npm run dev",
     "start:client": "cd client && npm run dev"
   },
+<<<<<<< HEAD
+  "dependencies": {
+    "@fontsource/inter": "^4.5.15",
+    "@vercel/analytics": "^1.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.7.1",
+    "react-router-dom": "^6.8.0",
+    "swiper": "^9.0.5"
+=======
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ifefrost/Capstone.git"
+>>>>>>> 5e6e497cbf786d0d6030276e3a75d5dec1ecf7b6
   },
   "author": "",
   "license": "ISC",
