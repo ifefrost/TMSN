@@ -1,6 +1,7 @@
-# Capstone
-Collaborative capstone project
+# TMSN
+Collaborative Movie Social Network Project
 
+How to set up:
 ---- Clone the repository \
 ---- set up your api key with The Movie Databse (TMDB) \
 ---- set your api key to the vite secret api key in your .env \
