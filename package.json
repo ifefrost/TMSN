@@ -1,29 +1,21 @@
 {
   "name": "tmsn",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "version": "1.0.0",
+  "description": "the movie social network",
+  "main": "index.js",
   "scripts": {
-    "dev": "vite",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start:server": "cd server && npm run dev",
-    "build": "vite build",
-    "preview": "vite preview"
+    "start:client": "cd client && npm run dev"
   },
-  "dependencies": {
-    "@fontsource/inter": "^4.5.15",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-icons": "^4.7.1",
-    "react-router-dom": "^6.8.0",
-    "swiper": "^9.0.5"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ifefrost/Capstone.git"
   },
-  "devDependencies": {
-    "@types/react": "^18.0.26",
-    "@types/react-dom": "^18.0.9",
-    "@vitejs/plugin-react": "^3.0.0",
-    "autoprefixer": "^10.4.13",
-    "postcss": "^8.4.21",
-    "tailwindcss": "^3.2.4",
-    "vite": "^4.0.0"
-  }
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ifefrost/Capstone/issues"
+  },
+  "homepage": "https://github.com/ifefrost/Capstone#readme"
 }
