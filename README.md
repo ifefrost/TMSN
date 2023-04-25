@@ -9,4 +9,4 @@ How to set up: \
 ---- enter 'npm i' in the server folder terminal \
 ---- cd to main folder \
 ---- enter 'npm run start:server' to launch the server side \
----- enter 'npm run dev' to launch the client side \
+---- enter 'npm run dev' to launch the client side 
