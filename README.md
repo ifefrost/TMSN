@@ -10,3 +10,7 @@ How to set up: \
 ---- cd to main folder \
 ---- enter 'npm run start:server' to launch the server side \
 ---- enter 'npm run start:client' to launch the client side 
+
+Extra todo:
+Set up a timeline
+Set up messaging/chat
